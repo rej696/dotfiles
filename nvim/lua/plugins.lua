@@ -1,0 +1,60 @@
+-- Plugin definition and loading
+-- local execute = vim.api.nvim_command
+local fn = vim.fn
+local cmd = vim.cmd
+
+-- Boostrap Packer
+local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+local packer_bootstrap
+if fn.empty(fn.glob(install_path)) > 0 then
+  packer_bootstrap = fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
+end
+
+-- Load Packer
+cmd([[packadd packer.nvim]])
+
+-- Rerun PackerCompile everytime pluggins.lua is updated
+cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
+
+-- Initialize pluggins
+return require('packer').startup(function(use)
+  -- Let Packer manage itself
+  use({ 'wbthomason/packer.nvim', opt = true })
+
+  -- Formatting
+  use 'tpope/vim-commentary'
+
+  -- Themes
+  use 'tanvirtin/monokai.nvim'
+
+  -- Spellchecker
+  use 'kamykn/spelunker.vim'
+  use 'kamykn/popup-menu.nvim'
+
+  -- git commands
+  use 'tpope/vim-fugitive'
+  use 'airblade/vim-gitgutter'
+
+  use 'williamboman/nvim-lsp-installer' -- Helper for installing most language servers
+  -- LSP server
+  use({
+    'neovim/nvim-lspconfig',
+    config = function() require('lsp.lspconfig') end
+  })
+
+  -- Treesitter
+  use({
+    'nvim-treesitter/nvim-treesitter',
+    config = function() require('plugins.treesitter') end,
+    run = ':TSUpdate'
+  })
+
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+end)
