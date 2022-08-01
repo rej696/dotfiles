@@ -20,7 +20,7 @@ function fullinstall() {
     yay -S dhcpcd
     sudo systemctl enable dhcpcd --now
     # Window Manager
-    yay -S lightdm lightdm-gtk-greeter xorg bspwm sxhkd feh rofi
+    yay -S lightdm lightdm-gtk-greeter xorg bspwm sxhkd feh rofi polybar
     # Other packages
     yay -S neovim alacritty firefox ttf-hack tmux
 }
@@ -36,6 +36,8 @@ rm /home/$USER/.config/sxhkd
 ln -s /home/$USER/dotfiles/sxhkd /home/$USER/.config/sxhkd
 rm /home/$USER/.config/rofi
 ln -s /home/$USER/dotfiles/rofi /home/$USER/.config/rofi
+rm /home/$USER/.config/polybar
+ln -s /home/$USER/dotfiles/polybar /home/$USER/.config/polybar
 
 # Alacritty
 rm /home/$USER/.config/alacritty
