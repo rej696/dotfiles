@@ -175,7 +175,7 @@ font:
     family: Hack
     style: Bold Italic
 
-  size: 11
+  size: 10
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -207,34 +207,116 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 
-# Colors (Monokai Pro)
+# https://color.firefox.com/?theme=XQAAAAL6AAAAAAAAAABBKYhm849SCia2CaaEGccwS-xMDPr5SlSkkGmcNDB6QcBLvzmxZf3j3bQlT1ZHcagjMhV8c0VMOfcCEwpUXNfWxtwAe4_TfaOLl11AcveowCp1rl1-A-n2jgdEfc4dn5zJPnvLuga3WUR7h3pTDnc7K1RtUh7YgMHjuGybhxRdCMh4djHXhsylrbee26OwV3UcmSqTsR0NriwOLqv0YwFD7gIqN_yeuIs
+
+# Monokai.nvim tanvirtin
 colors:
-  # Default colors
   primary:
-    background: '#2D2A2E'
-    foreground: '#FCFCFA'
+    background: '#272A30'
+    foreground: '#F8F8F0'
 
-  # Normal colors
   normal:
-    black:   '#403E41'
-    red:     '#FF6188'
-    green:   '#A9DC76'
-    yellow:  '#FFD866'
-    blue:    '#FC9867'
-    magenta: '#AB9DF2'
-    cyan:    '#78DCE8'
-    white:   '#FCFCFA'
+   black:   '#272822'
+   red:     '#F92672'
+   green:   '#A6E22E'
+   yellow:  '#F4BF75'
+   blue:    '#66D9EF'
+   magenta: '#AE81FF'
+   cyan:    '#A1EFE4'
+   white:   '#F8F8F0'
 
-  # Bright colors
   bright:
-    black:   '#727072'
-    red:     '#FF6188'
-    green:   '#A9DC76'
-    yellow:  '#FFD866'
-    blue:    '#FC9867'
-    magenta: '#AB9DF2'
-    cyan:    '#78DCE8'
-    white:   '#FCFCFA'
+   black:   '#75715E'
+   red:     '#F92672'
+   green:   '#A6E22E'
+   yellow:  '#F4BF75'
+   blue:    '#66D9EF'
+   magenta: '#AE81FF'
+   cyan:    '#A1EFE4'
+   white:   '#F9F8F5'
+
+# Monokai.nvim tanvirtin extras
+# colors:
+#   primary:
+#     background: '#272822'
+#     foreground: '#F8F8F2'
+
+#   normal:
+#    black:   '#272822'
+#    red:     '#F92672'
+#    green:   '#A6E22E'
+#    yellow:  '#F4BF75'
+#    blue:    '#66D9EF'
+#    magenta: '#AE81FF'
+#    cyan:    '#A1EFE4'
+#    white:   '#F8F8F2'
+
+#   bright:
+#    black:   '#75715E'
+#    red:     '#F92672'
+#    green:   '#A6E22E'
+#    yellow:  '#F4BF75'
+#    blue:    '#66D9EF'
+#    magenta: '#AE81FF'
+#    cyan:    '#A1EFE4'
+#    white:   '#F9F8F5'
+# # Monokai, modified version of robocopAlpha/alacritty_colors' Monokai soda theme
+# # (Changed background)
+# colors:
+#   primary:
+#     # background: '#272822'
+#     background: '#272A30'
+#     foreground: '#f8f8f2'
+
+#   normal:
+#     black:   '#1a1a1a'
+#     red:     '#f4005f'
+#     green:   '#98e024'
+#     yellow:  '#fa8419'
+#     blue:    '#9d65ff'
+#     magenta: '#f4005f'
+#     cyan:    '#58d1eb'
+#     white:   '#c4c5b5'
+
+#   # Bright colors
+#   bright:
+#     black:   '#625e4c'
+#     red:     '#f4005f'
+#     green:   '#98e024'
+#     yellow:  '#e0d561'
+#     blue:    '#9d65ff'
+#     magenta: '#f4005f'
+#     cyan:    '#58d1eb'
+#     white:   '#f6f6ef'
+
+# # Colors (Monokai Pro)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '#2D2A2E'
+#     foreground: '#FCFCFA'
+
+#   # Normal colors
+#   normal:
+#     black:   '#403E41'
+#     red:     '#FF6188'
+#     green:   '#A9DC76'
+#     yellow:  '#FFD866'
+#     blue:    '#FC9867'
+#     magenta: '#AB9DF2'
+#     cyan:    '#78DCE8'
+#     white:   '#FCFCFA'
+
+#   # Bright colors
+#   bright:
+#     black:   '#727072'
+#     red:     '#FF6188'
+#     green:   '#A9DC76'
+#     yellow:  '#FFD866'
+#     blue:    '#FC9867'
+#     magenta: '#AB9DF2'
+#     cyan:    '#78DCE8'
+#     white:   '#FCFCFA'
 
 # # Colors (Molokai Dark)
 # colors:

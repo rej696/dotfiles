@@ -20,6 +20,7 @@ ln -s /home/$USER/dotfiles/alacritty /home/$USER/.config/alacritty
 ln -s /home/$USER/dotfiles/.tmux.conf /home/$USER/.tmux.conf
 rm /home/$USER/.tmux
 ln -s /home/$USER/dotfiles/tmux /home/$USER/.tmux
+cd ~/.tmux && git submodule init && git submodule update && cd -
 tmux source-file /home/$USER/.tmux.conf
 
 # Bash
