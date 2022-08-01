@@ -1,0 +1,3 @@
+setxkbmap gb
+xrandr --output Virtual-1 --mode 1920x1080
+feh --bg-scale /home/rowan/dotfiles/jameswebb.jpg
