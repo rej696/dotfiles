@@ -1,5 +1,30 @@
 mkdir -p /home/$USER/.config/
 
+# Install software on arch
+while getopts ":a" option; do
+    case $option in
+        a) fullinstall();;
+    esac
+done
+
+function fullinstall() {
+    # Yay
+    sudo pacman -S --needed git base-devel;
+    cd ~ && git clone https://aur.archlinux.org/yay.git;
+    cd yay;
+    makepkg -si;
+    yay -Y --gendb;
+    yay -Syu --devel;
+
+    # DHCP daemon for internet
+    yay -S dhcpcd
+    sudo systemctl enable dhcpcd --now
+    # Window Manager
+    yay -S lightdm lightdm-gtk-greeter xorg bspwm sxhkd feh rofi
+    # Other packages
+    yay -S neovim alacritty firefox ttf-hack tmux
+}
+
 # Neovim
 rm /home/$USER/.config/nvim
 ln -s /home/$USER/dotfiles/nvim /home/$USER/.config/nvim
@@ -27,3 +52,6 @@ tmux source-file /home/$USER/.tmux.conf
 mv ~/.bashrc ~/.bashrc.bak
 ln -s /home/$USER/dotfiles/.bashrc /home/$USER/.bashrc
 source /home/$USER/.bashrc
+
+# Xprofile
+ln -s /home/$USER/dotfiles/.xprofile /home/$USER/.xprofile
