@@ -4,4 +4,4 @@
     combi-modes: "window,drun,run";
 }
 //@theme "solarized"
-@theme "Monokai"
+@theme "monokai"

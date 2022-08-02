@@ -18,7 +18,13 @@ function fullinstall() {
 
     # DHCP daemon for internet
     yay -S dhcpcd
-    sudo systemctl enable dhcpcd --now
+    sudo systemctl enable dhcpcd.service --now
+
+    # ntp for time syncronisation
+    yay -S ntp
+    sudo systemctl enable ntpd.service --now
+    timedatectl set-ntp 1
+
     # Window Manager
     yay -S lightdm lightdm-gtk-greeter xorg bspwm sxhkd feh rofi polybar
     # Other packages
