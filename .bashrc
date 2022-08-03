@@ -132,3 +132,5 @@ if ! shopt -oq posix; then
 fi
 
 export PATH=~/.local/bin:$PATH
+export EDITOR="nvim" # set the default editor to neovim
+set -o vi # set the editing mode to vi
