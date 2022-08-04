@@ -28,7 +28,14 @@ function fullinstall() {
     # Window Manager
     yay -S lightdm lightdm-gtk-greeter xorg bspwm sxhkd feh rofi polybar
     # Other packages
-    yay -S neovim alacritty firefox ttf-hack tmux
+    yay -S neovim alacritty firefox ttf-hack tmux bash-completion
+
+    # Rust alternative tools https://zaiste.net/posts/shell-commands-rust/
+    yay -S bat exa fd ripgrep bottom tealdear dust tokei
+    #      cat ls find grep top tldr du wc
+
+    # AUR packages
+    yay -S as-tree-bin
 }
 
 # Neovim
