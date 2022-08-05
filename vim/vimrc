@@ -1,0 +1,247 @@
+" mapped commands
+" <Space>f = Fuzzy find files
+" <Space>b = List buffers and prompt to switch
+" <Space>x = Delete current buffer
+" <Space>g = Grep and open quickfix list
+" <Space>/ = Vimgrep and add to quickfix (see :h vimgrep)
+" <Space>cl = Toggle quickfix list
+" <Space>co = Open quickfix list
+" <Space>cc = Close quickfix list
+" <Space>q = Close current window but not vim
+" <Alt-Direction> = move between splits
+
+" Insert mode autocompletion <C-n> and <C-p>
+
+" Allow hidden buffers
+set hidden
+
+" Split normally
+set splitright
+set splitbelow
+
+set textwidth=80
+set scrolloff=5
+set showcmd " show unfinished normal mode commands
+set nobackup " no swp files
+set number " line numbers
+set ruler " cursor location
+
+" Search
+"set hlsearch
+set incsearch
+set showmatch
+set ignorecase
+set smartcase
+
+" Turn off bell notification
+set visualbell t_vb=
+set novisualbell
+
+" Correct backspace behaviour
+set backspace=indent,eol,start
+
+" tabs & spaces & indentation
+filetype plugin indent on
+set autoindent " indent next line at same indentation as current line
+set smartindent
+set tabstop=8 " tabs are displayed as 8 characters
+set softtabstop=4 " tabs are expanded to 4 spaces
+set shiftwidth=4 " tabs are expanded to 4 spaces
+set expandtab " tabs are expanded to 4 spaces
+
+" Colorsheme
+syntax on
+
+set guifont=Hack:h11
+
+" set Molokai https://github.com/tomasr/molokai
+let g:rehash256 = 1 " better molokai color support
+" let g:molokai_original = 1 " different molokai setting
+colorscheme molokai
+
+" " set Solarized https://github.com/altercation/vim-colors-solarized
+" set background=dark
+" " let g:solarized_termcolors=256 " only use if not using solarized in terminal
+" let g:solarized_termcolors=16
+" let g:solarized_termtrans=1 " remove background
+" colorscheme solarized
+" set t_Co=16
+
+" Overwrite Terminal Request Version
+set t_RV=
+
+" set cursor to switch between modes
+let &t_SI="\e[6 q"
+let &t_EI="\e[2 q"
+
+" wildmenu
+set wildmenu
+" wildmenu uses a popup and does fuzzy find
+" set wildoptions=fuzzy,pum
+set wildmode=list:longest,full
+" Insert mode auto completion popup <C-n>
+set completeopt=menuone,noinsert,noselect
+
+" mouse
+set mouse=a
+
+" remove gvim toolbars
+set guioptions-=m "menubar
+set guioptions-=T "toolbar
+set guioptions-=r "scrollbar
+
+if ($OS =~ "Windows")
+  let g:netrw_scp_cmd="\"c:\\Users\\Rowan.Saunders\\scoop\\apps\\putty\\current\\PSCP.EXE\" -q -batch"
+endif
+
+" Repeatable insertion of single character (like r vs R for i) using s (i) and S (a)
+" s is accessabe via cl and S via cc
+function! RepeatChar(char, count)
+  return repeat(a:char, a:count)
+endfunction
+nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
+nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
+
+" run lua code, e.g. :Lua "print(\"Hello World\")"
+" make sure to wrap code in double quotes, and escape double quotes in the code
+command! Lua echo system("lua -e" . <q-args>)
+
+nnoremap <silent> <C-G> :Lex<CR>
+
+" netrw commands
+" gh : toggle hidden files
+" return : open file
+" %: create a new file
+" d: create a directory
+" -: move up a directory
+" p: Preview the file
+" s: select sorting style
+" r: reverse sorting order
+" R: rename highlighted file/directory
+" t: open in newtab
+
+
+" netrw directory browser settings
+"let g:netrw_liststyle=0 "thin view (- to go up a directory)
+"let g:netrw_browse_split=4 "open new file in pr:evious window
+let g:netrw_winsize=25 "set default width to 25%
+let g:netrw_keepdir=0 "sync current dir with browsing dir
+"let g:netrw_altv=1
+let g:netrw_banner=0 "hide banner
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+
+"override overloading netrw settings to enable line numbers
+let g:netrw_bufsettings='noma nomod nu nobl nowrap ro'
+
+" Set statusline
+let g:currentmode={
+      \ 'n'  : 'n',
+      \ 'v'  : 'v',
+      \ 'V'  : 'vl',
+      \ '' : 'vb',
+      \ 'i'  : 'i',
+      \ 'R'  : 'r',
+      \ 'r'  : 'r',
+      \ 'Rv' : 'rv',
+      \ 'c'  : 'c',
+      \ 't'  : 'f',
+      \}
+
+
+set laststatus=2
+set statusline=
+set statusline+=%#Constant#%{(g:currentmode[mode()]==#'n')?'\ \ NORMAL\ ':''}
+set statusline+=%#Directory#%{(g:currentmode[mode()]==#'i')?'\ \ INSERT\ ':''}
+set statusline+=%#Conditional#%{(g:currentmode[mode()]==#'r')?'\ \ REPLACE\ ':''}
+set statusline+=%#Conditional#%{(g:currentmode[mode()]==#'rv')?'\ \ V-REPLACE\ ':''}
+set statusline+=%#Define#%{(g:currentmode[mode()]==#'v')?'\ \ VISUAL\ ':''}
+set statusline+=%#Define#%{(g:currentmode[mode()]==#'vl')?'\ \ V-LINE\ ':''}
+set statusline+=%#Define#%{(g:currentmode[mode()]==#'vb')?'\ \ V-BLOCK\ ':''}
+set statusline+=%#Constant#%{(g:currentmode[mode()]==#'c')?'\ \ COMMAND\ ':''}
+set statusline+=%#Constant#%{(g:currentmode[mode()]==#'f')?'\ \ FINDER\ ':''}
+set statusline+=%#Define#\ %t
+set statusline+=\ %#Conditional#%m
+set statusline+=%=
+set statusline+=%#Define#%y
+set statusline+=%#Conditional#\ <<
+set statusline+=%#Directory#\ %l\ %#Conditional#/%#Directory#\ %L
+set statusline+=%#Conditional#\ ::
+set statusline+=%#Constant#\ %c
+set statusline+=%#Conditional#\ ::
+set statusline+=%#Debug#\ %n
+set statusline+=%#Conditional#\ >>\ %*
+set noshowmode
+
+" ---------------------------------------------------------
+" commands.lua
+" ---------------------------------------------------------
+
+" Remove trailing whitespace
+autocmd BufWritePre * %s/\s\+$//e
+
+" Grep
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --smart-case
+  set grepformat=%f:%l:%c:%m
+endif
+
+function! Grep(...)
+  return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
+endfunction
+
+command! -nargs=+ -complete=file_in_path -bar Grep cgetexpr Grep(<f-args>)
+command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
+
+" automatically convert :grep into Grep
+cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'Grep' + 'grep'
+cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'LGrep' + 'lgrep'
+
+" automatically open quickfix list whenever cgetexpr is called
+augroup quickfix
+  autocmd!
+  autocmd QuickFixCmdPost cgetexpr cwindow
+  autocmd QuickFixCmdPost lgetexpr lwindow
+augroup END
+
+" ---------------------------------------------------------
+" keymaps.lua
+" ---------------------------------------------------------
+" Set space to leader key
+let g:mapleader = " "
+let g:maplocalleader = " "
+
+" Remap Splits
+nnoremap <A-Left> <C-W><C-J>
+nnoremap <A-Down> <C-W><C-K>
+nnoremap <A-Up> <C-W><C-L>
+nnoremap <A-Right> <C-W><C-H>
+nnoremap <A-J> <C-W><C-J>
+nnoremap <A-K> <C-W><C-K>
+nnoremap <A-L> <C-W><C-L>
+nnoremap <A-H> <C-W><C-H>
+
+" List buffer then select
+nnoremap <leader>b :ls<CR>:b<Space>
+" Delete current buffer
+nnoremap <leader>x :bd<CR>
+" Close window but not vim
+nnoremap <leader>q :close<CR>
+
+" Fuzzy find files
+set path+=**
+nnoremap <leader>f :find *
+
+" Grep commands
+nnoremap <leader>g :Grep<Space>
+nnoremap <leader>/ :vimgrep<Space>
+
+" Quickfix list
+nnoremap <leader>cl :cwindow<CR>
+nnoremap <leader>co :copen<CR>
+nnoremap <leader>cc :cclose<CR>
+
+" Location list
+nnoremap <leader>ll :lwindow<CR>
+nnoremap <leader>lo :lopen<CR>
+nnoremap <leader>ll :lclose<CR>
+
