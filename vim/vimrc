@@ -52,7 +52,13 @@ set expandtab " tabs are expanded to 4 spaces
 " Colorsheme
 syntax on
 
-set guifont=Hack:h11
+if has("gui_running")
+    if has("gui_gtk3")
+        set guifont=Hack\ 11
+    else
+        set guifont=Hack:h11
+    endif
+endif
 
 " set Molokai https://github.com/tomasr/molokai
 let g:rehash256 = 1 " better molokai color support

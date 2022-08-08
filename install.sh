@@ -1,13 +1,28 @@
-mkdir -p /home/$USER/.config/
+#!/usr/bin/env bash
 
-# Install software on arch
-while getopts ":a" option; do
-    case $option in
-        a) fullinstall();;
-    esac
-done
+function fullinstallubuntu {
+    # essential packages
+    sudo apt-get install gcc tmux curl tar build-essential make cmake gdb -y
+    # Window Manager
+    sudo apt-get install bspwm sxhkd feh rofi polybar -y
+    # Fonts etc.
+    sudo apt-get install fonts-hack-ttf
 
-function fullinstall() {
+    curl -L https://github.com/neovim/neovim/releases/download/v0.7.2/nvim-linux64.tar.gz -o $HOME/nvim-linux64.tar.gz
+    tar xzvf $HOME/nvim-linux64.tar.gz -C $HOME/nvim-linux64
+    echo "export PATH=$PATH:$HOME/nvim-linux64/bin" >> $HOME/.bashrc
+    rm -r $HOME/nvim-linux64.tar.gz
+
+    # install rust things
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    source "$HOME/.cargo/env"
+    # Alacritty dependencies
+    sudo apt-get install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+    cargo install alacritty
+    cargo install ripgrep
+}
+
+function fullinstallarch {
     # Yay
     sudo pacman -S --needed git base-devel;
     cd ~ && git clone https://aur.archlinux.org/yay.git;
@@ -25,6 +40,9 @@ function fullinstall() {
     sudo systemctl enable ntpd.service --now
     timedatectl set-ntp 1
 
+    # Essential tools
+    yay -S gcc make cmake gdb
+
     # Window Manager
     yay -S lightdm lightdm-gtk-greeter xorg bspwm sxhkd feh rofi polybar
     # Other packages
@@ -37,6 +55,25 @@ function fullinstall() {
     # AUR packages
     yay -S as-tree-bin
 }
+
+mkdir -p /home/$USER/.config/
+
+# Bash
+mv ~/.bashrc ~/.bashrc.bak
+ln -s /home/$USER/dotfiles/.bashrc /home/$USER/.bashrc
+source /home/$USER/.bashrc
+
+# Install software on arch
+while getopts ":au" option; do
+    case $option in
+        a) fullinstallarch
+           ;;
+        u) fullinstallubuntu
+           ;;
+        :) ;;
+        ?) ;;
+    esac
+done
 
 # Neovim
 rm /home/$USER/.config/nvim
@@ -62,11 +99,6 @@ rm /home/$USER/.tmux
 ln -s /home/$USER/dotfiles/tmux /home/$USER/.tmux
 cd ~/.tmux && git submodule init && git submodule update && cd -
 tmux source-file /home/$USER/.tmux.conf
-
-# Bash
-mv ~/.bashrc ~/.bashrc.bak
-ln -s /home/$USER/dotfiles/.bashrc /home/$USER/.bashrc
-source /home/$USER/.bashrc
 
 # Xprofile
 ln -s /home/$USER/dotfiles/.xprofile /home/$USER/.xprofile
