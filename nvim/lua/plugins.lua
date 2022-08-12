@@ -40,7 +40,18 @@ return require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
 
-  use 'williamboman/nvim-lsp-installer' -- Helper for installing most language servers
+  --  use 'williamboman/nvim-lsp-installer' -- Helper for installing most language servers
+  -- nvim-lsp-installer is deprecated, use mason
+  use({
+    "williamboman/mason.nvim",
+    config = function() require('plugins.mason') end
+  })
+
+  use({
+    "williamboman/mason-lspconfig.nvim",
+    config = function() require("mason-lspconfig").setup() end
+  })
+
   -- LSP server
   use({
     'neovim/nvim-lspconfig',
@@ -52,6 +63,12 @@ return require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     config = function() require('plugins.treesitter') end,
     run = ':TSUpdate'
+  })
+
+  -- Nvim-tree
+  use({
+    'kyazdani42/nvim-tree.lua',
+    config = function() require('plugins.nvimtree') end,
   })
 
   if packer_bootstrap then

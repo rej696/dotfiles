@@ -44,6 +44,15 @@ vim.o.wildignorecase = true
 -- Disable default plugins
 -- vim.g.loaded_netrwPlugin = true
 
+-- Neovide configuration
+-- vim.api.nvim_exec ([[
+-- if exists("g:neovide")
+--     let g:neovide_cursor_animation_length=0
+--     set guifont=Hack=h10
+-- endif
+-- ]],
+-- false)
+
 -- Providers
 -- vim.g.python3_host_prog  = '/home/milton/software/miniconda/envs/pynvim/bin/python'
 
