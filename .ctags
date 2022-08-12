@@ -1,0 +1,10 @@
+--recurse=yes
+--exclude=.git
+--exclude=.svn
+--exclude=build/*
+--exclude=bin/*
+--exclude=lib/*
+--exclude=tools/*
+--exclude=utest_logs/*
+--exclude=\*.swp
+--exclude=\*.bak
