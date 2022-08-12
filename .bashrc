@@ -119,6 +119,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 if [ -f ~/dotfiles/.bash_aliases ]; then
     . ~/dotfiles/.bash_aliases
 fi
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -134,3 +137,21 @@ fi
 export PATH=~/.local/bin:$PATH
 export EDITOR="nvim" # set the default editor to neovim
 set -o vi # set the editing mode to vi
+export PATH=/home/rowan/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rowan/opt/nvim-linux64/bin:
+. "$HOME/.cargo/env"
+
+# nvim server (for use with neovide)
+nvim-server() {
+    nvim -c "let g:neovide_cursor_animation_length=0" -c "let g:neovide_cursor_trail_length=0" -c "set guifont=Hack:h11" --headless --listen localhost:6666&
+}
+nvide() {
+    neovide --remote-tcp=localhost:6666
+}
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Add gen1 utilities to path
+export PATH=$WORKSPACE_HOME/OBSW/Source/csl_adcs/tools/bin:$PATH
