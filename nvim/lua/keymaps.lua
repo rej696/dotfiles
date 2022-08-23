@@ -8,6 +8,9 @@ local tnoremap = Utils.tnoremap
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Toggle Source and header
+nnoremap("<leader>h", "<Cmd>ClangdSwitchSourceHeader<CR>")
+
 -- Remap Splits
 nnoremap("<leader>v", ":vsplit<CR>")
 nnoremap("<leader>sp", ":split<CR>")

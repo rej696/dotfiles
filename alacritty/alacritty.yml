@@ -214,28 +214,33 @@ font:
 # Monokai.nvim tanvirtin
 colors:
   primary:
-    background: '#272A30'
+    # background: '#272A30' # Lighter
+    background: '#26292C' # Darker
     foreground: '#F8F8F0'
 
   normal:
-   black:   '#272822'
-   red:     '#F92672'
-   green:   '#A6E22E'
-   yellow:  '#F4BF75'
-   blue:    '#66D9EF'
-   magenta: '#AE81FF'
-   cyan:    '#A1EFE4'
+   black:   '#000000'
+   # red:     '#FD871F' # Orange
+   red:     '#F92672' # Red
+   green:   '#A6E22E' # Green
+   yellow:  '#E6DB74' # Yellow
+   blue:    '#66D9EF' # Cyan
+   # magenta: '#F92672' # Red
+   # magenta: '#AE81FF' # Purple
+   magenta: '#FD871F' # Orange
+   cyan:    '#AE81FF' # Purple
+   # cyan:    '#FD871F' # Orange
    white:   '#F8F8F0'
 
   bright:
-   black:   '#75715E'
-   red:     '#F92672'
+   black:   '#000000'
+   red:     '#FD871F'
    green:   '#A6E22E'
-   yellow:  '#F4BF75'
+   yellow:  '#E6DB74'
    blue:    '#66D9EF'
-   magenta: '#AE81FF'
-   cyan:    '#A1EFE4'
-   white:   '#F9F8F5'
+   magenta: '#F92672'
+   cyan:    '#AE81FF'
+   white:   '#F8F8F0'
 
 # Monokai.nvim tanvirtin extras
 # colors:
