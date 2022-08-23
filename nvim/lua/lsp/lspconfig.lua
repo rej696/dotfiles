@@ -142,6 +142,11 @@ end
 --   -- Set some keybinds conditional on server capabilities
 --   buf_set_keymap("n", "<space>F", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 
+local clangd_on_attach = function(client, bufnr)
+    -- vim.api.nvim_set_keymap('n', '<space>h', ':ClangdSwitchSourceHeader<CR>', { noremap=true, silent=true })
+    on_attach(client, bufnr)
+end
+
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150,
@@ -150,8 +155,12 @@ require('lspconfig')['pyright'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
 }
-require('lspconfig')['clangd'].setup{
+require('lspconfig')['sumneko_lua'].setup{
     on_attach = on_attach,
+    flags = lsp_flags,
+}
+require('lspconfig')['clangd'].setup{
+    on_attach = clangd_on_attach,
     flags = lsp_flags,
 }
 require('lspconfig')['rust_analyzer'].setup{
