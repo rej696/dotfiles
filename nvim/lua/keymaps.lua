@@ -63,7 +63,11 @@ nnoremap("<leader>D", "<Cmd>lua vim.diagnostic.setloclist()<CR>")
 nnoremap("<leader><A-d>", "<Cmd>lua vim.diagnostic.setqflist()<CR>")
 
 -- Fuzzy find files
-nnoremap("<leader>f", ":find **/*")
+nnoremap("<leader>fi", ":find **/*")
+nnoremap("<leader>ff", "<Cmd>Telescope find_files disable_devicons=true<CR>")
+nnoremap("<leader>fb", "<Cmd>Telescope buffers disable_devicons=true<CR>")
+nnoremap("<leader>fg", "<Cmd>Telescope live_grep disable_devicons=true<CR>")
+nnoremap("<leader>fh", "<Cmd>Telescope help_tags disable_devicons=true<CR>")
 
 -- Close window but not vim
 nnoremap("<leader>q", ":close<CR>")
