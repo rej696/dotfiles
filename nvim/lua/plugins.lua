@@ -65,6 +65,14 @@ return require('packer').startup(function(use)
     run = ':TSUpdate'
   })
 
+  -- Telescope
+  use({
+    'nvim-telescope/telescope.nvim',
+    requires = {{'nvim-lua/plenary.nvim'}},
+    config = function() require('plugins.telescope') end,
+  })
+  use({'nvim-telescope/telescope-fzf-native.nvim', run='make'})
+
   -- Nvim-tree
   use({
     'kyazdani42/nvim-tree.lua',
