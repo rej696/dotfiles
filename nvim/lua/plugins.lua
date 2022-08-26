@@ -40,6 +40,12 @@ return require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
 
+
+  use({
+    'jpalardy/vim-slime',
+    config = function() require('plugins.slime') end
+  })
+
   --  use 'williamboman/nvim-lsp-installer' -- Helper for installing most language servers
   -- nvim-lsp-installer is deprecated, use mason
   use({
