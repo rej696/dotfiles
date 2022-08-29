@@ -29,6 +29,12 @@ return require('packer').startup(function(use)
   -- Formatting
   use 'tpope/vim-commentary'
 
+  -- s-expressions
+  use 'tpope/vim-sexp-mappings-for-regular-people'
+  use 'guns/vim-sexp'
+  use 'tpope/vim-repeat'
+  use 'tpope/vim-surround'
+
   -- Themes
   use 'tanvirtin/monokai.nvim'
 
