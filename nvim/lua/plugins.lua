@@ -39,8 +39,11 @@ return require('packer').startup(function(use)
   use 'tanvirtin/monokai.nvim'
 
   -- Spellchecker
-  use 'kamykn/spelunker.vim'
-  use 'kamykn/popup-menu.nvim'
+  use ({
+    'kamykn/spelunker.vim',
+    opt = true,
+    requires = {{'kamykn/popup-menu.nvim', opt = true}}
+  })
 
   -- git commands
   use 'tpope/vim-fugitive'
@@ -73,6 +76,7 @@ return require('packer').startup(function(use)
   -- Treesitter
   use({
     'nvim-treesitter/nvim-treesitter',
+    requires = {{'nvim-treesitter/nvim-treesitter-context', opt = true}},
     config = function() require('plugins.treesitter') end,
     run = ':TSUpdate'
   })
