@@ -76,9 +76,13 @@ return require('packer').startup(function(use)
   -- Treesitter
   use({
     'nvim-treesitter/nvim-treesitter',
-    requires = {{'nvim-treesitter/nvim-treesitter-context', opt = true}},
     config = function() require('plugins.treesitter') end,
     run = ':TSUpdate'
+  })
+
+  use({
+    'nvim-treesitter/nvim-treesitter-context',
+    config = function() require('treesitter-context').setup() end
   })
 
   -- Telescope
