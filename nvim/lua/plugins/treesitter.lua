@@ -15,5 +15,3 @@ require('nvim-treesitter.configs').setup({
     "yaml",
     },
 })
-
-require('treesitter-context').setup()
