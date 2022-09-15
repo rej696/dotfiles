@@ -15,12 +15,17 @@ require('telescope').setup({
         ['<C-c>'] = actions.close,
       },
     },
+    layout_strategy = "flex",
     layout_config = {
-      horizontal = {
-        height = 47,
         prompt_position = "top",
-      }
-    }
+        flip_columns = 170
+    },
+    -- layout_config = {
+    --   horizontal = {
+    --     height = 47,
+    --     prompt_position = "top",
+    --   }
+    -- }
   },
   extensions = {
     fzf = {
