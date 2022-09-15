@@ -13,7 +13,7 @@ end
 -- Load Packer
 cmd([[packadd packer.nvim]])
 
--- Rerun PackerCompile everytime pluggins.lua is updated
+-- Rerun PackerCompile everytime plugins.lua is updated
 cmd([[
   augroup packer_user_config
     autocmd!
@@ -39,11 +39,8 @@ return require('packer').startup(function(use)
   use 'tanvirtin/monokai.nvim'
 
   -- Spellchecker
-  use ({
-    'kamykn/spelunker.vim',
-    opt = true,
-    requires = {{'kamykn/popup-menu.nvim', opt = true}}
-  })
+  -- use 'kamykn/popup-menu.nvim'
+  use 'kamykn/spelunker.vim'
 
   -- git commands
   use 'tpope/vim-fugitive'
