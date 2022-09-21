@@ -42,6 +42,9 @@ return require('packer').startup(function(use)
   -- use 'kamykn/popup-menu.nvim'
   use 'kamykn/spelunker.vim'
 
+  -- smart line number toggling
+  use 'jeffkreeftmeijer/vim-numbertoggle'
+
   -- git commands
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
