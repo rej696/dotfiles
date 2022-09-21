@@ -102,3 +102,7 @@ tmux source-file /home/$USER/.tmux.conf
 
 # Xprofile
 ln -s /home/$USER/dotfiles/.xprofile /home/$USER/.xprofile
+
+mkdir -p /home/$USER/.ipython/profile_default/
+ln -s /home/$USER/dotfiles/ipython_config.py /home/$USER/.ipython/profile_default/ipython_config.py
+

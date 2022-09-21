@@ -16,3 +16,9 @@ bspc config gapless_monocle      true
 bspc rule -a Screenkey manage=off
 
 $HOME/.config/polybar/launch.sh
+
+nm-applet &
+pa-applet &
+light-locker --lock-on-lid &
+
+feh --bg-scale /home/rowan/dotfiles/jameswebb.jpg
