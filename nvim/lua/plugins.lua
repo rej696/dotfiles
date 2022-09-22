@@ -45,6 +45,9 @@ return require('packer').startup(function(use)
   -- smart line number toggling
   use 'jeffkreeftmeijer/vim-numbertoggle'
 
+  -- edit jupyter notebooks (requires pip install jupytext)
+  use 'goerz/jupytext.vim'
+
   -- git commands
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
