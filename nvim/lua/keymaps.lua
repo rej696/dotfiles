@@ -58,10 +58,24 @@ nnoremap("<leader>G", ":G<CR>")
 nnoremap("<leader>d", '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>')
 
 -- Open local diagnostics in local list
-nnoremap("<leader>D", "<Cmd>lua vim.diagnostic.setloclist()<CR>")
+-- nnoremap("<leader>D", "<Cmd>lua vim.diagnostic.setloclist()<CR>")
 
 -- Open all project diagnostics in quickfix list
-nnoremap("<leader><A-d>", "<Cmd>lua vim.diagnostic.setqflist()<CR>")
+-- nnoremap("<leader><A-d>", "<Cmd>lua vim.diagnostic.setqflist()<CR>")
+
+-- *** LSP keymaps ***
+-- gD         go to declaration
+-- gd         go to definition
+-- gi         go to implementation
+-- gr         go to references (telescope)
+-- gt         go to type definitions (telescope) (needs fixing?)
+-- <leader>D  go to type definition
+-- K          hover
+-- ^k         signature_help
+-- <leader>rs rename
+-- <leader>ca code action
+-- <space>fe  find errors (list diagnostics in file in telescope)
+-- <space>F   format
 
 -- Fuzzy find files
 nnoremap("<leader>fi", ":find **/*")
@@ -71,9 +85,10 @@ nnoremap("<leader>fb", "<Cmd>Telescope buffers disable_devicons=true<CR>")
 nnoremap("<leader>fg", "<Cmd>Telescope live_grep disable_devicons=true<CR>")
 nnoremap("<leader>fw", "<Cmd>lua require('telescope.builtin').grep_string{search = vim.fn.expand('<cword>')}<CR>")
 nnoremap("<leader>fh", "<Cmd>Telescope help_tags disable_devicons=true<CR>")
-nnoremap("<leader>ft", "<Cmd>Telescope<CR>")
+nnoremap("<leader>ft", "<Cmd>Telescope builtin theme=ivy<CR>")
 nnoremap("<leader>gs", "<Cmd>Telescope git_status disable_devicons=true<CR>")
 nnoremap("<leader>gb", "<Cmd>Telescope git_branches disable_devicons=true<CR>")
+nnoremap("Zl", "<Cmd>Telescope spell_suggest theme=cursor disable_devicons=true<CR>")
 
 -- Close window but not vim
 nnoremap("<leader>q", ":close<CR>")
