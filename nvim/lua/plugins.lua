@@ -55,6 +55,8 @@ return require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
   use 'airblade/vim-gitgutter'
 
+  -- vim wiki
+  use 'vimwiki/vimwiki'
 
   use({
     'jpalardy/vim-slime',
