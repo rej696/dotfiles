@@ -46,7 +46,10 @@ return require('packer').startup(function(use)
   use 'jeffkreeftmeijer/vim-numbertoggle'
 
   -- edit jupyter notebooks (requires pip install jupytext)
-  use 'goerz/jupytext.vim'
+  use({
+    'goerz/jupytext.vim',
+    config = function() vim.cmd("let g:jupytext_fmt = 'py'") end
+  })
 
   -- git commands
   use 'tpope/vim-fugitive'

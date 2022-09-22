@@ -42,9 +42,20 @@ local lsp_flags = {
     -- This is the default in Nvim 0.7+
     debounce_text_changes = 150,
 }
+local util = require 'lspconfig/util'
 require('lspconfig')['pyright'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
+    single_file_support = true,
+    root_dir = function(fname)
+        local root_files = {
+            'setup.py',
+            'setup.cfg',
+            'requirements.txt',
+            'Pipfile',
+        }
+        return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+    end,
 }
 require('lspconfig')['sumneko_lua'].setup {
     on_attach = on_attach,
