@@ -3,6 +3,15 @@ local actions = require('telescope.actions')
 -- local trouble = require('telescope.providers.telescope')
 
 require('telescope').setup({
+  pickers = {
+      buffers = {
+          mappings = {
+              n = {
+                  ['d'] = "delete_buffer",
+              },
+          },
+      },
+  },
   defaults = {
     sorting_strategy = "ascending",
     mappings = {
@@ -18,7 +27,9 @@ require('telescope').setup({
     layout_strategy = "flex",
     layout_config = {
         prompt_position = "top",
-        flip_columns = 170
+        flex = {
+            flip_columns = 170,
+        },
     },
     -- layout_config = {
     --   horizontal = {
