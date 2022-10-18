@@ -86,8 +86,15 @@ nnoremap("<leader>fg", "<Cmd>Telescope live_grep disable_devicons=true<CR>")
 nnoremap("<leader>fw", "<Cmd>lua require('telescope.builtin').grep_string{search = vim.fn.expand('<cword>')}<CR>")
 nnoremap("<leader>fh", "<Cmd>Telescope help_tags disable_devicons=true<CR>")
 nnoremap("<leader>ft", "<Cmd>Telescope builtin theme=ivy<CR>")
+nnoremap("<leader>fp", "<Cmd>Telescope treesitter<CR>")
+nnoremap("<leader>fd", "<Cmd>Telescope diagnostics disable_devicons=true<CR>")
+
+-- Git
+nnoremap("<leader>gp", "<Cmd>Gitsigns preview_hunk<CR>")
+nnoremap("<leader>gl", "<Cmd>Gitsigns blame_line<CR>")
+nnoremap("<leader>gb", "<Cmd>Git blame<CR>")
 nnoremap("<leader>gs", "<Cmd>Telescope git_status disable_devicons=true<CR>")
-nnoremap("<leader>gb", "<Cmd>Telescope git_branches disable_devicons=true<CR>")
+-- nnoremap("<leader>gfb", "<Cmd>Telescope git_branches disable_devicons=true<CR>")
 nnoremap("Zl", "<Cmd>Telescope spell_suggest theme=cursor disable_devicons=true<CR>")
 
 -- Close window but not vim
