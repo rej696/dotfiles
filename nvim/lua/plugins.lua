@@ -69,6 +69,7 @@ function(use)
 
     -- Themes
     use 'tanvirtin/monokai.nvim'
+    use 'folke/tokyonight.nvim'
 
     -- Spellchecker
     -- use 'kamykn/popup-menu.nvim'
