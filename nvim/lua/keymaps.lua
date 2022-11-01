@@ -88,6 +88,7 @@ nnoremap("<leader>fh", "<Cmd>Telescope help_tags disable_devicons=true<CR>")
 nnoremap("<leader>ft", "<Cmd>Telescope builtin theme=ivy<CR>")
 nnoremap("<leader>fp", "<Cmd>Telescope treesitter<CR>")
 nnoremap("<leader>fd", "<Cmd>Telescope diagnostics disable_devicons=true<CR>")
+nnoremap("<leader>fr", "<Cmd>Telescope resume disable_devicons=true<CR>")
 
 -- Git
 nnoremap("<leader>gp", "<Cmd>Gitsigns preview_hunk<CR>")
