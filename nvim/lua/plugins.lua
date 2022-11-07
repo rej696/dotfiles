@@ -17,10 +17,10 @@ end
 
 -- disable built in plugins
 local disabled_built_ins = {
-    "netrw",
-    "netrwPlugin",
-    "netrwSettings",
-    "netrwFileHandlers",
+    -- "netrw",
+    -- "netrwPlugin",
+    -- "netrwSettings",
+    -- "netrwFileHandlers",
     "gzip",
     "zip",
     "zipPlugin",
@@ -147,10 +147,12 @@ function(use)
     use {'nvim-telescope/telescope-fzf-native.nvim', run='make'}
 
     -- Nvim-tree
-    use {
-        'kyazdani42/nvim-tree.lua',
-        config = function() require('plugins.nvimtree') end,
-    }
+    -- use {
+    --     'kyazdani42/nvim-tree.lua',
+    --     config = function() require('plugins.nvimtree') end,
+    -- }
+    -- Netrw
+    require('plugins.netrw')
 
     if packer_bootstrap then
         require('packer').sync()
