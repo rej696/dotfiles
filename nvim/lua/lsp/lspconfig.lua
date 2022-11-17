@@ -32,7 +32,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gt', ':Telescope lsp_type_definitions theme=ivy disable_devicons=true<CR>', bufopts) --vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>fe', ':Telescope diagnostics theme=ivy disable_devicons=true<CR>', bufopts) --vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>F', vim.lsp.buf.format, bufopts)
-    vim.keymap.set('v', '<space>F', vim.lsp.buf.range_formatting, bufopts)
+    vim.keymap.set('v', '<space>F', vim.lsp.buf.format, bufopts)
 end
 
 local clangd_on_attach = function(client, bufnr)
@@ -44,21 +44,6 @@ local lsp_flags = {
     -- This is the default in Nvim 0.7+
     debounce_text_changes = 150,
 }
-local util = require 'lspconfig/util'
--- require('lspconfig')['pyright'].setup {
---     on_attach = on_attach,
---     flags = lsp_flags,
---     single_file_support = true,
---     root_dir = function(fname)
---         local root_files = {
---             'setup.py',
---             'setup.cfg',
---             'requirements.txt',
---             'Pipfile',
---         }
---         return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
---     end,
--- }
 require('lspconfig')['pylsp'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
@@ -93,6 +78,10 @@ require('lspconfig')['hls'].setup {
 }
 require('lspconfig')['clangd'].setup {
     on_attach = clangd_on_attach,
+    flags = lsp_flags,
+}
+require('lspconfig')['texlab'].setup {
+    on_attach = on_attach,
     flags = lsp_flags,
 }
 require('lspconfig')['rust_analyzer'].setup {
