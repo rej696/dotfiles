@@ -80,7 +80,7 @@ require('lspconfig')['clangd'].setup {
     on_attach = clangd_on_attach,
     flags = lsp_flags,
 }
-require('lspconfig')['texlab'].setup {
+require('lspconfig')['ltex'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
 }
