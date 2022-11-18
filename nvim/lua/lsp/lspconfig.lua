@@ -31,6 +31,8 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gr', ':Telescope lsp_references theme=ivy disable_devicond=true<CR>', bufopts) --vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', 'gt', ':Telescope lsp_type_definitions theme=ivy disable_devicons=true<CR>', bufopts) --vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>fe', ':Telescope diagnostics theme=ivy disable_devicons=true<CR>', bufopts) --vim.lsp.buf.references, bufopts)
+    -- vim.keymap.set('n', '<space>F', vim.lsp.buf.formatting, bufopts)
+    -- vim.keymap.set('v', '<space>F', vim.lsp.buf.range_formatting, bufopts)
     vim.keymap.set('n', '<space>F', vim.lsp.buf.format, bufopts)
     vim.keymap.set('v', '<space>F', vim.lsp.buf.format, bufopts)
 end

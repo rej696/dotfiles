@@ -7,11 +7,11 @@ require('nvim-treesitter.configs').setup({
     "bash",
     "c",
     "cpp",
-    "cuda",
     "json",
-    "julia",
     "lua",
     "python",
     "yaml",
+    "racket",
+    "rust"
     },
 })
