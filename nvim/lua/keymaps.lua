@@ -9,6 +9,9 @@ local tnoremap = Utils.tnoremap
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Insert unicode lambda
+inoremap("<C-l>", "<C-v>u03BB")
+
 -- Toggle Source and header
 nnoremap("<leader>h", "<Cmd>ClangdSwitchSourceHeader<CR>")
 
