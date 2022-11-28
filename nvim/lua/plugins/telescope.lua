@@ -1,6 +1,7 @@
 local actions = require('telescope.actions')
 -- local utils = require('telescope.utils')
 -- local trouble = require('telescope.providers.telescope')
+local lga_actions = require('telescope-live-grep-args.actions')
 
 require('telescope').setup({
   pickers = {
@@ -16,8 +17,8 @@ require('telescope').setup({
     sorting_strategy = "ascending",
     mappings = {
       i = {
-        ['<C-j>'] = actions.move_selection_next,
-        ['<C-k>'] = actions.move_selection_previous,
+        ['<C-n>'] = actions.move_selection_next,
+        ['<C-p>'] = actions.move_selection_previous,
         ['<C-c>'] = actions.close,
       },
       n = {
@@ -45,6 +46,15 @@ require('telescope').setup({
       override_file_sorter = true, -- override the file sorter
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
+    },
+    live_grep_args = {
+        disable_devicons = true,
+        auto_quoting = true,
+        mappings = {
+            i = {
+                ["<C-k>"] = lga_actions.quote_prompt(),
+            },
+        },
     },
   },
 })
