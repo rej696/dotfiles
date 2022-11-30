@@ -96,6 +96,7 @@ nnoremap("<leader>fr", "<Cmd>Telescope resume disable_devicons=true<CR>")
 
 -- Git
 nnoremap("<leader>gp", "<Cmd>Gitsigns preview_hunk<CR>")
+nnoremap("<leader>gn", "<Cmd>Gitsigns next_hunk<CR>")
 nnoremap("<leader>gl", "<Cmd>Gitsigns blame_line<CR>")
 nnoremap("<leader>gb", "<Cmd>Git blame<CR>")
 nnoremap("<leader>gs", "<Cmd>Telescope git_status disable_devicons=true<CR>")
