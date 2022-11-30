@@ -67,6 +67,11 @@ return require('packer').startup(
         use 'tpope/vim-repeat'
         use 'tpope/vim-surround'
 
+        -- hylang support
+        use 'hylang/vim-hy'
+        -- racket support
+        use 'benknoble/vim-racket'
+
         -- Themes
         use 'tanvirtin/monokai.nvim'
         use 'folke/tokyonight.nvim'
@@ -78,11 +83,11 @@ return require('packer').startup(
         -- smart line number toggling
         use 'jeffkreeftmeijer/vim-numbertoggle'
 
-        -- edit jupyter notebooks (requires pip install jupytext)
-        use {
-            'goerz/jupytext.vim',
-            config = function() vim.cmd("let g:jupytext_fmt = 'py'") end
-        }
+        -- -- edit jupyter notebooks (requires pip install jupytext)
+        -- use {
+        --     'goerz/jupytext.vim',
+        --     config = function() vim.cmd("let g:jupytext_fmt = 'py'") end
+        -- }
 
         -- git commands
         use 'tpope/vim-fugitive'
@@ -105,10 +110,11 @@ return require('packer').startup(
         -- vim wiki
         use 'vimwiki/vimwiki'
 
-        use {
-            'jpalardy/vim-slime',
-            config = function() require('plugins.slime') end
-        }
+        -- use {
+        --     'jpalardy/vim-slime',
+        --     config = function() require('plugins.slime') end
+        -- }
+        use 'Olical/conjure'
 
         --  use 'williamboman/nvim-lsp-installer' -- Helper for installing most language servers
         -- nvim-lsp-installer is deprecated, use mason
@@ -131,6 +137,7 @@ return require('packer').startup(
         -- Treesitter
         use {
             'nvim-treesitter/nvim-treesitter',
+            requires = {{'p00f/nvim-ts-rainbow'}},
             config = function() require('plugins.treesitter') end,
             run = ':TSUpdate'
         }
