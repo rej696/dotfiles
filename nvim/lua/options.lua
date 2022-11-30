@@ -65,3 +65,6 @@ vim.diagnostic.config {
   underline = false,            -- Keep error underline
   signs = true,                -- Keep gutter signs
 }
+
+-- vim.g["conjure#client#racket#stdio#command"] = "xvfb-racket"
+vim.g["conjure#extract#tree_sitter#enabled"] = true

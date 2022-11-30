@@ -12,6 +12,11 @@ require('nvim-treesitter.configs').setup({
     "python",
     "yaml",
     "racket",
-    "rust"
+    "rust",
+    "clojure"
     },
+  rainbow = {
+    enable = true,
+    -- disable = { "c" }
+  }
 })
