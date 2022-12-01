@@ -28,8 +28,8 @@ nnoremap("<A-k>", "<C-W><k>")
 nnoremap("<A-l>", "<C-W><l>")
 
 -- Toggle File explorer
-nnoremap("<leader>e", "<Cmd>NvimTreeToggle<CR>")
--- nnoremap("<leader>e", ":Lex<CR>")
+-- nnoremap("<leader>e", "<Cmd>NvimTreeToggle<CR>")
+nnoremap("<leader>ex", ":Ex<CR>")
 
 -- List Buffer then select
 nnoremap("<leader>b", ":ls<CR>:b<Space>")

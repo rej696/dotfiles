@@ -5,6 +5,7 @@ local cmd = vim.cmd
 
 -- Boostrap Packer
 local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+local parinfer_path = fn.stdpath('data') .. '/site/pack/packer/start/parinfer-rust'
 local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
     packer_bootstrap = fn.system {
@@ -62,10 +63,14 @@ return require('packer').startup(
         use 'tpope/vim-commentary'
 
         -- s-expressions
-        use 'tpope/vim-sexp-mappings-for-regular-people'
-        use 'guns/vim-sexp'
-        use 'tpope/vim-repeat'
-        use 'tpope/vim-surround'
+        -- use 'tpope/vim-sexp-mappings-for-regular-people'
+        -- use 'guns/vim-sexp'
+        -- use 'tpope/vim-repeat'
+        -- use 'tpope/vim-surround'
+        use {
+            'eraserhd/parinfer-rust',
+            run = 'cd ' .. parinfer_path .. ' && cargo build --release'
+        }
 
         -- hylang support
         use 'hylang/vim-hy'
