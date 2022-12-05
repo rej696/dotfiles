@@ -67,6 +67,15 @@ return require('packer').startup(
         -- use 'guns/vim-sexp'
         -- use 'tpope/vim-repeat'
         -- use 'tpope/vim-surround'
+
+        use {
+            'clojure-vim/vim-jack-in',
+            requires = {
+                { 'tpope/vim-dispatch' },
+                { 'radenling/vim-dispatch-neovim' }
+            }
+        }
+
         use {
             'eraserhd/parinfer-rust',
             run = 'cd ' .. parinfer_path .. ' && cargo build --release'
