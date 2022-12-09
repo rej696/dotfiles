@@ -85,6 +85,8 @@ return require('packer').startup(
         use 'hylang/vim-hy'
         -- racket support
         use 'benknoble/vim-racket'
+        -- janet support
+        use 'janet-lang/janet.vim'
 
         -- Themes
         use 'tanvirtin/monokai.nvim'
