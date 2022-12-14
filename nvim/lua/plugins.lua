@@ -3,6 +3,9 @@
 local fn = vim.fn
 local cmd = vim.cmd
 
+-- Set python3 host to python3.7
+-- vim.g.python3_host_prog = "/usr/bin/python3.7"
+
 -- Boostrap Packer
 local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 local parinfer_path = fn.stdpath('data') .. '/site/pack/packer/start/parinfer-rust'
