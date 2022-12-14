@@ -135,10 +135,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=~/.local/bin:$PATH
 export EDITOR="nvim" # set the default editor to neovim
 set -o vi # set the editing mode to vi
 export PATH=/home/rowan/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rowan/opt/nvim-linux64/bin:
+export PATH=~/.local/bin:$PATH
 . "$HOME/.cargo/env"
 
 # nvim server (for use with neovide)
@@ -148,7 +148,6 @@ nvim-server() {
 nvide() {
     neovide --remote-tcp=localhost:6666
 }
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
