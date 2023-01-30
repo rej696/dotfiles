@@ -68,3 +68,4 @@ vim.diagnostic.config {
 
 -- vim.g["conjure#client#racket#stdio#command"] = "xvfb-racket"
 vim.g["conjure#extract#tree_sitter#enabled"] = true
+vim.g["conjure#mapping#doc_word"] = {"<space>K"}

@@ -81,6 +81,11 @@ require('lspconfig')['hls'].setup {
 require('lspconfig')['clangd'].setup {
     on_attach = clangd_on_attach,
     flags = lsp_flags,
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--clang-tidy",
+    },
 }
 require('lspconfig')['ltex'].setup {
     on_attach = on_attach,
