@@ -135,3 +135,6 @@ export EDITOR="nvim" # set the default editor to neovim
 set -o vi # set the editing mode to vi
 export PATH=~/.local/bin:$PATH
 . "$HOME/.cargo/env"
+
+alias janet-nrepl='janet -e "(import spork/netrepl) (netrepl/server)" 2&> /dev/null &'
+alias lisp="rlwrap ros run --eval '(ql:quickload :swank)' --eval '(swank:create-server :dont-close t)'"
