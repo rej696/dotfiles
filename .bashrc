@@ -138,3 +138,5 @@ export PATH=~/.local/bin:$PATH
 
 alias janet-nrepl='janet -e "(import spork/netrepl) (netrepl/server)" 2&> /dev/null &'
 alias lisp="rlwrap ros run --eval '(ql:quickload :swank)' --eval '(swank:create-server :dont-close t)'"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
