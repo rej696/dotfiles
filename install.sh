@@ -75,6 +75,14 @@ while getopts ":au" option; do
     esac
 done
 
+# fzf
+if [ ! -d '~/.fzf' ]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+fi
+rm /home/$USER/.fzf.bash
+ln -s /home/$USER/dotfiles/fzf.bash /home/$USER/.fzf.bash
+
 # Neovim
 rm /home/$USER/.config/nvim
 ln -s /home/$USER/dotfiles/nvim /home/$USER/.config/nvim
