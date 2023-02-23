@@ -19,6 +19,11 @@ nnoremap("<leader>h", "<Cmd>ClangdSwitchSourceHeader<CR>")
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
 
+-- Centre page after search
+nnoremap("n", "nzz")
+nnoremap("N", "Nzz")
+nnoremap("*", "*zz")
+
 -- Remap Splits
 nnoremap("<leader>v", ":vsplit<CR>")
 nnoremap("<leader>sp", ":split<CR>")
