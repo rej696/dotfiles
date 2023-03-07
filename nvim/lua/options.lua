@@ -10,6 +10,9 @@ vim.wo.number            = true
 vim.wo.relativenumber    = true
 vim.wo.signcolumn        = 'yes'
 vim.wo.cursorline        = true
+vim.o.foldmethod         = 'indent'                      -- Fold by indentation level
+vim.o.foldlevel          = 99                            -- Default fold level to 99 (i.e. no folds), z[r,R] reduces and z[m,M] increases(more)
+                                                         -- zo and zc to close individual folds
 
 -- Behaviour
 vim.o.hlsearch           = false
