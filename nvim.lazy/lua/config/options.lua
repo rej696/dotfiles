@@ -51,13 +51,19 @@ vim.api.nvim_exec("set cino=(s,m1", true)
 -- vim.g.loaded_netrwPlugin = true
 
 -- Neovide configuration
--- vim.api.nvim_exec ([[
--- if exists("g:neovide")
---     let g:neovide_cursor_animation_length=0
---     set guifont=Hack=h10
--- endif
--- ]],
--- false)
+if vim.g.neovide then
+    vim.o.guifont = "Hack:h10"
+    -- vim.g.neovide_padding_top = 0
+    -- vim.g.neovide_padding_bottom = 0
+    -- vim.g.neovide_padding_right = 0
+    -- vim.g.neovide_padding_left = 0
+    vim.g.neovide_hide_mouse_when_typing = true
+    vim.g.neovide_scroll_animation_length = 0.3
+    vim.g.neovide_cursor_animation_length = 0
+    vim.g.neovide_cursor_trail_size = 0
+    vim.g.neovide_fullscreen = true
+    vim.g.neovide_scale_factor = 1.0
+end
 
 -- Providers
 -- vim.g.python3_host_prog  = '/home/milton/software/miniconda/envs/pynvim/bin/python'

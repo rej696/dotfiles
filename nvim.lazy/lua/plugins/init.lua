@@ -6,7 +6,29 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd([[colorscheme monokai]])
+            -- vim.cmd([[colorscheme monokai]])
+            require('monokai').setup()
+
+            if vim.g.neovide then
+                -- Colors
+                local palette = require 'monokai'.classic
+                vim.g.terminal_color_0 =  palette.black
+                vim.g.terminal_color_1 =  palette.pink
+                vim.g.terminal_color_2 =  palette.green
+                vim.g.terminal_color_3 =  palette.brown
+                vim.g.terminal_color_4 =  palette.aqua
+                vim.g.terminal_color_5 =  palette.orange
+                vim.g.terminal_color_6 =  palette.purple
+                vim.g.terminal_color_7 =  palette.white
+                vim.g.terminal_color_8 =  palette.black
+                vim.g.terminal_color_9 =  palette.pink
+                vim.g.terminal_color_10 =  palette.green
+                vim.g.terminal_color_11 =  palette.brown
+                vim.g.terminal_color_12 =  palette.aqua
+                vim.g.terminal_color_13 = palette.orange
+                vim.g.terminal_color_14 = palette.purple
+                vim.g.terminal_color_15 = palette.white
+            end
         end,
     },
 
