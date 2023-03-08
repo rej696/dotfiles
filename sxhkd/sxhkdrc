@@ -8,6 +8,15 @@ super + Return
 
 # program launcher
 super + space
+	rofi -show window
+
+super + c
+	rofi -show ssh
+
+super + e
+	rofi -show filebrowser
+
+super + r
 	rofi -show combi
 
 # make sxhkd reload its configuration files:
@@ -18,16 +27,20 @@ super + Escape
 super + l
         light-locker-command -l
 
-# lock screen
+# browser
 super + b
         firefox
+
+# browser
+super + v
+        neovide
 
 # pulse audio controller
 super + p
         pavucontrol
 
 # network manager
-super + n
+super + i
         nm-connection-editor
 
 #
