@@ -1,7 +1,8 @@
  configuration {
-    modi: "window,drun,run,combi";
+    modi: "window,drun,run,combi,filebrowser,ssh,windowcd";
     font: "hack 12";
     combi-modi: "window,drun,run";
+    terminal: "alacritty";
 }
 //@theme "solarized"
 @theme "monokai"
