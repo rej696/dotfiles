@@ -3,6 +3,11 @@ return {
     -- nvim-lsp-installer is deprecated, use mason
     {
         "williamboman/mason.nvim",
+        dependencies = {
+            "williamboman/mason-lspconfig.nvim",
+            config = true
+            -- config = function() require("mason-lspconfig").setup() end
+        },
         opts = {
             ui = {
                 icons = {
@@ -11,13 +16,9 @@ return {
                     package_uninstalled = "✗"
                 }
             }
-        }
+        },
+        -- cmd = { "Mason", "LspInstall" } -- Mason is needed to add lsp binaries to path
     },
-    {
-        "williamboman/mason-lspconfig.nvim",
-        config = true
-        -- config = function() require("mason-lspconfig").setup() end
-    }
 }
 
 -- -- TODO make plugin file

@@ -1,10 +1,20 @@
 -- Initialize pluggins
 return {
     -- themes
-    'tanvirtin/monokai.nvim',
+    {
+        'tanvirtin/monokai.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd([[colorscheme monokai]])
+        end,
+    },
 
     -- git
-    'tpope/vim-fugitive',
+    {
+        'tpope/vim-fugitive',
+        cmd = "Git"
+    },
     {
         'lewis6991/gitsigns.nvim',
         config = function()
@@ -23,31 +33,52 @@ return {
 
     -- Spellchecker
     -- 'kamykn/popup-menu.nvim'
-    'kamykn/spelunker.vim',
+    {
+        'kamykn/spelunker.vim',
+        ft = { 'markdown', 'tex' },
+    },
 
     -- smart line number toggling
     'jeffkreeftmeijer/vim-numbertoggle',
 
     -- Formatting
-    'tpope/vim-commentary',
+    {
+        'tpope/vim-commentary',
+        keys = { "gcc", { "gc", mode = "v" } },
+    },
 
     -- hylang support
-    'hylang/vim-hy',
+    {
+        'hylang/vim-hy',
+        ft = 'hy',
+    },
     -- racket support
-    'benknoble/vim-racket',
+    {
+        'benknoble/vim-racket',
+        ft = 'racket',
+    },
     -- janet support
-    'janet-lang/janet.vim',
+    {
+        'janet-lang/janet.vim',
+        ft = 'janet',
+    },
 
     -- s-expressions
     -- 'tpope/vim-sexp-mappings-for-regular-people',
     -- 'guns/vim-sexp',
     -- 'tpope/vim-repeat',
     -- 'tpope/vim-surround',
-    'Olical/conjure',
+    {
+        'Olical/conjure',
+        config = function()
+            -- vim.g["conjure#client#racket#stdio#command"] = "xvfb-racket"
+            vim.g["conjure#extract#tree_sitter#enabled"] = true
+            vim.g["conjure#mapping#doc_word"] = {"<space>K"}
+        end
+    },
     {
         'eraserhd/parinfer-rust',
         build = 'cd ' .. vim.fn.stdpath('data') .. "/lazy/parinfer-rust" .. ' && cargo build --release'
-        -- FIXME fix path to installation?
     },
 
     -- clojure support
@@ -56,7 +87,8 @@ return {
         dependencies = {
             { 'tpope/vim-dispatch' },
             { 'radenling/vim-dispatch-neovim' }
-        }
+        },
+        ft = 'clojure'
     },
 }
 
