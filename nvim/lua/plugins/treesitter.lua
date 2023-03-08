@@ -1,7 +1,11 @@
 -- Treesitter configuration
 
 require('nvim-treesitter.configs').setup({
-  highlight = { enable = true, additional_vim_regex_highlighting = false},
+  highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = false
+
+  },
   -- We must manually specify which parsers to install
   ensure_installed = {
     "bash",
@@ -14,9 +18,31 @@ require('nvim-treesitter.configs').setup({
     "racket",
     "rust",
     "clojure"
-    },
+  },
   rainbow = {
-    enable = true,
-    -- disable = { "c" }
+    enable = false,
+    disable = { "c" }
+  },
+
+  playground = {
+      enable = true
+  },
+
+  textobjects = {
+      select = {
+          enable = true,
+          keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@functions.inner"
+          }
+      },
+      lsp_interop = {
+          enable = true,
+          border = "single",
+          floating_preview_opts = {},
+          peek_definition_code = {
+              ["<leader>df"] = "@function.outer"
+          }
+      }
   }
 })

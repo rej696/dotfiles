@@ -156,7 +156,11 @@ return require('packer').startup(
         -- Treesitter
         use {
             'nvim-treesitter/nvim-treesitter',
-            requires = {{'p00f/nvim-ts-rainbow'}},
+            requires = {
+                { 'p00f/nvim-ts-rainbow' },
+                { 'nvim-treesitter/playground' },
+                { 'nvim-treesitter/nvim-treesitter-textobjects' }
+            },
             config = function() require('plugins.treesitter') end,
             run = ':TSUpdate'
         }
