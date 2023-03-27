@@ -45,12 +45,22 @@ return {
             on_attach(client, bufnr)
         end
 
+        local ruff_on_attach = function(client, bufnr)
+            -- vim.api.nvim_set_keymap('n', '<space>h', ':ClangdSwitchSourceHeader<CR>', { noremap=true, silent=true })
+            on_attach(client, bufnr)
+            client.server_capabilities.hover = false
+        end
+
         local lsp_flags = {
             -- This is the default in Nvim 0.7+
             debounce_text_changes = 150,
         }
         require('lspconfig')['pylsp'].setup {
             on_attach = on_attach,
+            flags = lsp_flags,
+        }
+        require('lspconfig')['ruff_lsp'].setup {
+            on_attach = ruff_on_attach,
             flags = lsp_flags,
         }
         require('lspconfig')['lua_ls'].setup {

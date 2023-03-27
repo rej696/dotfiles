@@ -96,6 +96,7 @@ nnoremap("<leader>fa", "<Cmd>Telescope find_files disable_devicons=true hidden=t
 nnoremap("<leader>fb", "<Cmd>Telescope buffers disable_devicons=true<CR>")
 -- nnoremap("<leader>fg", "<Cmd>Telescope live_grep disable_devicons=true<CR>")
 nnoremap("<leader>fg", "<Cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+-- nnoremap("<leader>fg", '<Cmd>Telescope grep_string only_sort_text=true search=""<CR>')
 nnoremap("<leader>fw", "<Cmd>lua require('telescope.builtin').grep_string{search = vim.fn.expand('<cword>')}<CR>")
 nnoremap("<leader>fh", "<Cmd>Telescope help_tags disable_devicons=true<CR>")
 nnoremap("<leader>ft", "<Cmd>Telescope builtin theme=ivy<CR>")
@@ -104,9 +105,12 @@ nnoremap("<leader>fd", "<Cmd>Telescope diagnostics disable_devicons=true<CR>")
 nnoremap("<leader>fr", "<Cmd>Telescope resume disable_devicons=true<CR>")
 
 -- Git
-nnoremap("<leader>gp", "<Cmd>Gitsigns preview_hunk<CR>")
+nnoremap("<leader>gp", "<Cmd>Gitsigns preview_hunk_inline<CR>")
 nnoremap("<leader>gn", "<Cmd>Gitsigns next_hunk<CR>")
+nnoremap("<leader>gr", "<Cmd>Gitsigns reset_hunk<CR>")
 nnoremap("<leader>gl", "<Cmd>Gitsigns blame_line<CR>")
+nnoremap("<leader>ga", "<Cmd>Gitsigns stage_hunk<CR>")
+nnoremap("<leader>gu", "<Cmd>Gitsigns undo_stage_hunk<CR>")
 nnoremap("<leader>gb", "<Cmd>Git blame<CR>")
 nnoremap("<leader>gs", "<Cmd>Telescope git_status disable_devicons=true<CR>")
 -- nnoremap("<leader>gfb", "<Cmd>Telescope git_branches disable_devicons=true<CR>")
@@ -116,7 +120,7 @@ nnoremap("Zl", "<Cmd>Telescope spell_suggest theme=cursor disable_devicons=true<
 nnoremap("<leader>q", ":close<CR>")
 
 -- Grep Command
-nnoremap("<leader>gr", ":Grep<Space>")
+nnoremap("<leader>rg", ":Grep<Space>")
 
 -- VimGrep
 nnoremap("<leader>/", ":vimgrep<Space>")

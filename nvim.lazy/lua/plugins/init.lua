@@ -112,6 +112,13 @@ return {
         },
         ft = 'clojure'
     },
+
+    {
+        'jbyuki/instant.nvim',
+        config = function()
+            vim.g["instant_username"] = "rowan"
+        end
+    },
 }
 
 
