@@ -1,5 +1,5 @@
  configuration {
-    modi: "window,drun,run,combi,filebrowser,ssh,windowcd";
+    modi: "window,drun,run,combi,ssh";
     font: "hack 12";
     combi-modi: "window,drun,run";
     terminal: "alacritty";

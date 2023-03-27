@@ -211,36 +211,127 @@ font:
 
 # https://color.firefox.com/?theme=XQAAAAL6AAAAAAAAAABBKYhm849SCia2CaaEGccwS-xMDPr5SlSkkGmcNDB6QcBLvzmxZf3j3bQlT1ZHcagjMhV8c0VMOfcCEwpUXNfWxtwAe4_TfaOLl11AcveowCp1rl1-A-n2jgdEfc4dn5zJPnvLuga3WUR7h3pTDnc7K1RtUh7YgMHjuGybhxRdCMh4djHXhsylrbee26OwV3UcmSqTsR0NriwOLqv0YwFD7gIqN_yeuIs
 
-# Monokai.nvim tanvirtin
-colors:
-  primary:
-    # background: '#272A30' # Lighter
-    background: '#26292C' # Darker
-    foreground: '#F8F8F0'
+color_schemes:
+  # Monokai.nvim tanvirtin
+  monokai: &monokai
+    primary:
+      # background: '#272A30' # Lighter
+      background: '#26292C' # Darker
+      foreground: '#F8F8F0'
 
-  normal:
-   black:   '#000000'
-   # red:     '#FD871F' # Orange
-   red:     '#F92672' # Red
-   green:   '#A6E22E' # Green
-   yellow:  '#E6DB74' # Yellow
-   blue:    '#66D9EF' # Cyan
-   # magenta: '#F92672' # Red
-   # magenta: '#AE81FF' # Purple
-   magenta: '#FD871F' # Orange
-   cyan:    '#AE81FF' # Purple
-   # cyan:    '#FD871F' # Orange
-   white:   '#F8F8F0'
+    normal:
+     black:   '#000000'
+     # red:     '#FD871F' # Orange
+     red:     '#F92672' # Red
+     green:   '#A6E22E' # Green
+     yellow:  '#E6DB74' # Yellow
+     blue:    '#66D9EF' # Cyan
+     # magenta: '#F92672' # Red
+     # magenta: '#AE81FF' # Purple
+     magenta: '#FD871F' # Orange
+     cyan:    '#AE81FF' # Purple
+     # cyan:    '#FD871F' # Orange
+     white:   '#F8F8F0'
 
-  bright:
-   black:   '#000000'
-   red:     '#FD871F'
-   green:   '#A6E22E'
-   yellow:  '#E6DB74'
-   blue:    '#66D9EF'
-   magenta: '#F92672'
-   cyan:    '#AE81FF'
-   white:   '#F8F8F0'
+    bright:
+     black:   '#000000'
+     red:     '#FD871F'
+     green:   '#A6E22E'
+     yellow:  '#E6DB74'
+     blue:    '#66D9EF'
+     magenta: '#F92672'
+     cyan:    '#AE81FF'
+     white:   '#F8F8F0'
+
+  # XTerm's default colors
+  xterm: &xterm
+    # Default colors
+    primary:
+      background: '0x000000'
+      foreground: '0xffffff'
+    # Normal colors
+    normal:
+      black:   '0x000000'
+      red:     '0xcd0000'
+      green:   '0x00cd00'
+      yellow:  '0xcdcd00'
+      blue:    '0x0000ee'
+      magenta: '0xcd00cd'
+      cyan:    '0x00cdcd'
+      white:   '0xe5e5e5'
+
+    # Bright colors
+    bright:
+      black:   '0x7f7f7f'
+      red:     '0xff0000'
+      green:   '0x00ff00'
+      yellow:  '0xffff00'
+      blue:    '0x5c5cff'
+      magenta: '0xff00ff'
+      cyan:    '0x00ffff'
+      white:   '0xffffff'
+
+  monokai_charcoal: &monokai_charcoal
+    primary:
+      background: '#000000'
+      foreground: '#FFFFFF'
+
+    # Normal Colours
+    normal:
+      black:   '#1a1a1a'
+      red:     '#f4005f'
+      green:   '#98e024'
+      yellow:  '#fa8419'
+      blue:    '#9d65ff'
+      magenta: '#f4005f'
+      cyan:    '#58d1eb'
+      white:   '#c4c5b5'
+
+    # Bright Colours
+    bright:
+      black:   '#625e4c'
+      red:     '#f4005f'
+      green:   '#98e024'
+      yellow:  '#e0d561'
+      blue:    '#9d65ff'
+      magenta: '#f4005f'
+      cyan:    '#58d1eb'
+      white:   '#f6f6ef'
+
+  # Colors (Hyper)
+  hyper: &hyper
+    # Default colors
+    primary:
+      background: '0x000000'
+      foreground: '0xffffff'
+    cursor:
+      text: '0xF81CE5'
+      cursor: '0xffffff'
+
+    # Normal colors
+    normal:
+      black:   '0x000000'
+      red:     '0xfe0100'
+      green:   '0x33ff00'
+      yellow:  '0xfeff00'
+      blue:    '0x0066ff'
+      magenta: '0xcc00ff'
+      cyan:    '0x00ffff'
+      white:   '0xd0d0d0'
+
+    # Bright colors
+    bright:
+      black:   '0x808080'
+      red:     '0xfe0100'
+      green:   '0x33ff00'
+      yellow:  '0xfeff00'
+      blue:    '0x0066ff'
+      magenta: '0xcc00ff'
+      cyan:    '0x00ffff'
+      white:   '0xFFFFFF'
+
+colors: *monokai
+
 
 # Monokai.nvim tanvirtin extras
 # colors:

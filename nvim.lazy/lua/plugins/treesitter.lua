@@ -58,6 +58,7 @@ return {
             })
 
             vim.api.nvim_set_hl(0, "@function.call", { link = "Function" })
+            vim.api.nvim_set_hl(0, "@method.call", { link = "Function" })
         end
     }
 }
