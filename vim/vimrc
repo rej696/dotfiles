@@ -24,6 +24,7 @@ set scrolloff=5
 set showcmd " show unfinished normal mode commands
 set nobackup " no swp files
 set number " line numbers
+set relativenumber " line numbers
 set ruler " cursor location
 
 " Search
@@ -169,13 +170,11 @@ set statusline+=%#Define#\ %t
 set statusline+=\ %#Conditional#%m
 set statusline+=%=
 set statusline+=%#Define#%y
-set statusline+=%#Conditional#\ <<
-set statusline+=%#Directory#\ %l\ %#Conditional#/%#Directory#\ %L
-set statusline+=%#Conditional#\ ::
-set statusline+=%#Constant#\ %c
-set statusline+=%#Conditional#\ ::
-set statusline+=%#Debug#\ %n
-set statusline+=%#Conditional#\ >>\ %*
+set statusline+=%#Directory#\ %l,%c\ %3p%%\ %*
+" set statusline+=%#Directory#\ %l%#Conditional#,
+"set statusline+=%#Directory#%c
+"set statusline+=%#Directory#\ %3p%%
+"set statusline+=%#Conditional#\ %*
 set noshowmode
 
 " ---------------------------------------------------------
@@ -192,15 +191,15 @@ if executable("rg")
 endif
 
 function! Grep(...)
-  return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
+  return system(join([&grepprg] + [expand(join(a:000, ' '))], ' '))
 endfunction
 
 command! -nargs=+ -complete=file_in_path -bar Grep cgetexpr Grep(<f-args>)
 command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
 
 " automatically convert :grep into Grep
-cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'Grep' + 'grep'
-cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'LGrep' + 'lgrep'
+cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'Grep' : 'grep'
+cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'LGrep' : 'lgrep'
 
 " automatically open quickfix list whenever cgetexpr is called
 augroup quickfix
@@ -245,6 +244,8 @@ nnoremap <leader>/ :vimgrep<Space>
 nnoremap <leader>cl :cwindow<CR>
 nnoremap <leader>co :copen<CR>
 nnoremap <leader>cc :cclose<CR>
+nnoremap <leader>cn :cnext<CR>
+nnoremap <leader>cp :cprevious<CR>
 
 " Location list
 nnoremap <leader>ll :lwindow<CR>
