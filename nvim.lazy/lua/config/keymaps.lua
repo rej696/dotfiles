@@ -27,14 +27,15 @@ nnoremap("*", "*zz")
 -- Remap Splits
 nnoremap("<leader>v", ":vsplit<CR>")
 nnoremap("<leader>sp", ":split<CR>")
-nnoremap("<A-Left>", "<C-W><Left>")
-nnoremap("<A-Down>", "<C-W><Down>")
-nnoremap("<A-Up>", "<C-W><Up>")
-nnoremap("<A-Right>", "<C-W><Right>")
-nnoremap("<A-h>", "<C-W><h>")
-nnoremap("<A-j>", "<C-W><j>")
-nnoremap("<A-k>", "<C-W><k>")
-nnoremap("<A-l>", "<C-W><l>")
+nnoremap("<A-Left>", ":<C-U>TmuxNavigateLeft<CR>")
+nnoremap("<A-Down>", ":<C-U>TmuxNavigateDown<CR>")
+nnoremap("<A-Up>", ":<C-U>TmuxNavigateUp<CR>")
+nnoremap("<A-Right>", ":<C-U>TmuxNavigateRight<CR>")
+nnoremap("<A-p>", ":<C-U>TmuxNavigatePrevious<CR>")
+-- nnoremap("<A-h>", "<C-W><h>")
+-- nnoremap("<A-j>", "<C-W><j>")
+-- nnoremap("<A-k>", "<C-W><k>")
+-- nnoremap("<A-l>", "<C-W><l>")
 
 -- Toggle File explorer
 -- nnoremap("<leader>e", "<Cmd>NvimTreeToggle<CR>")
@@ -127,6 +128,7 @@ nnoremap("<leader>/", ":vimgrep<Space>")
 
 -- Don't lose contents of yank register on visual select and paste
 xnoremap("<leader>p", "\"_dP")
+nnoremap("<leader>p", "\"+p")
 
 -- Yank to system clipboard, delete to _ register
 nnoremap("<leader>y", "\"+y")
