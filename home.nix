@@ -6,6 +6,12 @@
 # - https://mipmip.github.io/home-manager-option-search/
 # - https://github.com/srid/nixos-config
 
+# Installation commands
+# sh <(https://nixos.org/nix/install) --no-daemon
+# sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+# sudo nix-channel --update
+# nix-shell '<home-manager>' -A install
+
 { config, pkgs, ... }:
 
 let
@@ -39,15 +45,16 @@ in
         pkgs.bspwm
         pkgs.sxhkd
         pkgs.polybar
-    ]
+        pkgs.feh
+    ];
 
     home.file."./.config/nvim/" = {
-        source = ./dotfiles/nvim.lazy/
+        source = ./dotfiles/nvim.lazy/;
         recursive = true;
     };
     
     home.file."./.config/alacritty/" = {
-        source = ./dotfiles/alacritty/
+        source = ./dotfiles/alacritty/;
         recursive = true;
     };
 
@@ -59,8 +66,8 @@ in
     programs.git = {
         # FIXME
         enable = false;
-        userName = "rej696"
-        userEmail = "55083730+rej696@users.noreply.github.com"
+        userName = "rej696";
+        userEmail = "55083730+rej696@users.noreply.github.com";
     }
 
 }
