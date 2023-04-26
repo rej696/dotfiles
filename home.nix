@@ -29,8 +29,16 @@ in
         pkgs.hack-font,
         pkgs.ripgrep,
         pkgs.alacritty,
-        pkgs.neovim
+        pkgs.neovim,
         pkgs.tealdeer,
+        pkgs.gcc,
+        pkgs.curl,
+        pkgs.tar,
+        pkgs.gdb,
+        pkgs.rofi,
+        pkgs.bspwm,
+        pkgs.sxhkd,
+        pkgs.polybar
     ]
 
     home.file."./.config/nvim/" = {
