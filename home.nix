@@ -22,22 +22,22 @@ in
     programs.home-manager.enable = true;
 
     home.packages = [
-        pkgs.fd,
-        pkgs.du-dust,
-        pkgs.tmux,
-        pkgs.make,
-        pkgs.hack-font,
-        pkgs.ripgrep,
-        pkgs.alacritty,
-        pkgs.neovim,
-        pkgs.tealdeer,
-        pkgs.gcc,
-        pkgs.curl,
-        pkgs.tar,
-        pkgs.gdb,
-        pkgs.rofi,
-        pkgs.bspwm,
-        pkgs.sxhkd,
+        pkgs.fd
+        pkgs.du-dust
+        pkgs.tmux
+        pkgs.make
+        pkgs.hack-font
+        pkgs.ripgrep
+        pkgs.alacritty
+        pkgs.neovim
+        pkgs.tealdeer
+        pkgs.gcc
+        pkgs.curl
+        pkgs.tar
+        pkgs.gdb
+        pkgs.rofi
+        pkgs.bspwm
+        pkgs.sxhkd
         pkgs.polybar
     ]
 
