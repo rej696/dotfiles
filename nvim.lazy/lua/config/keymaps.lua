@@ -15,6 +15,10 @@ inoremap("<C-l>", "<C-v>u03BB")
 -- Toggle Source and header
 nnoremap("<leader>h", "<Cmd>ClangdSwitchSourceHeader<CR>")
 
+-- Trim whitespace
+nnoremap("<leader>tr", ":%s/\\s\\+$//e<CR>")
+vnoremap("<leader>tr", ":s/\\s\\+$//e<CR>")
+
 -- Centre page after pgdn/up
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")

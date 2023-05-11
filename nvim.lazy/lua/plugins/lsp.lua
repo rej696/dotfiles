@@ -78,6 +78,7 @@ return {
         event = {'BufReadPre', 'BufNewFile'},
         dependencies = {
             {'hrsh7th/cmp-nvim-lsp'},
+            {'p00f/clangd_extensions.nvim'},
             {'williamboman/mason-lspconfig.nvim'},
             {
                 'williamboman/mason.nvim',
@@ -151,16 +152,9 @@ return {
             })
 
             lsp.on_attach(on_attach)
+            lsp.skip_server_setup({'clangd'})
 
             require('lspconfig')['lua_ls'].setup(lsp.nvim_lua_ls())
-            require('lspconfig')['clangd'].setup {
-                on_attach = clangd_on_attach,
-                cmd = {
-                    "clangd",
-                    "--background-index",
-                    "--clang-tidy",
-                },
-            }
             require('lspconfig')['racket_langserver'].setup {
                 on_attach = on_attach,
                 cmd = {
@@ -175,6 +169,24 @@ return {
             }
 
             lsp.setup()
+
+            require('clangd_extensions').setup {
+                server = {
+                    on_attach = clangd_on_attach,
+                    cmd = {
+                        "clangd",
+                        "--background-index",
+                        "--clang-tidy",
+                        "--enable-config"
+                    },
+                },
+                extensions = {
+                    inlay_hints = {
+                        only_current_line = true,
+                    }
+                }
+            }
+
         end
     }
 }
