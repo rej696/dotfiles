@@ -150,7 +150,7 @@ man() {
 export EDITOR="nvim" # set the default editor to neovim
 set -o vi # set the editing mode to vi
 # export PATH=/home/rowan/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rowan/opt/nvim-linux64/bin:
-export PATH=/home/rowan/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:
+# export PATH=/home/rowan/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:
 export PATH=~/.local/bin:$PATH
 . "$HOME/.cargo/env"
 
