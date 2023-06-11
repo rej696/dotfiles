@@ -51,6 +51,9 @@ set expandtab " tabs are expanded to 4 spaces
 
 " Colorsheme
 syntax on
+" set termguicolors
+" colorscheme koelher
+set t_Co=16
 
 if has("gui_running")
     if has("gui_gtk3")
