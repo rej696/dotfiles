@@ -1,0 +1,242 @@
+" mapped commands
+" <Space>ff = Fuzzy find files
+" <Space>b = List buffers and prompt to switch
+" <Space>x = Delete current buffer
+" <Space>fg = Grep and open quickfix list
+" <Space>f/ = Vimgrep and add to quickfix (see :h vimgrep)
+" <Space>cl = Toggle quickfix list
+" <Space>co = Open quickfix list
+" <Space>cc = Close quickfix list
+" <Space>q = Close current window but not vim
+" <Alt-Direction> = move between splits
+
+" Insert mode autocompletion <C-n> and <C-p>
+
+" Allow hidden buffers
+set hidden
+
+" Split normally
+set splitright
+set splitbelow
+
+set textwidth=80
+set scrolloff=5
+set showcmd " show unfinished normal mode commands
+set nobackup " no swp files
+set number " line numbers
+set relativenumber " line numbers
+set ruler " cursor location
+
+" Search
+"set hlsearch
+set incsearch
+set showmatch
+set ignorecase
+set smartcase
+
+" Turn off bell notification
+set visualbell t_vb=
+set novisualbell
+
+" Correct backspace behaviour
+set backspace=indent,eol,start
+
+" tabs & spaces & indentation
+filetype plugin indent on
+set autoindent " indent next line at same indentation as current line
+set smartindent
+set tabstop=8 " tabs are displayed as 8 characters
+set softtabstop=4 " tabs are expanded to 4 spaces
+set shiftwidth=4 " tabs are expanded to 4 spaces
+set expandtab " tabs are expanded to 4 spaces
+
+" Colorsheme
+syntax on
+" set termguicolors
+colorscheme pablo
+set t_Co=16
+
+" visual mode highlight
+hi Visual cterm=bold ctermbg=blue ctermfg=white
+
+if has("gui_running")
+    if has("gui_gtk3")
+        set guifont=Hack\ 11
+    else
+        set guifont=Hack:h11
+    endif
+    " remove gvim toolbars
+    set guioptions-=m "menubar
+    set guioptions-=T "toolbar
+    set guioptions-=r "scrollbar
+endif
+
+" Overwrite Terminal Request Version
+set t_RV=
+
+
+" wildmenu
+set wildmenu
+" wildmenu uses a popup and does fuzzy find
+" set wildoptions=fuzzy,pum
+set wildmode=list:longest,full
+" Insert mode auto completion popup <C-n>
+set completeopt=menuone,noinsert,noselect
+
+" mouse
+set mouse=a
+
+
+
+" netrw commands
+" gh : toggle hidden files
+" return : open file
+" %: create a new file
+" d: create a directory
+" -: move up a directory
+" p: Preview the file
+" s: select sorting style
+" r: reverse sorting order
+" R: rename highlighted file/directory
+" t: open in newtab
+" a: show hidden files
+
+
+" netrw directory browser settings
+"let g:netrw_liststyle=0 "thin view (- to go up a directory)
+"let g:netrw_browse_split=4 "open new file in pr:evious window
+let g:netrw_winsize=25 "set default width to 25%
+let g:netrw_keepdir=0 "sync current dir with browsing dir
+"let g:netrw_altv=1
+let g:netrw_banner=0 "hide banner
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+
+"override overloading netrw settings to enable line numbers
+let g:netrw_bufsettings='noma nomod nu nobl nowrap ro'
+
+" Grep
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --smart-case
+  set grepformat=%f:%l:%c:%m
+endif
+
+function! Grep(...)
+  return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
+endfunction
+
+" hex editing mode (using ftplugin/xxd.vim)
+function! Hex()
+    if "xxd" != &ft
+        let b:old_ft = &ft
+        set ft=xxd
+    else
+        let &ft = b:old_ft
+        unlet b:old_ft
+    endif
+endfunction
+
+command Xxd :call Hex()
+command Hex :call Hex()
+
+command! -nargs=+ -complete=file_in_path -bar Grep cgetexpr Grep(<f-args>)
+command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
+
+" automatically convert :grep into Grep
+cnoreabbrev <expr> grep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'Grep' : 'grep'
+cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'grep') ? 'LGrep' : 'lgrep'
+
+" automatically open quickfix list whenever cgetexpr is called
+augroup quickfix
+  autocmd!
+  autocmd QuickFixCmdPost cgetexpr cwindow
+  autocmd QuickFixCmdPost lgetexpr lwindow
+augroup END
+
+" fzf
+function! FZF() abort
+    let l:tempname = tempname()
+    execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+    " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+    try
+        execute 'cfile ' . l:tempname
+        redraw!
+    finally
+        call delete(l:tempname)
+    endtry
+endfunction
+
+function! FZFall() abort
+    let l:tempname = tempname()
+    execute 'silent !fd -H | fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+    " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+    try
+        execute 'cfile ' . l:tempname
+        redraw!
+    finally
+        call delete(l:tempname)
+    endtry
+endfunction
+
+function! FZFgrep() abort
+    let l:tempname = tempname()
+    execute 'silent !rg -n . | fzf --multi ' . '| awk ''{ print $1":"$2":0" }'' > ' . fnameescape(l:tempname)
+    " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+    try
+        execute 'cfile ' . l:tempname
+        redraw!
+    finally
+        call delete(l:tempname)
+    endtry
+endfunction
+
+command! -nargs=* Fzf call FZF()
+command! -nargs=* Fzfall call FZFall()
+command! -nargs=* Fzfgrep call FZFgrep()
+
+" ---------------------------------------------------------
+" keymaps.lua
+" ---------------------------------------------------------
+" Set space to leader key
+let g:mapleader = " "
+let g:maplocalleader = " "
+
+" Remap Splits
+nnoremap <A-Left> <C-W><C-J>
+nnoremap <A-Down> <C-W><C-K>
+nnoremap <A-Up> <C-W><C-L>
+nnoremap <A-Right> <C-W><C-H>
+nnoremap <A-J> <C-W><C-J>
+nnoremap <A-K> <C-W><C-K>
+nnoremap <A-L> <C-W><C-L>
+nnoremap <A-H> <C-W><C-H>
+
+nnoremap <leader>sp :split<CR>
+nnoremap <leader>v :vsplit<CR>
+
+" List buffer then select
+nnoremap <leader>b :ls<CR>:b<Space>
+" Delete current buffer
+nnoremap <leader>x :bd<CR>
+" Close window but not vim
+nnoremap <leader>q :close<CR>
+
+" Fuzzy find files
+"set path+=**
+"nnoremap <leader>ff :find *
+nnoremap <leader>ff :Fzf<CR>
+nnoremap <leader>fa :Fzfall<CR>
+nnoremap <leader>fg :Fzfgrep<CR>
+
+" Grep commands
+nnoremap <leader>rg :Grep<Space>
+nnoremap <leader>f/ :vimgrep<Space>
+
+" Quickfix list
+nnoremap <leader>cl :cwindow<CR>
+nnoremap <leader>co :copen<CR>
+nnoremap <leader>cc :cclose<CR>
+
+" Location list
+nnoremap <leader>ll :lwindow<CR>
+nnoremap <leader>lo :lopen<CR>
+nnoremap <leader>ll :lclose<CR>
