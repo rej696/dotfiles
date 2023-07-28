@@ -53,8 +53,8 @@ set expandtab " tabs are expanded to 4 spaces
 " Colorsheme
 syntax on
 " set termguicolors
-colorscheme pablo
-set t_Co=16
+colorscheme default
+set t_Co=8
 
 " visual mode highlight
 hi Visual cterm=bold ctermbg=blue ctermfg=white
@@ -192,6 +192,21 @@ endfunction
 command! -nargs=* Fzf call FZF()
 command! -nargs=* Fzfall call FZFall()
 command! -nargs=* Fzfgrep call FZFgrep()
+
+" Commenting
+augroup commenting_blocks_of_code
+    autocmd!
+    autocmd FileType c,cpp,rust let b:comment_leader = '\/\/ '
+    autocmd FileType sh,python,lua let b:comment_leader = '# '
+    autocmd FileType conf,fstab let b:comment_leader = '# '
+    autocmd FileType tex let b:comment_leader = '% '
+    autocmd FileType vim let b:comment_leader = '" '
+    autocmd FileType lisp let b:comment_leader = '; '
+    autocmd FileType forth let b:comment_leader = '\\ '
+augroup END
+
+noremap <silent> gcc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> gcu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
 " ---------------------------------------------------------
 " keymaps.lua
