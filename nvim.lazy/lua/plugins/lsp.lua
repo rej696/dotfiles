@@ -181,8 +181,10 @@ return {
                     },
                 },
                 extensions = {
+                    autoSetHints = false,
                     inlay_hints = {
-                        only_current_line = true,
+                        inline = true,
+                        -- only_current_line = true,
                     }
                 }
             }

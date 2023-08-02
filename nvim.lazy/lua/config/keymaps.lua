@@ -13,7 +13,8 @@ vim.g.maplocalleader = " "
 inoremap("<C-l>", "<C-v>u03BB")
 
 -- Toggle Source and header
-nnoremap("<leader>h", "<Cmd>ClangdSwitchSourceHeader<CR>")
+nnoremap("gh", "<Cmd>ClangdSwitchSourceHeader<CR>")
+nnoremap("<leader>th", "<Cmd>ClangdToggleInlayHints<CR>")
 
 -- Trim whitespace
 nnoremap("<leader>tr", ":%s/\\s\\+$//e<CR>")
