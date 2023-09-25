@@ -45,7 +45,7 @@ vim.opt.wildignore:append('__pycache__/*')
 vim.o.wildignorecase = true
 
 -- Cindent rules
-vim.api.nvim_exec("set cino=(s,m1", true)
+vim.api.nvim_exec("set cino=(s,m1,l1", true)
 
 -- Disable default plugins
 -- vim.g.loaded_netrwPlugin = true

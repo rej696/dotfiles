@@ -53,8 +53,8 @@ nnoremap("<leader>b", ":ls<CR>:b<Space>")
 nnoremap("<leader>x", ":bd<CR>")
 
 -- Buffer Navigation
-nnoremap("<A-Home>", ":bprev<CR>")
-nnoremap("<A-End>", ":bnext<CR>")
+nnoremap("<A-Home>", ":tabp<CR>")
+nnoremap("<A-End>", ":tabn<CR>")
 
 -- Terminal Remapping
 tnoremap("<Esc>", "<C-\\><C-n>")
