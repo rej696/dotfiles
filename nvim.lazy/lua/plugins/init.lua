@@ -2,29 +2,38 @@
 return {
     -- themes
     {
+        'mcchrish/zenbones.nvim',
+        dependencies = {
+            { 'rktjmp/lush.nvim' },
+        },
+        config = function()
+            vim.cmd([[colorscheme zenwritten]])
+        end
+    },
+    {
         'tanvirtin/monokai.nvim',
         lazy = false,
         priority = 1000,
         config = function()
             -- vim.cmd([[colorscheme monokai]])
-            require('monokai').setup()
+            -- require('monokai').setup()
 
             if vim.g.neovide then
                 -- Colors
                 local palette = require 'monokai'.classic
-                vim.g.terminal_color_0 =  palette.black
-                vim.g.terminal_color_1 =  palette.pink
-                vim.g.terminal_color_2 =  palette.green
-                vim.g.terminal_color_3 =  palette.brown
-                vim.g.terminal_color_4 =  palette.aqua
-                vim.g.terminal_color_5 =  palette.orange
-                vim.g.terminal_color_6 =  palette.purple
-                vim.g.terminal_color_7 =  palette.white
-                vim.g.terminal_color_8 =  palette.black
-                vim.g.terminal_color_9 =  palette.pink
-                vim.g.terminal_color_10 =  palette.green
-                vim.g.terminal_color_11 =  palette.brown
-                vim.g.terminal_color_12 =  palette.aqua
+                vim.g.terminal_color_0 = palette.black
+                vim.g.terminal_color_1 = palette.pink
+                vim.g.terminal_color_2 = palette.green
+                vim.g.terminal_color_3 = palette.brown
+                vim.g.terminal_color_4 = palette.aqua
+                vim.g.terminal_color_5 = palette.orange
+                vim.g.terminal_color_6 = palette.purple
+                vim.g.terminal_color_7 = palette.white
+                vim.g.terminal_color_8 = palette.black
+                vim.g.terminal_color_9 = palette.pink
+                vim.g.terminal_color_10 = palette.green
+                vim.g.terminal_color_11 = palette.brown
+                vim.g.terminal_color_12 = palette.aqua
                 vim.g.terminal_color_13 = palette.orange
                 vim.g.terminal_color_14 = palette.purple
                 vim.g.terminal_color_15 = palette.white
@@ -62,6 +71,14 @@ return {
 
     -- smart line number toggling
     'jeffkreeftmeijer/vim-numbertoggle',
+
+    -- edit jupyter notebooks
+    -- {
+    --     'goerz/jupytext.vim',
+    --     config = function()
+    --         vim.cmd("let g:jupytext_fmt = 'py'")
+    --     end
+    -- },
 
     -- Tmux Integration
     {
@@ -104,7 +121,7 @@ return {
         config = function()
             -- vim.g["conjure#client#racket#stdio#command"] = "xvfb-racket"
             vim.g["conjure#extract#tree_sitter#enabled"] = true
-            vim.g["conjure#mapping#doc_word"] = {"<space>K"}
+            vim.g["conjure#mapping#doc_word"] = { "<space>K" }
         end
     },
     {
