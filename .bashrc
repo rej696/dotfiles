@@ -146,6 +146,19 @@ man() {
     man "${@}"
 }
 
+# wt is for working with git worktrees, will switch directory to the argument passed to it.
+# You can use regular repos for work-trees, but you might want to create a blank commit at the root:
+#    git checkout $(git commit-tree $(git hash-object -t tree /dev/null) < /dev/null)
+# To add a branch/worktree from remote, `git worktree add <path> <branch-name>`
+# To create a new branch/worktree, `git worktree add -b <new-branch-name> <path> <commit/branch to branch from>`
+wt() {
+    directory=$(git worktree list --porcelain | grep -E 'worktree ' | awk '$0~v' v="${1}" | cut -d ' ' -f2-)
+    if [ -z $directory ]; then
+        return 1;
+    fi
+    cd "${directory}"
+}
+
 export EDITOR="nvim" # set the default editor to neovim
 set -o vi # set the editing mode to vi
 # export PATH=/home/rowan/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rowan/opt/nvim-linux64/bin:
