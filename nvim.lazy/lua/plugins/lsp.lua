@@ -144,7 +144,6 @@ return {
                 'pylsp',
                 'lua_ls',
                 'clangd',
-                'ltex',
                 -- 'hls',
                 -- 'racket_langserver'
                 -- 'rust_analyzer'
