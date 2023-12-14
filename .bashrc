@@ -71,8 +71,21 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+git_basename() {
+    git_root=$(git rev-parse --show-toplevel 2> /dev/null)
+    if [ -n "$git_root" ]; then
+        # echo -e '\033[01;31m[\033[01;32m'$(basename $git_root)'\033[01;31m:\033[01;34m'$(__git_ps1)'\033[01;31m]'
+        # echo -e '\033[01;31m[\033[01;32m'$(basename $git_root)'\033[01;31m:\033[03;34m'$(__git_ps1)'\033[01;31m]'
+        if [ $git_root != $PWD ]; then
+            echo -e '\033[01;32m'$(basename $git_root)'\033[01;31m:'
+        fi
+    fi
+}
+
+
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\][\[\033[01;32m\]\W\[\033[01;31m\]] \[\033[01;32m\]\$ \[\033[00m\]'
+    # PS1='${debian_chroot:+($debian_chroot)}$(git_basename) \[\033[01;31m\][\[\033[01;32m\]\W\[\033[01;31m\]] \[\033[01;32m\]\$ \[\033[00m\]'
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\][$(git_basename)\[\033[01;32m\]\W\[\033[01;31m\]]\[\033[03;34m\]$(__git_ps1) \[\033[01;32m\]\$ \[\033[00m\]'
 else
     PS1='${debian_chroot:+($debian_chroot)}[\W] \$ '
 fi
