@@ -77,7 +77,9 @@ git_basename() {
         # echo -e '\033[01;31m[\033[01;32m'$(basename $git_root)'\033[01;31m:\033[01;34m'$(__git_ps1)'\033[01;31m]'
         # echo -e '\033[01;31m[\033[01;32m'$(basename $git_root)'\033[01;31m:\033[03;34m'$(__git_ps1)'\033[01;31m]'
         if [ $git_root != $PWD ]; then
-            echo -e '\033[01;32m'$(basename $git_root)'\033[01;31m:'
+            # \001 and \002 are the same as \[ and \] in the prompt, for wrapping formatting codes
+            # Not doing this prevents the prompt from wrapping correctly for long lines
+            echo -e '\001\033[03;02;32m\002'$(basename $git_root)'\001\033[00;01;31m\002/'
         fi
     fi
 }
@@ -85,7 +87,7 @@ git_basename() {
 
 if [ "$color_prompt" = yes ]; then
     # PS1='${debian_chroot:+($debian_chroot)}$(git_basename) \[\033[01;31m\][\[\033[01;32m\]\W\[\033[01;31m\]] \[\033[01;32m\]\$ \[\033[00m\]'
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\][$(git_basename)\[\033[01;32m\]\W\[\033[01;31m\]]\[\033[03;34m\]$(__git_ps1) \[\033[01;32m\]\$ \[\033[00m\]'
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\][$(git_basename)\[\033[01;32m\]\W\[\033[01;31m\]]\[\033[03;34m\]$(__git_ps1) \[\033[00;01;32m\]\$ \[\033[00m\]'
 else
     PS1='${debian_chroot:+($debian_chroot)}[\W] \$ '
 fi
