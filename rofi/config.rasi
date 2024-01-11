@@ -5,4 +5,4 @@
     terminal: "alacritty";
 }
 //@theme "solarized"
-@theme "monokai"
+@theme "zenwritten"

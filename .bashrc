@@ -71,8 +71,23 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+git_basename() {
+    git_root=$(git rev-parse --show-toplevel 2> /dev/null)
+    if [ -n "$git_root" ]; then
+        # echo -e '\033[01;31m[\033[01;32m'$(basename $git_root)'\033[01;31m:\033[01;34m'$(__git_ps1)'\033[01;31m]'
+        # echo -e '\033[01;31m[\033[01;32m'$(basename $git_root)'\033[01;31m:\033[03;34m'$(__git_ps1)'\033[01;31m]'
+        if [ $git_root != $PWD ]; then
+            # \001 and \002 are the same as \[ and \] in the prompt, for wrapping formatting codes
+            # Not doing this prevents the prompt from wrapping correctly for long lines
+            echo -e '\001\033[03;02;32m\002'$(basename $git_root)'\001\033[00;01;31m\002/'
+        fi
+    fi
+}
+
+
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\][\[\033[01;32m\]\W\[\033[01;31m\]] \[\033[01;32m\]\$ \[\033[00m\]'
+    # PS1='${debian_chroot:+($debian_chroot)}$(git_basename) \[\033[01;31m\][\[\033[01;32m\]\W\[\033[01;31m\]] \[\033[01;32m\]\$ \[\033[00m\]'
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\][$(git_basename)\[\033[01;32m\]\W\[\033[01;31m\]]\[\033[03;34m\]$(__git_ps1) \[\033[00;01;32m\]\$ \[\033[00m\]'
 else
     PS1='${debian_chroot:+($debian_chroot)}[\W] \$ '
 fi
@@ -160,7 +175,7 @@ wt() {
 }
 
 export EDITOR="nvim" # set the default editor to neovim
-set -o vi # set the editing mode to vi
+# set -o vi # set the editing mode to vi
 # export PATH=/home/rowan/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rowan/opt/nvim-linux64/bin:
 # export PATH=/home/rowan/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:
 export PATH=~/.local/bin:$PATH
@@ -177,9 +192,6 @@ nvide() {
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Add gen1 utilities to path
-export PATH=$WORKSPACE_HOME/OBSW/Source/csl_adcs/tools/bin:$PATH
 
 alias janet-nrepl='janet -e "(import spork/netrepl) (netrepl/server)" 2&> /dev/null &'
 alias lisp="rlwrap ros run --eval '(ql:quickload :swank)' --eval '(swank:create-server :dont-close t)'"

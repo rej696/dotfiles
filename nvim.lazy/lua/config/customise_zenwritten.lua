@@ -10,6 +10,7 @@ local specs = lush.parse(function()
         Statement { base.Statement, fg = p.dark.rose},
         Number { base.Number, fg = p.dark.blossom},
         Type { base.Type, fg = p.dark.sky},
+        ColorColumn { base.CursorLine },
     }
 end)
 

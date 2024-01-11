@@ -2,14 +2,16 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
+# feh --bg-scale /home/rowan/dotfiles/jameswebb.jpg
+
 # bspc monitor -d I II III IV V VI VII VIII IX X
 bspc monitor -d 1 2 3 4 5 6 7 8
 
 bspc config border_width         2
-bspc config window_gap          12
+bspc config window_gap           0
 bspc config click_to_focus       true
 
-bspc config split_ratio          0.52
+bspc config split_ratio          0.5
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
@@ -17,8 +19,8 @@ bspc rule -a Screenkey manage=off
 
 $HOME/.config/polybar/launch.sh
 
-nm-applet &
-pa-applet &
-light-locker --lock-on-lid &
+pgrep -x nm-applet > /dev/null || nm-applet &
+pgrep -x pa-applet > /dev/null || pa-applet &
+pgrep -x light-locker > /dev/null || light-locker --lock-on-lid &
 
-feh --bg-scale /home/rowan/dotfiles/jameswebb.jpg
+# feh --bg-scale /home/rowan/dotfiles/jameswebb.jpg
