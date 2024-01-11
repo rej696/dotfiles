@@ -12,6 +12,9 @@ vim.g.maplocalleader = " "
 -- Insert unicode lambda
 inoremap("<C-l>", "<C-v>u03BB")
 
+-- Luaforth
+nnoremap("<leader>lf", "<Cmd>lua require('luaforth').prompt()<CR>")
+
 -- Toggle Source and header
 nnoremap("gh", "<Cmd>ClangdSwitchSourceHeader<CR>")
 nnoremap("<leader>th", "<Cmd>ClangdToggleInlayHints<CR>")
