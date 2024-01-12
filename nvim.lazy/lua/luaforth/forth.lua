@@ -10,6 +10,7 @@ local function split(str, pat)
     return t
 end
 
+---@param str string
 local function eval(str)
     return assert(loadstring(str))()
 end
@@ -74,7 +75,7 @@ local tos_compare_pairs = function(pair1, pair2)
         if type1 == "string" then return key1 < key2 end
         return tostring(key1) < tostring(key2) -- fast
     else
-        return type1 < type2                 -- numbers before strings before tables, etc
+        return type1 < type2                   -- numbers before strings before tables, etc
     end
 end
 
@@ -102,6 +103,7 @@ tos = function(o)
     if t == "table" then return tos_table(o) end
     return "<" .. tostring(o) .. ">"
 end
+
 
 local prettyprint = function(...)
     local arg = table.pack(...)
@@ -148,6 +150,7 @@ M.parse_spaces = partial(M.parse_pattern, "^([ \t]*)()")
 M.parse_word = partial(M.parse_pattern, "^([^ \t\r\n]+)()")
 M.parse_newline = partial(M.parse_pattern, "^([\r\n]+)()")
 M.parse_restofline = partial(M.parse_pattern, "^([^\r\n]*)()")
+M.parse_to_symbol = function(delim) return M.parse_pattern("^(.-)%s" .. delim .. "()") end
 M.parse_word_or_newline = function() return M.parse_word() or M.parse_newline() end
 M.get_word = function()
     M.parse_spaces(); return M.parse_word()
@@ -192,10 +195,14 @@ end
 -- some basics
 M._F["\n"] = function() end
 M._F[""] = function() M.mode = "stop" end
-M._F["[L"] = function() eval(M.parse_pattern("^(.-)%sL]()")) end
+-- M._F["[L"] = function() eval(M.parse_pattern("^(.-)%sL]()")) end
+M._F["[L"] = function() eval(M.parse_to_symbol("L]")) end
 M.DS = { n = 0 }
 M.push = function(stack, x)
     stack.n = stack.n + 1; stack[stack.n] = x
+end
+M.peek = function(stack)
+    return stack[stack.n]
 end
 M.pop = function(stack)
     if stack.n == 0 then
@@ -209,6 +216,13 @@ M.pop = function(stack)
 end
 
 -- printing state
+M.stringify = function(o)
+    local t = type(o)
+    if t == "number" then return tostring(o) end
+    if t == "string" then return string.format("%q", o) end
+    if t == "table" then return "{ " .. mapconcat(M.stringify, o, " ") .. " }" end
+    return "<" .. tostring(o) .. ">"
+end
 M.debug = false
 M.d = {}
 M.d.q = function(obj)
@@ -403,17 +417,180 @@ M.modes.lit = function()
     mode = "forth"
 end
 
-M.write = function(str)
-    M.output = M.output .. str
+-- printing
+M.output = {}
+M.write = function(o)
+    local str = o
+    if type(o) ~= "string" then
+        str = tostring(o)
+    end
+    table.insert(M.output, str)
 end
+
+M.print = function()
+    print(table.concat(M.output, " "))
+    M.output = {}
+end
+
+-- tables in forth
+M.TS = { n = 0 }
+
+M.table_metatable = {
+    __tostring = M.stringify,
+    __concat = function(a, b)
+        if type(a) == "table" and type(b) == "table" then
+            for i=1,#b do
+                table.insert(a, b[i])
+            end
+            return a
+        elseif type(a) == "table" and type(b) ~= "table" then
+            table.insert(a, b)
+            return a
+        elseif type(a) ~= "table" and type(b) == "table" then
+            table.insert(b, a)
+            return b
+        else
+            error("Unable to add types " .. type(a) .. " and " .. type(b))
+            return a, b
+        end
+    end,
+    __add = function(a, b)
+        if type(a) == "table" and type(b) ~= "table" then
+            for i, v in ipairs(a) do
+                a[i] = v + b
+            end
+            return a
+        elseif type(a) ~= "table" and type(b) == "table" then
+            for i, v in ipairs(b) do
+                b[i] = a + v
+            end
+            return b
+        else
+            error("Unable to add types " .. type(a) .. " and " .. type(b))
+            return a, b
+        end
+    end,
+    __sub = function(a, b)
+        if type(a) == "table" and type(b) ~= "table" then
+            for i, v in ipairs(a) do
+                a[i] = v - b
+            end
+            return a
+        elseif type(a) ~= "table" and type(b) == "table" then
+            for i, v in ipairs(b) do
+                b[i] = a - v
+            end
+            return b
+        else
+            error("Unable to add types " .. type(a) .. " and " .. type(b))
+            return a, b
+        end
+    end,
+    __div = function(a, b)
+        if type(a) == "table" and type(b) ~= "table" then
+            for i, v in ipairs(a) do
+                a[i] = v / b
+            end
+            return a
+        elseif type(a) ~= "table" and type(b) == "table" then
+            for i, v in ipairs(b) do
+                b[i] = a / v
+            end
+            return b
+        else
+            error("Unable to add types " .. type(a) .. " and " .. type(b))
+            return a, b
+        end
+    end,
+    __mul = function(a, b)
+        if type(a) == "table" and type(b) ~= "table" then
+            for i, v in ipairs(a) do
+                a[i] = v * b
+            end
+            return a
+        elseif type(a) ~= "table" and type(b) == "table" then
+            for i, v in ipairs(b) do
+                b[i] = a * v
+            end
+            return b
+        else
+            error("Unable to add types " .. type(a) .. " and " .. type(b))
+            return a, b
+        end
+    end,
+    -- __concat = function(a, b)
+    --     return tostring(a) .. tostring(b)
+    -- end
+}
+
+M.interpret_table_entry = function()
+    if M.word then
+        if tonumber(M.word) then
+            table.insert(M.peek(M.TS), tonumber(M.word))
+        else
+            table.insert(M.peek(M.TS), M.word)
+        end
+        return true
+    end
+end
+
+M.modes.table = function()
+    M.word = M.get_word_or_newline() or ""
+    if M.debug then
+        M.p_s_c()
+    end
+    local _ = M.interpret_primitive()
+        or M.interpret_nonprimitive()
+        or M.interpret_table_entry()
+        or error("can't build table: " .. tostring(M.word))
+end
+M._F["{"] = function()
+    M.mode = "table"
+    local t = {}
+    setmetatable(t, M.table_metatable)
+    M.push(M.TS, t)
+    -- M.TS.n = M.TS.n + 1
+    -- M.TS[M.TS.n] = {}
+end
+
+M._F["}"] = function()
+    local t = M.pop(M.TS)
+    if t then
+        if M.TS.n == 0 then
+            M.push(M.DS, t)
+            M.mode = "interpret"
+        else
+            M.push(M.TS, t)
+        end
+    else
+        error("No table to end")
+    end
+end
+
+-- parse lua table
+M._F["{L"] = function()
+    local str = M.parse_to_symbol("L}")
+    if str then
+        local t = eval("return { " .. str .. " }")
+        if t then
+            setmetatable(t, M.table_metatable)
+            M.push(M.DS, t)
+        else
+            error("Unable to load table from string: " .. str)
+        end
+    else
+        error("Unable to parse table literal")
+    end
+end
+
 
 -- Basic Forth primitives
 M._F["."] = function()
-    M.write(M.pop(M.DS) .. " ")
+    M.write(M.pop(M.DS))
 end
 M._F[".s"] = function()
     for i = 1, M.DS.n do
-        M.write(M.DS[i] .. " ")
+        M.write(M.DS[i])
     end
 end
 M._F["drop"] = function() local _ = M.pop(M.DS) end
