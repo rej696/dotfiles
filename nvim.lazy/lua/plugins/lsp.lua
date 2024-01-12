@@ -10,6 +10,31 @@ return {
     },
 
     {
+        'zbirenbaum/copilot.lua',
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                suggestion = {
+                    enabled = true,
+                    auto_trigger = true
+                },
+                panel = {
+                    enabled = true,
+                    auto_refresh = true
+                },
+                copilot_node_command = '/home/rowan/.nvm/versions/node/v17.9.1/bin/node'
+            })
+        end
+    },
+    -- {
+    --     'zbirenbaum/copilot-cmp',
+    --     config = function()
+    --         require("copilot_cmp").setup()
+    --     end
+    -- },
+
+    {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
         dependencies = {
@@ -34,6 +59,7 @@ return {
 
             cmp.setup({
                 sources = {
+                    -- {name = "copilot"},
                     {name = 'nvim_lsp'},
                     {name = 'buffer', keyword_length = 3},
                     {name = 'path'},
@@ -176,7 +202,8 @@ return {
                         "clangd",
                         "--background-index",
                         "--clang-tidy",
-                        "--enable-config"
+                        "--enable-config",
+                        "--offset-encoding=utf-16",
                     },
                 },
                 extensions = {

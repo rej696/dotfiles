@@ -1,0 +1,24 @@
+If:
+  PathMatch: [/home/rowan/workspace/pic/.*, /opt/microchip/xc8/v2.45/pic/.*]
+CompileFlags:
+  Add: [-include/opt/microchip/xc8/v2.45/pic/include/language_support.h,
+    -isystem/opt/microchip/xc8/v2.45/pic/include/proc,
+    -isystem/opt/microchip/xc8/v2.45/pic/include,
+    -isystem/opt/microchip/xc8/v2.45/pic/include/c99,
+    -isystem/opt/microchip/xc8/v2.45/pic/include/c90,
+    -D__XC8, -DXPRJ_default=default, -D__PICC__, -D__CLANG__, -D_HTC_H_,
+    -D__ADDRQUAL=__ADDRQUAL_REJECT,
+    -D__int24=int, -D__uint24=int, #-Duint24_t=int, -Dint24_t=int,
+    -D__bit=char,
+    -D_16F1947, -nostdlibinc,
+    -ferror-limit=0
+  ]
+
+Diagnostics:
+  Suppress:
+    - expected_unqualified_id
+    - unknown-attributes
+    - expected_either
+    - language_linkage_spec_unknown
+    - anon_bitfield_qualifiers
+

@@ -13,7 +13,8 @@ vim.g.maplocalleader = " "
 inoremap("<C-l>", "<C-v>u03BB")
 
 -- Luaforth
-nnoremap("<leader>lf", "<Cmd>lua require('luaforth').prompt()<CR>")
+nnoremap("<leader>lp", "<Cmd>lua require('luaforth').prompt()<CR>")
+nnoremap("<leader>lf", "<Cmd>lua require('luaforth').repl()<CR>")
 
 -- Toggle Source and header
 nnoremap("gh", "<Cmd>ClangdSwitchSourceHeader<CR>")

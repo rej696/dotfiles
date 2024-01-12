@@ -427,10 +427,14 @@ M.write = function(o)
     table.insert(M.output, str)
 end
 
-M.print = function()
-    print(table.concat(M.output, " "))
+M.read_output = function()
+    local output = table.concat(M.output, " ")
     M.output = {}
+    return output or ""
 end
+
+M.input_prompt = "Forth: "
+M.output_prompt = " -> "
 
 -- tables in forth
 M.TS = { n = 0 }
