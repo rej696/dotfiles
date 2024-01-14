@@ -71,6 +71,11 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+if [ -f /usr/share/git/completion/git-prompt.sh ]; then
+    source /usr/share/git/completion/git-prompt.sh
+
+fi
+
 git_basename() {
     git_root=$(git rev-parse --show-toplevel 2> /dev/null)
     if [ -n "$git_root" ]; then
@@ -179,6 +184,7 @@ export EDITOR="nvim" # set the default editor to neovim
 # export PATH=/home/rowan/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rowan/opt/nvim-linux64/bin:
 # export PATH=/home/rowan/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:
 export PATH=~/.local/bin:$PATH
+export MANPATH=~/.local/share/man:$MANPATH
 . "$HOME/.cargo/env"
 
 # nvim server (for use with neovide)
