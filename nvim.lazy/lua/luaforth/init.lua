@@ -1,5 +1,9 @@
 Forth = require("luaforth.forth")
 
+-- Extensions
+require('luaforth.primitives')
+require('luaforth.table')
+
 -- TODO embed tcc.lua (https://github.com/nucular/tcclua)
 -- and luajit.ffi (http://luajit.org/ext_ffi.html) to be able
 -- to define and declare and compile C functions in the forth interpreter,
