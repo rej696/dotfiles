@@ -155,6 +155,8 @@ return {
             end
 
             local clangd_on_attach = function(client, bufnr)
+                require('clangd_extensions.inlay_hints').setup_autocmd()
+                require('clangd_extensions.inlay_hints').set_inlay_hints()
                 -- vim.api.nvim_set_keymap('n', '<space>h', ':ClangdSwitchSourceHeader<CR>', { noremap=true, silent=true })
                 on_attach(client, bufnr)
             end
@@ -177,7 +179,7 @@ return {
             })
 
             lsp.on_attach(on_attach)
-            lsp.skip_server_setup({'clangd'})
+            -- lsp.skip_server_setup({'clangd'})
 
             require('lspconfig')['lua_ls'].setup(lsp.nvim_lua_ls())
             require('lspconfig')['racket_langserver'].setup {
@@ -192,28 +194,23 @@ return {
             require('lspconfig')['ruff_lsp'].setup {
                 on_attach = ruff_on_attach,
             }
-
-            lsp.setup()
-
-            require('clangd_extensions').setup {
-                server = {
-                    on_attach = clangd_on_attach,
-                    cmd = {
-                        "clangd",
-                        "--background-index",
-                        "--clang-tidy",
-                        "--enable-config",
-                        "--offset-encoding=utf-16",
-                    },
+            require('lspconfig')['clangd'].setup {
+                on_attach = clangd_on_attach,
+                cmd = {
+                    "clangd",
+                    "--background-index",
+                    "--clang-tidy",
+                    "--enable-config",
+                    "--offset-encoding=utf-16",
                 },
-                extensions = {
-                    autoSetHints = false,
-                    inlay_hints = {
-                        inline = true,
-                        -- only_current_line = true,
-                    }
+            }
+            require('clangd_extensions').setup {
+                inlay_hints = {
+                    only_current_line = true,
                 }
             }
+
+            lsp.setup()
 
         end
     }
