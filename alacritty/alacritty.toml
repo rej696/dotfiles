@@ -1,158 +1,158 @@
-[color_schemes.hyper.bright]
-black = "0x808080"
-blue = "0x0066ff"
-cyan = "0x00ffff"
-green = "0x33ff00"
-magenta = "0xcc00ff"
-red = "0xfe0100"
-white = "0xFFFFFF"
-yellow = "0xfeff00"
+# [color_schemes.hyper.bright]
+# black = "0x808080"
+# blue = "0x0066ff"
+# cyan = "0x00ffff"
+# green = "0x33ff00"
+# magenta = "0xcc00ff"
+# red = "0xfe0100"
+# white = "0xFFFFFF"
+# yellow = "0xfeff00"
 
-[color_schemes.hyper.cursor]
-cursor = "0xffffff"
-text = "0xF81CE5"
+# [color_schemes.hyper.cursor]
+# cursor = "0xffffff"
+# text = "0xF81CE5"
 
-[color_schemes.hyper.normal]
-black = "0x000000"
-blue = "0x0066ff"
-cyan = "0x00ffff"
-green = "0x33ff00"
-magenta = "0xcc00ff"
-red = "0xfe0100"
-white = "0xd0d0d0"
-yellow = "0xfeff00"
+# [color_schemes.hyper.normal]
+# black = "0x000000"
+# blue = "0x0066ff"
+# cyan = "0x00ffff"
+# green = "0x33ff00"
+# magenta = "0xcc00ff"
+# red = "0xfe0100"
+# white = "0xd0d0d0"
+# yellow = "0xfeff00"
 
-[color_schemes.hyper.primary]
-background = "0x000000"
-foreground = "0xffffff"
+# [color_schemes.hyper.primary]
+# background = "0x000000"
+# foreground = "0xffffff"
 
-[color_schemes.monokai.bright]
-black = "#000000"
-blue = "#66D9EF"
-cyan = "#AE81FF"
-green = "#A6E22E"
-magenta = "#F92672"
-red = "#FD871F"
-white = "#F8F8F0"
-yellow = "#E6DB74"
+# [color_schemes.monokai.bright]
+# black = "#000000"
+# blue = "#66D9EF"
+# cyan = "#AE81FF"
+# green = "#A6E22E"
+# magenta = "#F92672"
+# red = "#FD871F"
+# white = "#F8F8F0"
+# yellow = "#E6DB74"
 
-[color_schemes.monokai.normal]
-black = "#000000"
-blue = "#66D9EF"
-cyan = "#AE81FF"
-green = "#A6E22E"
-magenta = "#FD871F"
-red = "#F92672"
-white = "#F8F8F0"
-yellow = "#E6DB74"
+# [color_schemes.monokai.normal]
+# black = "#000000"
+# blue = "#66D9EF"
+# cyan = "#AE81FF"
+# green = "#A6E22E"
+# magenta = "#FD871F"
+# red = "#F92672"
+# white = "#F8F8F0"
+# yellow = "#E6DB74"
 
-[color_schemes.monokai.primary]
-background = "#26292C"
-foreground = "#F8F8F0"
+# [color_schemes.monokai.primary]
+# background = "#26292C"
+# foreground = "#F8F8F0"
 
-[color_schemes.monokai_charcoal.bright]
-black = "#625e4c"
-blue = "#9d65ff"
-cyan = "#58d1eb"
-green = "#98e024"
-magenta = "#f4005f"
-red = "#f4005f"
-white = "#f6f6ef"
-yellow = "#e0d561"
+# [color_schemes.monokai_charcoal.bright]
+# black = "#625e4c"
+# blue = "#9d65ff"
+# cyan = "#58d1eb"
+# green = "#98e024"
+# magenta = "#f4005f"
+# red = "#f4005f"
+# white = "#f6f6ef"
+# yellow = "#e0d561"
 
-[color_schemes.monokai_charcoal.normal]
-black = "#1a1a1a"
-blue = "#9d65ff"
-cyan = "#58d1eb"
-green = "#98e024"
-magenta = "#f4005f"
-red = "#f4005f"
-white = "#c4c5b5"
-yellow = "#fa8419"
+# [color_schemes.monokai_charcoal.normal]
+# black = "#1a1a1a"
+# blue = "#9d65ff"
+# cyan = "#58d1eb"
+# green = "#98e024"
+# magenta = "#f4005f"
+# red = "#f4005f"
+# white = "#c4c5b5"
+# yellow = "#fa8419"
 
-[color_schemes.monokai_charcoal.primary]
-background = "#000000"
-foreground = "#FFFFFF"
+# [color_schemes.monokai_charcoal.primary]
+# background = "#000000"
+# foreground = "#FFFFFF"
 
-[color_schemes.xterm.bright]
-black = "0x7f7f7f"
-blue = "0x5c5cff"
-cyan = "0x00ffff"
-green = "0x00ff00"
-magenta = "0xff00ff"
-red = "0xff0000"
-white = "0xffffff"
-yellow = "0xffff00"
+# [color_schemes.xterm.bright]
+# black = "0x7f7f7f"
+# blue = "0x5c5cff"
+# cyan = "0x00ffff"
+# green = "0x00ff00"
+# magenta = "0xff00ff"
+# red = "0xff0000"
+# white = "0xffffff"
+# yellow = "0xffff00"
 
-[color_schemes.xterm.normal]
-black = "0x000000"
-blue = "0x0000ee"
-cyan = "0x00cdcd"
-green = "0x00cd00"
-magenta = "0xcd00cd"
-red = "0xcd0000"
-white = "0xe5e5e5"
-yellow = "0xcdcd00"
+# [color_schemes.xterm.normal]
+# black = "0x000000"
+# blue = "0x0000ee"
+# cyan = "0x00cdcd"
+# green = "0x00cd00"
+# magenta = "0xcd00cd"
+# red = "0xcd0000"
+# white = "0xe5e5e5"
+# yellow = "0xcdcd00"
 
-[color_schemes.xterm.primary]
-background = "0x000000"
-foreground = "0xffffff"
+# [color_schemes.xterm.primary]
+# background = "0x000000"
+# foreground = "0xffffff"
 
-[color_schemes.zenbones.bright]
-black = "#403833"
-blue = "#61ABDA"
-cyan = "#65B8C1"
-green = "#8BAE68"
-magenta = "#CF86C1"
-red = "#E8838F"
-white = "#888F94"
-yellow = "#D68C67"
+# [color_schemes.zenbones.bright]
+# black = "#403833"
+# blue = "#61ABDA"
+# cyan = "#65B8C1"
+# green = "#8BAE68"
+# magenta = "#CF86C1"
+# red = "#E8838F"
+# white = "#888F94"
+# yellow = "#D68C67"
 
-[color_schemes.zenbones.cursor]
-cursor = "#C4CACF"
-text = "#1C1917"
+# [color_schemes.zenbones.cursor]
+# cursor = "#C4CACF"
+# text = "#1C1917"
 
-[color_schemes.zenbones.normal]
-black = "#1C1917"
-blue = "#6099C0"
-cyan = "#66A5AD"
-green = "#819B69"
-magenta = "#B279A7"
-red = "#DE6E7C"
-white = "#B4BDC3"
-yellow = "#B77E64"
+# [color_schemes.zenbones.normal]
+# black = "#1C1917"
+# blue = "#6099C0"
+# cyan = "#66A5AD"
+# green = "#819B69"
+# magenta = "#B279A7"
+# red = "#DE6E7C"
+# white = "#B4BDC3"
+# yellow = "#B77E64"
 
-[color_schemes.zenbones.primary]
-background = "#1C1917"
-foreground = "#B4BDC3"
+# [color_schemes.zenbones.primary]
+# background = "#1C1917"
+# foreground = "#B4BDC3"
 
-[color_schemes.zenwritten.bright]
-black = "#3D3839"
-blue = "#61ABDA"
-cyan = "#65B8C1"
-green = "#8BAE68"
-magenta = "#CF86C1"
-red = "#E8838F"
-white = "#8E8E8E"
-yellow = "#D68C67"
+# [color_schemes.zenwritten.bright]
+# black = "#3D3839"
+# blue = "#61ABDA"
+# cyan = "#65B8C1"
+# green = "#8BAE68"
+# magenta = "#CF86C1"
+# red = "#E8838F"
+# white = "#8E8E8E"
+# yellow = "#D68C67"
 
-[color_schemes.zenwritten.cursor]
-cursor = "#C9C9C9"
-text = "#191919"
+# [color_schemes.zenwritten.cursor]
+# cursor = "#C9C9C9"
+# text = "#191919"
 
-[color_schemes.zenwritten.normal]
-black = "#191919"
-blue = "#6099C0"
-cyan = "#66A5AD"
-green = "#819B69"
-magenta = "#B279A7"
-red = "#DE6E7C"
-white = "#BBBBBB"
-yellow = "#B77E64"
+# [color_schemes.zenwritten.normal]
+# black = "#191919"
+# blue = "#6099C0"
+# cyan = "#66A5AD"
+# green = "#819B69"
+# magenta = "#B279A7"
+# red = "#DE6E7C"
+# white = "#BBBBBB"
+# yellow = "#B77E64"
 
-[color_schemes.zenwritten.primary]
-background = "#191919"
-foreground = "#BBBBBB"
+# [color_schemes.zenwritten.primary]
+# background = "#191919"
+# foreground = "#BBBBBB"
 
 [colors.bright]
 black = "#3D3839"
