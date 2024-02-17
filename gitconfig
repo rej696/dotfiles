@@ -1,0 +1,14 @@
+[user]
+	email = 55083730+rej696@users.noreply.github.com
+	name = rej696
+[core]
+	editor = vim
+[init]
+	defaultBranch = main
+[maintenance]
+	repo = /home/rowan/dotfiles
+[rerere]
+	enabled = true
+	autoUpdate = true
+[alias]
+	tree = log --graph --oneline --all
