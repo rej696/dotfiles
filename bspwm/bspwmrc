@@ -5,7 +5,12 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 # feh --bg-scale /home/rowan/dotfiles/jameswebb.jpg
 
 # bspc monitor -d I II III IV V VI VII VIII IX X
-bspc monitor -d 1 2 3 4 5 6 7 8
+
+if [ -f $HOME/.bspwm_monitor_config ]; then
+    source $HOME/.bspwm_monitor_config
+else
+    bspc monitor -d 1 2 3 4 5 6 7 8
+fi
 
 bspc config border_width         2
 bspc config window_gap           0

@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# This script is to be sourced into the bspwm config file
+
+# set the background to black
+xsetroot
+
+if xrandr | grep DisplayPort-0 | grep -q " connected"; then
+    # echo "Two monitors"
+    # if [[ $(bspc query -D | wc -l) == 8 ]]; then
+    #     echo "modify monitors"
+    #     name=1
+    #     for id in $(bspc query -D | head -n 4); do
+    #         bspc desktop $id -m DisplayPort-0
+    #         bspc desktop $id -n $name
+    #         let name++
+    #     done
+
+    #     for id in $(bspc query -D | tail -n 4); do
+    #         bspc desktop $id -m eDP
+    #         bspc desktop $id -n $name
+    #         let name++
+    #     done
+    #     for id in $(bspc query -D | tail -n +8); do
+    #         bspc desktop $id -r
+    #     done
+    # else
+        # echo "new monitors"
+        mons -e left
+        bspc monitor DisplayPort-0 -d 1 2 3 4
+        bspc monitor eDP -d 5 6 7 8
+    # fi
+else
+    # Move desktops to laptop screen and delete external monitor
+    if [[ $(bspc query -M | wc -l) == 2 ]]; then
+        for id in $(bspc query -m DisplayPort-0 -D); do
+            bspc desktop $id -m eDP
+        done
+        bspc monitor DisplayPort-0 -r
+    fi
+
+    # Create addional desktops if 8 don't exist
+    if [[ $(bspc query -D | wc -l) != 8 ]]; then
+        bspc monitor -d 1 2 3 4 5 6 7 8
+    fi
+
+    # Rename top 8 in order
+    name=1
+    for id in $(bspc query -D | head -n 8); do
+        # bspc desktop $id -m eDP
+        bspc desktop $id -n $name
+        let name++
+    done
+
+    # remove any remaining
+    for id in $(bspc query -D | tail -n +9); do
+        bspc desktop $id -r
+    done
+fi
