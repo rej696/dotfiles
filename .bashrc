@@ -199,7 +199,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-alias janet-nrepl='janet -e "(import spork/netrepl) (netrepl/server)" 2&> /dev/null &'
+# Run janet-server to start server, then ConjureConnect, then run janet-client to connect to shared repl
+alias janet-server='janet -e "(import spork/netrepl) (netrepl/server-single)" 2&> /dev/null &'
+alias janet-client='janet -e "(import spork/netrepl) (netrepl/client)"'
+
 alias lisp="rlwrap ros run --eval '(ql:quickload :swank)' --eval '(swank:create-server :dont-close t)'"
 alias dc="rlwrap dc"
 
