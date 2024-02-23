@@ -1,6 +1,8 @@
 [user]
 	email = 55083730+rej696@users.noreply.github.com
 	name = rej696
+[diff]
+	tool = nvimdiff
 [core]
 	editor = vim
 [init]
@@ -12,3 +14,4 @@
 	autoUpdate = true
 [alias]
 	tree = log --graph --oneline --all
+	rej696 = config user.name "Rowan.Saunders" && config user.email "55083730+rej696@users.noreply.github.com"
