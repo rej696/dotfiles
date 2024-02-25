@@ -4,3 +4,6 @@
 [submodule "vim-molokai"]
 	path = vim-molokai
 	url = https://github.com/tomasr/molokai
+[submodule "sh-todo"]
+	path = sh-todo
+	url = git@github.com:rej696/sh-todo.git
