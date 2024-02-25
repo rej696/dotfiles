@@ -182,6 +182,7 @@ return {
             -- lsp.skip_server_setup({'clangd'})
 
             require('lspconfig')['lua_ls'].setup(lsp.nvim_lua_ls())
+            require('lspconfig')['gopls'].setup({})
             require('lspconfig')['racket_langserver'].setup {
                 on_attach = on_attach,
                 cmd = {
