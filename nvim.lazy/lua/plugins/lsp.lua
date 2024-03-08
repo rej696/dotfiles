@@ -60,7 +60,7 @@ return {
             cmp.setup({
                 sources = {
                     -- {name = "copilot"},
-                    {name = 'nvim_lsp'},
+                    {name = 'nvim_lsp', keyword_length = 6, group_index = 1, max_item_count = 30},
                     {name = 'buffer', keyword_length = 3},
                     {name = 'path'},
                     {name = 'omni'},
@@ -207,12 +207,28 @@ return {
             }
             require('clangd_extensions').setup {
                 inlay_hints = {
-                    only_current_line = true,
+                    only_current_line = false,
                 }
             }
 
             lsp.setup()
 
         end
+    },
+    -- {
+    --     "dhananjaylatkar/cscope_maps.nvim",
+    --     config = function()
+    --         require("cscope_maps").setup()
+    --     end
+    -- },
+    {
+        "rej696/calltree.nvim",
+        dependencies = {
+            "dhananjaylatkar/cscope_maps.nvim"
+        },
+        opts = {
+            prefix = "<leader>o",
+            tree_style = "brief",
+        },
     }
 }

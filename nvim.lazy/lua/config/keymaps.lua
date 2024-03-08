@@ -16,6 +16,9 @@ inoremap("<C-l>", "<C-v>u03BB")
 nnoremap("<leader>lp", "<Cmd>lua require('luaforth').prompt()<CR>")
 nnoremap("<leader>lf", "<Cmd>lua require('luaforth').repl()<CR>")
 
+nnoremap("<leader>ob", ":!fd -e c -e h | xargs cscope -b <CR>")
+nnoremap("<leader>ot", ":!fd -e c -e h | ctags -L - <CR>")
+
 -- Toggle Source and header
 nnoremap("gh", "<Cmd>ClangdSwitchSourceHeader<CR>")
 nnoremap("<leader>th", "<Cmd>ClangdToggleInlayHints<CR>")
