@@ -207,7 +207,7 @@ return {
             }
             require('clangd_extensions').setup {
                 inlay_hints = {
-                    only_current_line = false,
+                    only_current_line = true,
                 }
             }
 
