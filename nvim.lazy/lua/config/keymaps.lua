@@ -5,6 +5,8 @@ local vnoremap = Utils.vnoremap
 local xnoremap = Utils.xnoremap
 local inoremap = Utils.inoremap
 local tnoremap = Utils.tnoremap
+local nmap = Utils.nmap
+local xmap = Utils.xmap
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -150,3 +152,11 @@ nnoremap("<leader>Y", "\"+Y")
 nnoremap("<leader>d", "\"_d")
 vnoremap("<leader>d", "\"_d")
 nnoremap("<leader>D", "\"_D")
+
+-- Send to terminal
+xmap("<leader>e", "<Plug>(neoterm-repl-send)")
+nmap("<leader>e", "<Plug>(neoterm-repl-send)")
+nmap("<leader>ee", "<leader>ea(")
+nmap("<leader>E", "<Plug>(neoterm-repl-send-line)")
+nnoremap("<leader>lv", ":vert bo Ttoggle<CR>")
+nnoremap("<leader>ls", ":bo Ttoggle<CR>")

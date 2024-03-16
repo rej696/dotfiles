@@ -9,24 +9,24 @@ return {
         end
     },
 
-    {
-        'zbirenbaum/copilot.lua',
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup({
-                suggestion = {
-                    enabled = true,
-                    auto_trigger = true
-                },
-                panel = {
-                    enabled = true,
-                    auto_refresh = true
-                },
-                copilot_node_command = '/home/rowan/.nvm/versions/node/v17.9.1/bin/node'
-            })
-        end
-    },
+    -- {
+    --     'zbirenbaum/copilot.lua',
+    --     cmd = "Copilot",
+    --     event = "InsertEnter",
+    --     config = function()
+    --         require("copilot").setup({
+    --             suggestion = {
+    --                 enabled = true,
+    --                 auto_trigger = true
+    --             },
+    --             panel = {
+    --                 enabled = true,
+    --                 auto_refresh = true
+    --             },
+    --             copilot_node_command = '/home/rowan/.nvm/versions/node/v17.9.1/bin/node'
+    --         })
+    --     end
+    -- },
     -- {
     --     'zbirenbaum/copilot-cmp',
     --     config = function()
