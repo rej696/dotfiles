@@ -9,7 +9,7 @@ local nmap = Utils.nmap
 local xmap = Utils.xmap
 
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "  "
 
 -- Insert unicode lambda
 inoremap("<C-l>", "<C-v>u03BB")
@@ -160,3 +160,8 @@ nmap("<leader>ee", "<leader>ea(")
 nmap("<leader>E", "<Plug>(neoterm-repl-send-line)")
 nnoremap("<leader>lv", ":vert bo Ttoggle<CR>")
 nnoremap("<leader>ls", ":bo Ttoggle<CR>")
+
+
+-- Dasht documentations
+nnoremap("<leader>K", ":call Dasht(dasht#cursor_search_terms())<CR>")
+vnoremap("<leader>K", "y:<C-U>callDasht(getreg(0))<CR>")

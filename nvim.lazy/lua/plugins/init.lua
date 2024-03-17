@@ -7,7 +7,7 @@ return {
             { 'rktjmp/lush.nvim' },
         },
         config = function()
-            vim.cmd ([[autocmd Colorscheme zenwritten lua require "config.customise_zenwritten"]])
+            vim.cmd([[autocmd Colorscheme zenwritten lua require "config.customise_zenwritten"]])
             vim.cmd([[colorscheme zenwritten]])
         end
     },
@@ -129,6 +129,77 @@ return {
     -- },
     --
     { 'kassio/neoterm' },
+    -- {
+    --     'monkoose/nvlime',
+    --     ft = "lisp",
+    --     dependencies = {
+    --         { 'monkoose/parsley' },
+    --     },
+    --     config = function ()
+    --         local cmp = require('cmp')
+    --         -- The nvlime plugin doesn't seem to correctly register the cmp source when
+    --         -- using lazy, so we have to do it manually
+    --         cmp.register_source("nvlime", require("nvlime.cmp"))
+    --         cmp.setup.filetype({'lisp'}, {
+    --             sources = {
+    --                 {name = 'nvlime'},
+    --                 {name = 'buffer', keyword_length = 3},
+    --                 {name = 'path'},
+    --                 {name = 'omni'},
+    --             }
+    --         })
+    --     end
+
+    -- },
+    --
+    {
+        'vlime/vlime',
+        ft = "lisp",
+        dependencies = {
+            { 'HiPhish/nvim-cmp-vlime' },
+        },
+        config = function()
+            require('cmp').setup.filetype({'lisp'}, {
+                sources = {
+                    {name = 'vlime'},
+                    {name = 'buffer', keyword_length = 3},
+                    {name = 'path'},
+                    {name = 'omni'},
+                }
+            })
+
+            vim.g.vlime_window_settings = {
+                sldb = {
+                    pos = "belowright",
+                    size = nil,
+                    vertical = false,
+                },
+                repl = {
+                    pos = "belowright",
+                    size = nil,
+                    vertical = true,
+                },
+                inspector = {
+                    pos = "belowright",
+                    size = 12,
+                    vertical = false,
+                },
+                mrepl = {
+                    pos = "belowright",
+                    size = nil,
+                    vertical = true,
+                },
+                server = {
+                    pos = "botright",
+                    size = 12,
+                    vertical = false,
+                },
+            }
+
+            vim.g.vlime_compiler_policy = {DEBUG = 3, SPEED = 0}
+
+        end
+    },
     {
         'eraserhd/parinfer-rust',
         build = 'cd ' .. vim.fn.stdpath('data') .. "/lazy/parinfer-rust" .. ' && cargo build --release'
@@ -148,6 +219,12 @@ return {
         'jbyuki/instant.nvim',
         config = function()
             vim.g["instant_username"] = "rowan"
+        end
+    },
+    {
+        'sunaku/vim-dasht',
+        config = function()
+            vim.g.dasht_results_window = 'new'
         end
     },
 }
