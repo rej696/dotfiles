@@ -78,7 +78,7 @@ SortIncludes: CaseSensitive
 # Other settings
 ColumnLimit: 100
 QualifierAlignment: Custom
-QualifierOrder: ['volatile', 'static', 'inline', 'type', 'const']
+QualifierOrder: ['static', 'inline', 'volatile', 'type', 'const']
 ReflowComments: true
 
 # C++ specific settings
