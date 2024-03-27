@@ -1,7 +1,7 @@
 return {
     {
         'VonHeikemen/lsp-zero.nvim',
-        branch ='v2.x',
+        branch = 'v2.x',
         lazy = true,
         config = function()
             -- modify lsp-zero settings here
@@ -38,12 +38,12 @@ return {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
         dependencies = {
-            {'L3MON4D3/LuaSnip'},
-            {'hrsh7th/cmp-buffer'},
-            {'hrsh7th/cmp-path'},
-            {'hrsh7th/cmp-omni'},
-            {'hrsh7th/cmp-cmdline'},
-            {'saadparwaiz1/cmp_luasnip'},
+            { 'L3MON4D3/LuaSnip' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-path' },
+            { 'hrsh7th/cmp-omni' },
+            { 'hrsh7th/cmp-cmdline' },
+            { 'saadparwaiz1/cmp_luasnip' },
         },
         config = function()
             -- modify cmp setting here
@@ -60,25 +60,25 @@ return {
             cmp.setup({
                 sources = {
                     -- {name = "copilot"},
-                    {name = 'nvim_lsp', keyword_length = 6, group_index = 1, max_item_count = 30},
-                    {name = 'buffer', keyword_length = 3},
-                    {name = 'path'},
-                    {name = 'omni'},
-                    {name = 'luasnip', keyword_length = 2},
+                    { name = 'nvim_lsp', keyword_length = 6, group_index = 1, max_item_count = 30 },
+                    { name = 'buffer',   keyword_length = 3 },
+                    { name = 'path' },
+                    { name = 'omni' },
+                    { name = 'luasnip',  keyword_length = 2 },
                 },
                 mapping = {
                     ['<C-Space>'] = cmp.mapping.complete(),
-                    ['<Tab>'] = cmp.mapping.confirm({select = true}),
+                    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
                     -- ['<Tab>'] = cmp_action.luasnip_supertab(),
                     -- ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
-                    ['<CR>'] = cmp.mapping.confirm({select = false}),
+                    ['<CR>'] = cmp.mapping.confirm({ select = false }),
                 }
             })
 
             cmp.setup.cmdline('/', {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
-                    {name = 'buffer'}
+                    { name = 'buffer' }
                 }
             })
             cmp.setup.cmdline(':', {
@@ -87,13 +87,13 @@ return {
                     autocomplete = false
                 },
                 sources = cmp.config.sources({
-                    {name = 'path'}
-                }, {{
+                    { name = 'path' }
+                }, { {
                     name = 'cmdline',
                     option = {
-                        ignore_cmds = {'Man', '!'}
+                        ignore_cmds = { 'Man', '!' }
                     }
-                }})
+                } })
             })
         end
     },
@@ -101,11 +101,11 @@ return {
     {
         'neovim/nvim-lspconfig',
         cmd = 'LspInfo',
-        event = {'BufReadPre', 'BufNewFile'},
+        event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'p00f/clangd_extensions.nvim'},
-            {'williamboman/mason-lspconfig.nvim'},
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'p00f/clangd_extensions.nvim' },
+            { 'williamboman/mason-lspconfig.nvim' },
             {
                 'williamboman/mason.nvim',
                 build = function()
@@ -145,9 +145,9 @@ return {
                 vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
                 vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
                 vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-                vim.keymap.set('n', 'gr', ':Telescope lsp_references theme=ivy disable_devicond=true<CR>', bufopts) --vim.lsp.buf.references, bufopts)
+                vim.keymap.set('n', 'gr', ':Telescope lsp_references theme=ivy disable_devicond=true<CR>', bufopts)       --vim.lsp.buf.references, bufopts)
                 vim.keymap.set('n', 'gt', ':Telescope lsp_type_definitions theme=ivy disable_devicons=true<CR>', bufopts) --vim.lsp.buf.references, bufopts)
-                vim.keymap.set('n', '<space>fe', ':Telescope diagnostics theme=ivy disable_devicons=true<CR>', bufopts) --vim.lsp.buf.references, bufopts)
+                vim.keymap.set('n', '<space>fe', ':Telescope diagnostics theme=ivy disable_devicons=true<CR>', bufopts)   --vim.lsp.buf.references, bufopts)
                 -- vim.keymap.set('n', '<space>F', vim.lsp.buf.formatting, bufopts)
                 -- vim.keymap.set('v', '<space>F', vim.lsp.buf.range_formatting, bufopts)
                 vim.keymap.set('n', '<space>F', vim.lsp.buf.format, bufopts)
@@ -181,8 +181,25 @@ return {
             lsp.on_attach(on_attach)
             -- lsp.skip_server_setup({'clangd'})
 
+            -- require('lspconfig.configs').perlnavigator = {
+            --     default_config = {
+            --         name = 'perlnavigator',
+            --         cmd = 'perlnavigator',
+            --         filetypes = { 'perl' },
+            --         root_dir = require 'lspconfig.util'.root_pattern('.git'),
+            --     }
+            -- }
             require('lspconfig')['lua_ls'].setup(lsp.nvim_lua_ls())
             require('lspconfig')['gopls'].setup({})
+            -- require('lspconfig')['perlnavigator'].setup({
+                -- perlnavigator = {
+                --     perlPath = 'perl',
+                --     enableWarnings = true,
+                --     perltidyProfile = '',
+                --     perlcriticProfile = '',
+                --     perlcriticEnabled = true,
+                -- },
+            -- })
             require('lspconfig')['racket_langserver'].setup {
                 on_attach = on_attach,
                 cmd = {
@@ -212,7 +229,6 @@ return {
             }
 
             lsp.setup()
-
         end
     },
     -- {

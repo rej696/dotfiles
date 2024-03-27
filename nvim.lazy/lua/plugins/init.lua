@@ -159,12 +159,12 @@ return {
             { 'HiPhish/nvim-cmp-vlime' },
         },
         config = function()
-            require('cmp').setup.filetype({'lisp'}, {
+            require('cmp').setup.filetype({ 'lisp' }, {
                 sources = {
-                    {name = 'vlime'},
-                    {name = 'buffer', keyword_length = 3},
-                    {name = 'path'},
-                    {name = 'omni'},
+                    { name = 'vlime' },
+                    { name = 'buffer', keyword_length = 3 },
+                    { name = 'path' },
+                    { name = 'omni' },
                 }
             })
 
@@ -196,8 +196,7 @@ return {
                 },
             }
 
-            vim.g.vlime_compiler_policy = {DEBUG = 3, SPEED = 0}
-
+            vim.g.vlime_compiler_policy = { DEBUG = 3, SPEED = 0 }
         end
     },
     {
@@ -227,6 +226,15 @@ return {
             vim.g.dasht_results_window = 'new'
         end
     },
+    {
+        'Groveer/plantuml.nvim',
+        config = function()
+            require "plantuml".setup {
+                renderer = 'text',
+            }
+        end,
+    },
+
 }
 
 
