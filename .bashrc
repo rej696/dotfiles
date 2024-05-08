@@ -71,10 +71,10 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ -f /usr/share/git/completion/git-prompt.sh ]; then
+if [ -f /usr/lib/git-core/git-sh-prompt ]; then
+    source /usr/lib/git-core/git-sh-prompt
+elif [ -f /usr/share/git/completion/git-prompt.sh ]; then
     source /usr/share/git/completion/git-prompt.sh
-elif [ -f /usr/lib/git-core/git-sh-promt ]; then
-    source /usr/lib/git-core/git-sh-promt
 fi
 
 git_basename() {
