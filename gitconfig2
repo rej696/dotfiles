@@ -1,0 +1,18 @@
+[user]
+	name = Rowan.Saunders
+	email = rowan.saunders@aac-clydespace.com
+[diff]
+    tool = nvimdiff
+[core]
+    editor = nvim
+[init]
+    defaultBranch = main
+[rerere]
+    enabled = true
+    autoUpdate = true
+[pull]
+    rebase = true
+[alias]
+    tree = log --graph --oneline --all
+    rej696 = "!f() { git config --local user.name 'rej696' && git config --local user.email 'r.f.t@hotmail.co.uk'; }; f"
+
