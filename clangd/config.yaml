@@ -1,5 +1,5 @@
 If:
-  PathMatch: [/home/rowan/workspace/pic/.*, /opt/microchip/xc8/v2.45/pic/.*]
+  PathMatch: [/home/rowan/workspace/pic/.*, /opt/microchip/xc8/v2.45/pic/.*, /home/csl/work/**/*pic*/.*]
 CompileFlags:
   Add: [-include/opt/microchip/xc8/v2.45/pic/include/language_support.h,
     -isystem/opt/microchip/xc8/v2.45/pic/include/proc,
