@@ -73,7 +73,8 @@ fi
 
 if [ -f /usr/share/git/completion/git-prompt.sh ]; then
     source /usr/share/git/completion/git-prompt.sh
-
+elif [ -f /usr/lib/git-core/git-sh-promt ]; then
+    source /usr/lib/git-core/git-sh-promt
 fi
 
 git_basename() {
@@ -185,7 +186,7 @@ export EDITOR="nvim" # set the default editor to neovim
 # export PATH=/home/rowan/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:
 export PATH=~/.local/bin:$PATH
 export MANPATH=~/.local/share/man:$MANPATH
-. "$HOME/.cargo/env"
+[ -s "$HOME/.cargo" ] && . "$HOME/.cargo/env"
 
 # nvim server (for use with neovide)
 nvim-server() {

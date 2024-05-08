@@ -227,7 +227,7 @@ return {
         end
     },
     {
-        'Groveer/plantuml.nvim',
+        'rej696/plantuml.nvim',
         config = function()
             require "plantuml".setup {
                 renderer = 'text',
