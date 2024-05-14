@@ -49,6 +49,7 @@ RUN apt-get update && apt-get install -y \
 # pic stuff
   build-essential \
   make \
+  cmake \
   git \
   curl \
   tar \
@@ -57,6 +58,7 @@ RUN apt-get update && apt-get install -y \
   tmux \
   tmate \
   gdb \
+  gdb-multiarch \
   gcc \
   ripgrep \
   tmate \
@@ -68,7 +70,16 @@ RUN apt-get update && apt-get install -y \
   coreutils \
   nano \
   clang-format-17 \
-  neovim
+  neovim \
+  bear \
+  cscope \
+  entr \
+  exuberant-ctags \
+  jq \
+  picocom \
+  rlwrap \
+  dc
+
 RUN gem install rake bundler:1.17.3 rspec respec
 
 # install gcc-arm-none-eabi
