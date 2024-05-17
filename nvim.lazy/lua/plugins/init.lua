@@ -97,20 +97,20 @@ return {
     },
 
     -- hylang support
-    {
-        'hylang/vim-hy',
-        ft = 'hy',
-    },
+    -- {
+    --     'hylang/vim-hy',
+    --     ft = 'hy',
+    -- },
     -- racket support
-    {
-        'benknoble/vim-racket',
-        ft = 'racket',
-    },
+    -- {
+    --     'benknoble/vim-racket',
+    --     ft = 'racket',
+    -- },
     -- janet support
-    {
-        'janet-lang/janet.vim',
-        ft = 'janet',
-    },
+    -- {
+    --     'janet-lang/janet.vim',
+    --     ft = 'janet',
+    -- },
 
     -- s-expressions
     -- 'tpope/vim-sexp-mappings-for-regular-people',
@@ -152,80 +152,80 @@ return {
 
     -- },
     --
-    {
-        'vlime/vlime',
-        ft = "lisp",
-        dependencies = {
-            { 'HiPhish/nvim-cmp-vlime' },
-        },
-        config = function()
-            require('cmp').setup.filetype({ 'lisp' }, {
-                sources = {
-                    { name = 'vlime' },
-                    { name = 'buffer', keyword_length = 3 },
-                    { name = 'path' },
-                    { name = 'omni' },
-                }
-            })
+    -- {
+    --     'vlime/vlime',
+    --     ft = "lisp",
+    --     dependencies = {
+    --         { 'HiPhish/nvim-cmp-vlime' },
+    --     },
+    --     config = function()
+    --         require('cmp').setup.filetype({ 'lisp' }, {
+    --             sources = {
+    --                 { name = 'vlime' },
+    --                 { name = 'buffer', keyword_length = 3 },
+    --                 { name = 'path' },
+    --                 { name = 'omni' },
+    --             }
+    --         })
 
-            vim.g.vlime_window_settings = {
-                sldb = {
-                    pos = "belowright",
-                    size = nil,
-                    vertical = false,
-                },
-                repl = {
-                    pos = "belowright",
-                    size = nil,
-                    vertical = true,
-                },
-                inspector = {
-                    pos = "belowright",
-                    size = 12,
-                    vertical = false,
-                },
-                mrepl = {
-                    pos = "belowright",
-                    size = nil,
-                    vertical = true,
-                },
-                server = {
-                    pos = "botright",
-                    size = 12,
-                    vertical = false,
-                },
-            }
+    --         vim.g.vlime_window_settings = {
+    --             sldb = {
+    --                 pos = "belowright",
+    --                 size = nil,
+    --                 vertical = false,
+    --             },
+    --             repl = {
+    --                 pos = "belowright",
+    --                 size = nil,
+    --                 vertical = true,
+    --             },
+    --             inspector = {
+    --                 pos = "belowright",
+    --                 size = 12,
+    --                 vertical = false,
+    --             },
+    --             mrepl = {
+    --                 pos = "belowright",
+    --                 size = nil,
+    --                 vertical = true,
+    --             },
+    --             server = {
+    --                 pos = "botright",
+    --                 size = 12,
+    --                 vertical = false,
+    --             },
+    --         }
 
-            vim.g.vlime_compiler_policy = { DEBUG = 3, SPEED = 0 }
-        end
-    },
+    --         vim.g.vlime_compiler_policy = { DEBUG = 3, SPEED = 0 }
+    --     end
+    -- },
     {
         'eraserhd/parinfer-rust',
         build = 'cd ' .. vim.fn.stdpath('data') .. "/lazy/parinfer-rust" .. ' && cargo build --release'
     },
 
     -- clojure support
-    {
-        'clojure-vim/vim-jack-in',
-        dependencies = {
-            { 'tpope/vim-dispatch' },
-            { 'radenling/vim-dispatch-neovim' }
-        },
-        ft = 'clojure'
-    },
+    -- {
+    --     'clojure-vim/vim-jack-in',
+    --     dependencies = {
+    --         { 'tpope/vim-dispatch' },
+    --         { 'radenling/vim-dispatch-neovim' }
+    --     },
+    --     ft = 'clojure'
+    -- },
 
-    {
-        'jbyuki/instant.nvim',
-        config = function()
-            vim.g["instant_username"] = "rowan"
-        end
-    },
-    {
-        'sunaku/vim-dasht',
-        config = function()
-            vim.g.dasht_results_window = 'new'
-        end
-    },
+    -- {
+    --     'jbyuki/instant.nvim',
+    --     config = function()
+    --         vim.g["instant_username"] = "rowan"
+    --     end
+    -- },
+    -- {
+    --     'sunaku/vim-dasht',
+    --     config = function()
+    --         vim.g.dasht_results_window = 'new'
+    --     end
+    -- },
     {
         'rej696/plantuml.nvim',
         config = function()

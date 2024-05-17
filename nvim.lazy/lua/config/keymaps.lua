@@ -55,15 +55,20 @@ nnoremap("<A-p>", ":<C-U>TmuxNavigatePrevious<CR>")
 -- nnoremap("<leader>e", "<Cmd>NvimTreeToggle<CR>")
 nnoremap("<leader>ex", ":Ex<CR>")
 
+
 -- List Buffer then select
 nnoremap("<leader>b", ":ls<CR>:b<Space>")
 
 -- Delete Current Buffer
 nnoremap("<leader>x", ":bd<CR>")
+nnoremap("[b", ":bnext<CR>")
+nnoremap("]b", ":bprevious<CR>")
 
 -- Buffer Navigation
 nnoremap("<A-Home>", ":tabp<CR>")
 nnoremap("<A-End>", ":tabn<CR>")
+nnoremap("[t", ":tabp<CR>")
+nnoremap("]t", ":tabn<CR>")
 
 -- Terminal Remapping
 tnoremap("<Esc>", "<C-\\><C-n>")
@@ -72,11 +77,15 @@ tnoremap("<Esc>", "<C-\\><C-n>")
 nnoremap("<leader>cl", ":cwindow<CR>")
 nnoremap("<leader>co", ":copen<CR>")
 nnoremap("<leader>cc", ":cclose<CR>")
+nnoremap("]c", ":cnext<CR>")
+nnoremap("[c", ":cprevious<CR>")
 
 -- Location list
 nnoremap("<leader>ll", ":lwindow<CR>")
 nnoremap("<leader>lo", ":lopen<CR>")
 nnoremap("<leader>lc", ":lclose<CR>")
+nnoremap("]l", ":lnext<CR>")
+nnoremap("[l", ":lprevious<CR>")
 
 -- Fugitive
 nnoremap("<leader>G", ":G<CR>")
@@ -114,9 +123,9 @@ nnoremap("<leader>fg", "<Cmd>lua require('telescope').extensions.live_grep_args.
 -- nnoremap("<leader>fg", '<Cmd>Telescope grep_string only_sort_text=true search=""<CR>')
 nnoremap("<leader>fw", "<Cmd>lua require('telescope.builtin').grep_string{search = vim.fn.expand('<cword>')}<CR>")
 nnoremap("<leader>fh", "<Cmd>Telescope help_tags disable_devicons=true<CR>")
-nnoremap("<leader>ft", "<Cmd>Telescope builtin theme=ivy<CR>")
-nnoremap("<leader>fp", "<Cmd>Telescope treesitter<CR>")
+nnoremap("<leader>ft", "<Cmd>Telescope builtin<CR>")
 nnoremap("<leader>fd", "<Cmd>Telescope diagnostics disable_devicons=true<CR>")
+nnoremap("<leader>fp", "<Cmd>Telescope resume disable_devicons=true<CR>")
 nnoremap("<leader>fr", "<Cmd>Telescope resume disable_devicons=true<CR>")
 
 -- Git

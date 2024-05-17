@@ -209,9 +209,9 @@ return {
                     "racket-langserver"
                 },
             }
-            require('lspconfig')['ruff_lsp'].setup {
-                on_attach = ruff_on_attach,
-            }
+            -- require('lspconfig')['ruff-lsp'].setup {
+            --     on_attach = ruff_on_attach,
+            -- }
             require('lspconfig')['clangd'].setup {
                 on_attach = clangd_on_attach,
                 cmd = {

@@ -19,8 +19,8 @@ return {
             pickers = {
                 buffers = {
                     mappings = {
-                        n = {
-                            ['d'] = "delete_buffer",
+                        i = {
+                            ['<C-x>'] = "delete_buffer",
                         },
                     },
                 },
@@ -29,11 +29,20 @@ return {
                 sorting_strategy = "ascending",
                 mappings = {
                     i = {
-                        ['<C-n>'] = actions.move_selection_next,
-                        ['<C-p>'] = actions.move_selection_previous,
+                        -- ['<C-n>'] = actions.move_selection_next,
+                        -- ['<C-p>'] = actions.move_selection_previous,
+                        ['<C-q>'] = actions.smart_send_to_qflist,
+                        -- ['<C-c>'] = actions.smart_send_to_qflist,
+                        ['<C-a>'] = actions.smart_add_to_qflist,
+                        ['<C-s>'] = actions.file_split,
+                        -- ['<C-[>'] = actions.close,
                         ['<C-c>'] = actions.close,
+                        ['<C-z>'] = actions.close,
+                        ['<C-p>'] = actions.cycle_history_prev,
+                        ['<C-n>'] = actions.cycle_history_next,
                     },
                     n = {
+                        ['<C-z>'] = actions.close,
                         ['<C-c>'] = actions.close,
                     },
                 },
