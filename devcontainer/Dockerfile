@@ -78,7 +78,8 @@ RUN apt-get update && apt-get install -y \
   jq \
   picocom \
   rlwrap \
-  dc
+  dc \
+  libssl-dev
 
 RUN gem install rake bundler:1.17.3 rspec respec
 

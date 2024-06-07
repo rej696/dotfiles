@@ -163,14 +163,14 @@ vnoremap("<leader>d", "\"_d")
 nnoremap("<leader>D", "\"_D")
 
 -- Send to terminal
-xmap("<leader>e", "<Plug>(neoterm-repl-send)")
-nmap("<leader>e", "<Plug>(neoterm-repl-send)")
-nmap("<leader>ee", "<leader>ea(")
-nmap("<leader>E", "<Plug>(neoterm-repl-send-line)")
-nnoremap("<leader>lv", ":vert bo Ttoggle<CR>")
-nnoremap("<leader>ls", ":bo Ttoggle<CR>")
+-- xmap("<leader>e", "<Plug>(neoterm-repl-send)")
+-- nmap("<leader>e", "<Plug>(neoterm-repl-send)")
+-- nmap("<leader>ee", "<leader>ea(")
+-- nmap("<leader>E", "<Plug>(neoterm-repl-send-line)")
+-- nnoremap("<leader>lv", ":vert bo Ttoggle<CR>")
+-- nnoremap("<leader>ls", ":bo Ttoggle<CR>")
 
 
 -- Dasht documentations
-nnoremap("<leader>K", ":call Dasht(dasht#cursor_search_terms())<CR>")
-vnoremap("<leader>K", "y:<C-U>callDasht(getreg(0))<CR>")
+-- nnoremap("<leader>K", ":call Dasht(dasht#cursor_search_terms())<CR>")
+-- vnoremap("<leader>K", "y:<C-U>callDasht(getreg(0))<CR>")
