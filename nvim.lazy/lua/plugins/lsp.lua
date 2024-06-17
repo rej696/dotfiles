@@ -191,6 +191,7 @@ return {
             -- }
             require('lspconfig')['lua_ls'].setup(lsp.nvim_lua_ls())
             require('lspconfig')['gopls'].setup({})
+            require('lspconfig')['zls'].setup({})
             -- require('lspconfig')['perlnavigator'].setup({
                 -- perlnavigator = {
                 --     perlPath = 'perl',

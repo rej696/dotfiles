@@ -132,7 +132,7 @@ RUN ln -s /home/csl/dotfiles/.tmate.conf /home/csl/.tmate.conf
 RUN ln -s /home/csl/dotfiles/tmux /home/csl/.tmux
 RUN ln -s /home/csl/dotfiles/vim.raspberry /home/csl/.vim
 RUN ln -s /home/csl/.vim/vimrc /home/csl/.vimrc
-RUN ln -s /home/csl/dotfiles/gitconfig2 /home/csl/.gitconfig
+RUN ln -s /home/csl/dotfiles/gitconfig3 /home/csl/.gitconfig
 RUN ln -s /home/csl/dotfiles/clangd /home/csl/.config/clangd
 RUN cd /home/csl/dotfiles && git submodule update --init -- tmux && cd -
 

@@ -1,0 +1,13 @@
+[diff]
+    tool = nvimdiff
+[core]
+    editor = nvim
+[init]
+    defaultBranch = main
+[rerere]
+    enabled = true
+    autoUpdate = true
+[pull]
+    rebase = true
+[alias]
+    tree = log --graph --oneline --all
