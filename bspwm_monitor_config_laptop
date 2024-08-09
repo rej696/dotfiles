@@ -26,9 +26,9 @@ if xrandr | grep DisplayPort-0 | grep -q " connected"; then
     #     done
     # else
         # echo "new monitors"
-        mons -e left
-        bspc monitor DisplayPort-0 -d 1 2 3 4
-        bspc monitor eDP -d 5 6 7 8
+        mons -e right
+        bspc monitor DisplayPort-0 -d 5 6 7 8
+        bspc monitor eDP -d 1 2 3 4
     # fi
 else
     # Move desktops to laptop screen and delete external monitor
