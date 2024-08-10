@@ -114,16 +114,6 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 "override overloading netrw settings to enable line numbers
 let g:netrw_bufsettings='noma nomod nu nobl nowrap ro'
 
-" Grep
-if executable("rg")
-  set grepprg=rg\ --vimgrep\ --smart-case
-  set grepformat=%f:%l:%c:%m
-endif
-
-function! Grep(...)
-  return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
-endfunction
-
 " hex editing mode (using ftplugin/xxd.vim)
 function! Hex()
     if "xxd" != &ft
@@ -137,6 +127,16 @@ endfunction
 
 command Xxd :call Hex()
 command Hex :call Hex()
+
+" Grep
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --smart-case
+  set grepformat=%f:%l:%c:%m
+endif
+
+function! Grep(...)
+  return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
+endfunction
 
 command! -nargs=+ -complete=file_in_path -bar Grep cgetexpr Grep(<f-args>)
 command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
@@ -153,9 +153,9 @@ augroup quickfix
 augroup END
 
 " fzf
-function! FZF() abort
+function! FZFterm() abort
     let l:tempname = tempname()
-    execute 'silent !fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+    execute 'silent !fzf --multi --preview "cat {}" ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
     " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
     try
         execute 'cfile ' . l:tempname
@@ -165,9 +165,9 @@ function! FZF() abort
     endtry
 endfunction
 
-function! FZFall() abort
+function! FZFtermall() abort
     let l:tempname = tempname()
-    execute 'silent !fd -H | fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+    execute 'silent !fd -H | fzf --multi --preview "cat {}"' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
     " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
     try
         execute 'cfile ' . l:tempname
@@ -177,9 +177,10 @@ function! FZFall() abort
     endtry
 endfunction
 
-function! FZFgrep() abort
+function! FZFtermgrep() abort
     let l:tempname = tempname()
-    execute 'silent !rg -n . | fzf --multi ' . '| awk ''{ print $1":"$2":0" }'' > ' . fnameescape(l:tempname)
+    let l:rg = "rg --column --line-number --no-heading --color=always --smart-case "
+    execute 'silent !fzf --ansi --disabled --bind "start:reload:' . l:rg. ' {q}" --bind "change:reload:sleep 0.1;' . l:rg .' {q} || true" --delimiter : --preview "cat {1}"' . '| awk ''{ print $1":"$2":0" }'' > ' . fnameescape(l:tempname)
     " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
     try
         execute 'cfile ' . l:tempname
@@ -189,9 +190,41 @@ function! FZFgrep() abort
     endtry
 endfunction
 
-command! -nargs=* Fzf call FZF()
-command! -nargs=* Fzfall call FZFall()
-command! -nargs=* Fzfgrep call FZFgrep()
+command! -nargs=* Fzf call FZFterm()
+command! -nargs=* Fzfall call FZFtermall()
+command! -nargs=* Fzfgrep call FZFtermgrep()
+
+" FZF integration
+set rtp+=~/.fzf
+let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.8, 'relative': v:true } }
+" Rg command
+let g:rg_prefix = "rg --column --line-number --no-heading --color=always --smart-case "
+command! -nargs=* Rg call fzf#run(fzf#wrap({
+            \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
+            \ 'options': '--ansi --disabled --bind "start:reload:' . g:rg_prefix .
+            \ ' {q}" --bind "change:reload:sleep 0.1;' . g:rg_prefix .
+            \ ' {q} || true" --delimiter : ' }))
+" --preview "cat {1}"'}))
+
+command! -nargs=* Tree call fzf#run(fzf#wrap({
+            \ 'sink': "e",
+            \ 'source': "fd -t d",
+            \ 'options': '--preview "tree -C {} | head -n 40"'}))
+
+command! -nargs=* Find call fzf#run(fzf#wrap({
+            \ 'sink': "e",
+            \ 'source': "fd",
+            \ 'options': '--preview "cat {}"'}))
+
+command! -nargs=* FindAll call fzf#run(fzf#wrap({
+            \ 'sink': "e",
+            \ 'source': "fd -H",
+            \ 'options': '--preview "cat {}"'}))
+
+command! -nargs=* FindIgnored call fzf#run(fzf#wrap({
+            \ 'sink': "e",
+            \ 'source': "fd -H -I",
+            \ 'options': '--preview "cat {}"'}))
 
 " Commenting
 augroup commenting_blocks_of_code
@@ -238,12 +271,13 @@ nnoremap <leader>q :close<CR>
 " Fuzzy find files
 "set path+=**
 "nnoremap <leader>ff :find *
-nnoremap <leader>ff :Fzf<CR>
-nnoremap <leader>fa :Fzfall<CR>
-nnoremap <leader>fg :Fzfgrep<CR>
+nnoremap <leader>ff :Find<CR>
+nnoremap <leader>fa :FindAll<CR>
+nnoremap <leader>fg :Rg<CR>
 
 " Grep commands
 nnoremap <leader>rg :Grep<Space>
+nnoremap <leader>/ :Grep<Space>
 nnoremap <leader>f/ :vimgrep<Space>
 
 " Quickfix list
@@ -255,3 +289,26 @@ nnoremap <leader>cc :cclose<CR>
 nnoremap <leader>ll :lwindow<CR>
 nnoremap <leader>lo :lopen<CR>
 nnoremap <leader>ll :lclose<CR>
+
+" Navigation
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprevious<CR>
+nnoremap ]t :tabn<CR>
+nnoremap [t :tabp<CR>
+nnoremap ]c :cnext<CR>
+nnoremap [c :cprevious<CR>
+nnoremap ]l :lnext<CR>
+nnoremap [l :lprevious<CR>
+
+
+" build tags
+nnoremap <leader>ot :!fd -e c -e h \| ctags -L - <CR>
+
+" Centre page after pgdn/up
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" Centre page after search
+nnoremap n  nzz
+nnoremap N  Nzz
+nnoremap *  *zz
