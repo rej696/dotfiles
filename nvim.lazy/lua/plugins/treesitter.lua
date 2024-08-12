@@ -2,7 +2,15 @@
 return {
     -- 'p00f/nvim-ts-rainbow',
     'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-treesitter/nvim-treesitter-context',
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        config = function()
+            require 'treesitter-context'.setup { enable = false }
+            -- toggle context
+            vim.api.nvim_set_keymap(
+                'n', "<leader>ct", ":TSContextToggle<CR>", { noremap = true, silent = true })
+        end,
+    },
 
     {
         'nvim-treesitter/playground',
@@ -42,8 +50,8 @@ return {
                     select = {
                         enable = true,
                         keymaps = {
-                                ["af"] = "@function.outer",
-                                ["if"] = "@functions.inner"
+                            ["af"] = "@function.outer",
+                            ["if"] = "@functions.inner"
                         }
                     },
                     lsp_interop = {
@@ -51,7 +59,7 @@ return {
                         border = "single",
                         floating_preview_opts = {},
                         peek_definition_code = {
-                                ["<leader>df"] = "@function.outer"
+                            ["<leader>df"] = "@function.outer"
                         }
                     }
                 }

@@ -221,6 +221,7 @@ return {
                     "--clang-tidy",
                     "--enable-config",
                     "--offset-encoding=utf-16",
+                    "--query-driver=/usr/local/bin/arm-none-eabi-g*",
                 },
             }
             require('clangd_extensions').setup {

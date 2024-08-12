@@ -139,6 +139,8 @@ nnoremap("<leader>gb", "<Cmd>Git blame<CR>")
 nnoremap("<leader>gs", "<Cmd>Telescope git_status disable_devicons=true<CR>")
 -- nnoremap("<leader>gfb", "<Cmd>Telescope git_branches disable_devicons=true<CR>")
 nnoremap("Zl", "<Cmd>Telescope spell_suggest theme=cursor disable_devicons=true<CR>")
+nnoremap("Ze", "<Cmd>setlocal spell<CR>")
+nnoremap("Zd", "<Cmd>setlocal nospell<CR>")
 
 -- Close window but not vim
 nnoremap("<leader>q", ":close<CR>")

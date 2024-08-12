@@ -1,4 +1,4 @@
--- Initialize pluggins
+-- Initialize plugins
 return {
     -- themes
     {
@@ -52,12 +52,12 @@ return {
         config = function()
             require('gitsigns').setup {
                 signs = {
-                    add = { hl = 'GitSignsAdd', text = '+' },
-                    change = { hl = 'String', text = '~' },
-                    delete = { hl = 'GitSignsDelete', text = '-' },
-                    topdelete = { hl = 'GitSignsDelete', text = '-' },
-                    changedelete = { hl = 'CursorLineNr', text = '#' },
-                    untracked = { hl = 'GitSignsAdd', text = '+' }
+                    add = { text = '+' },
+                    change = { text = '~' },
+                    delete = { text = '-' },
+                    topdelete = { text = '-' },
+                    changedelete = { text = '#' },
+                    untracked = { text = '+' }
                 }
             }
         end
@@ -68,6 +68,10 @@ return {
     {
         'kamykn/spelunker.vim',
         ft = { 'markdown', 'tex' },
+        config = function()
+            vim.o.spell     = false
+            vim.g.enable_spelunker_vim = 0
+        end
     },
 
     -- smart line number toggling
