@@ -206,6 +206,11 @@ command! -nargs=* Rg call fzf#run(fzf#wrap({
             \ ' {q} || true" --delimiter : ' }))
 " --preview "cat {1}"'}))
 
+command! -nargs=* FindWord call fzf#run(fzf#wrap({
+            \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
+            \ 'source': "rg --column --line-number --no-heading --color=always --smart-case" . shellescape(expand('<c-word>')),
+            \ 'options': '--ansi --disabled --delimiter : ' }))
+
 command! -nargs=* Tree call fzf#run(fzf#wrap({
             \ 'sink': "e",
             \ 'source': "fd -t d",
@@ -249,10 +254,10 @@ let g:mapleader = " "
 let g:maplocalleader = " "
 
 " Remap Splits
-nnoremap <A-Left> <C-W><C-J>
-nnoremap <A-Down> <C-W><C-K>
-nnoremap <A-Up> <C-W><C-L>
-nnoremap <A-Right> <C-W><C-H>
+nnoremap <A-Left> <C-W><C-H>
+nnoremap <A-Down> <C-W><C-J>
+nnoremap <A-Up> <C-W><C-K>
+nnoremap <A-Right> <C-W><C-L>
 nnoremap <A-J> <C-W><C-J>
 nnoremap <A-K> <C-W><C-K>
 nnoremap <A-L> <C-W><C-L>
@@ -273,6 +278,7 @@ nnoremap <leader>q :close<CR>
 "nnoremap <leader>ff :find *
 nnoremap <leader>ff :Find<CR>
 nnoremap <leader>fa :FindAll<CR>
+nnoremap <leader>fw :FindWord<CR>
 nnoremap <leader>fg :Rg<CR>
 
 " Grep commands
