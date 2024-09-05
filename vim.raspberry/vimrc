@@ -106,7 +106,7 @@ set mouse=a
 "let g:netrw_liststyle=0 "thin view (- to go up a directory)
 "let g:netrw_browse_split=4 "open new file in pr:evious window
 let g:netrw_winsize=25 "set default width to 25%
-let g:netrw_keepdir=0 "sync current dir with browsing dir
+let g:netrw_keepdir=1 "sync current dir with browsing dir
 "let g:netrw_altv=1
 let g:netrw_banner=0 "hide banner
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
@@ -202,13 +202,18 @@ let g:rg_prefix = "rg --column --line-number --no-heading --color=always --smart
 command! -nargs=* Rg call fzf#run(fzf#wrap({
             \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
             \ 'options': '--ansi --disabled --bind "start:reload:' . g:rg_prefix .
-            \ ' {q}" --bind "change:reload:sleep 0.1;' . g:rg_prefix .
+            \ ' {q}" --bind "change:reload:' . g:rg_prefix .
             \ ' {q} || true" --delimiter : ' }))
 " --preview "cat {1}"'}))
 
+"command! -nargs=* FindWord call fzf#run(fzf#wrap({
+"            \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
+"            \ 'source': "rg --column --line-number --no-heading --color=always --smart-case " . expand('<cword>'),
+"            \ 'options': '--ansi --disabled --delimiter : ' }))
+
 command! -nargs=* FindWord call fzf#run(fzf#wrap({
             \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
-            \ 'source': "rg --column --line-number --no-heading --color=always --smart-case" . shellescape(expand('<c-word>')),
+            \ 'source': "rg --column --line-number --no-heading --color=always --smart-case " . expand('<cword>'),
             \ 'options': '--ansi --disabled --delimiter : ' }))
 
 command! -nargs=* Tree call fzf#run(fzf#wrap({
@@ -218,17 +223,17 @@ command! -nargs=* Tree call fzf#run(fzf#wrap({
 
 command! -nargs=* Find call fzf#run(fzf#wrap({
             \ 'sink': "e",
-            \ 'source': "fd",
+            \ 'source': "fd -t f",
             \ 'options': '--preview "cat {}"'}))
 
 command! -nargs=* FindAll call fzf#run(fzf#wrap({
             \ 'sink': "e",
-            \ 'source': "fd -H",
+            \ 'source': "fd -H -t f",
             \ 'options': '--preview "cat {}"'}))
 
 command! -nargs=* FindIgnored call fzf#run(fzf#wrap({
             \ 'sink': "e",
-            \ 'source': "fd -H -I",
+            \ 'source': "fd -H -I -t f",
             \ 'options': '--preview "cat {}"'}))
 
 " Commenting
@@ -306,6 +311,9 @@ nnoremap [c :cprevious<CR>
 nnoremap ]l :lnext<CR>
 nnoremap [l :lprevious<CR>
 
+" changelist (like jumplist)
+nnoremap <C-m> g,
+nnoremap <C-n> g;
 
 " build tags
 nnoremap <leader>ot :!fd -e c -e h \| ctags -L - <CR>
