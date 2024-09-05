@@ -203,8 +203,9 @@ command! -nargs=* Rg call fzf#run(fzf#wrap({
             \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
             \ 'options': '--ansi --disabled --bind "start:reload:' . g:rg_prefix .
             \ ' {q}" --bind "change:reload:' . g:rg_prefix .
-            \ ' {q} || true" --delimiter : ' }))
-" --preview "cat {1}"'}))
+            \ ' {q} || true" --delimiter : ' .
+            \ ' --preview "cat {1}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' .
+            \ ' --preview-window "+{2}"'}))
 
 "command! -nargs=* FindWord call fzf#run(fzf#wrap({
 "            \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
@@ -214,27 +215,34 @@ command! -nargs=* Rg call fzf#run(fzf#wrap({
 command! -nargs=* FindWord call fzf#run(fzf#wrap({
             \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
             \ 'source': "rg --column --line-number --no-heading --color=always --smart-case " . expand('<cword>'),
-            \ 'options': '--ansi --disabled --delimiter : ' }))
+            \ 'options': '--ansi --disabled --delimiter : ' .
+            \ ' --preview "cat {1}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' .
+            \ ' --preview-window "+{2}"'}))
 
 command! -nargs=* Tree call fzf#run(fzf#wrap({
             \ 'sink': "e",
             \ 'source': "fd -t d",
-            \ 'options': '--preview "tree -C {} | head -n 40"'}))
+            \ 'options': '--preview "tree -C {} | head -n 40" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
 
 command! -nargs=* Find call fzf#run(fzf#wrap({
             \ 'sink': "e",
             \ 'source': "fd -t f",
-            \ 'options': '--preview "cat {}"'}))
+            \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
 
 command! -nargs=* FindAll call fzf#run(fzf#wrap({
             \ 'sink': "e",
             \ 'source': "fd -H -t f",
-            \ 'options': '--preview "cat {}"'}))
+            \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
+
+command! -nargs=* FindBuf call fzf#run(fzf#wrap({
+            \ 'sink': "e",
+            \ 'source': map(filter(copy(getbufinfo()), 'v:val.listed'), { val -> fnamemodify(v:val.name, ':.')}),
+            \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
 
 command! -nargs=* FindIgnored call fzf#run(fzf#wrap({
             \ 'sink': "e",
             \ 'source': "fd -H -I -t f",
-            \ 'options': '--preview "cat {}"'}))
+            \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
 
 " Commenting
 augroup commenting_blocks_of_code
@@ -284,6 +292,7 @@ nnoremap <leader>q :close<CR>
 nnoremap <leader>ff :Find<CR>
 nnoremap <leader>fa :FindAll<CR>
 nnoremap <leader>fw :FindWord<CR>
+nnoremap <leader>fb :FindBuf<CR>
 nnoremap <leader>fg :Rg<CR>
 
 " Grep commands
