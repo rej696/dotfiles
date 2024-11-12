@@ -42,6 +42,10 @@ super + p
 super + i
         nm-connection-editor
 
+# screenshot
+super + shift + s
+        flameshot gui
+
 #
 # bspwm hotkeys
 #
