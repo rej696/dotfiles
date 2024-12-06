@@ -39,34 +39,8 @@ vim.o.completeopt        = "menuone,noinsert,noselect"
 vim.o.wildmode           = "longest,full"                -- Display auto-complete in Command Mode
 vim.o.updatetime         = 300                           -- Delay until write to Swap and HoldCommand event
 
--- Fuzzy search
-vim.opt.path:append('**')
-vim.opt.wildignore:append('__pycache__/*')
-vim.o.wildignorecase = true
-
 -- Cindent rules
 vim.api.nvim_exec("set cino=(s,m1,l1", true)
-
--- Disable default plugins
--- vim.g.loaded_netrwPlugin = false
-
--- Neovide configuration
-if vim.g.neovide then
-    vim.o.guifont = "Hack:h10"
-    -- vim.g.neovide_padding_top = 0
-    -- vim.g.neovide_padding_bottom = 0
-    -- vim.g.neovide_padding_right = 0
-    -- vim.g.neovide_padding_left = 0
-    vim.g.neovide_hide_mouse_when_typing = true
-    vim.g.neovide_scroll_animation_length = 0.3
-    vim.g.neovide_cursor_animation_length = 0
-    vim.g.neovide_cursor_trail_size = 0
-    -- vim.g.neovide_fullscreen = true
-    vim.g.neovide_scale_factor = 1.0
-end
-
--- Providers
--- vim.g.python3_host_prog  = '/home/milton/software/miniconda/envs/pynvim/bin/python'
 
 -- Disable inline error messages
 vim.diagnostic.config {
@@ -92,18 +66,15 @@ vim.diagnostic.config {
 -- " netrw directory browser settings
 -- "let g:netrw_liststyle=0 "thin view (- to go up a directory)
 -- "let g:netrw_browse_split=4 "open new file in pr:evious window
--- vim.g.netrw_winsize=25 --set default width to 25%
+vim.g.netrw_winsize=25 --set default width to 25%
 -- vim.g.netrw_keepdir=0 -- sync current dir with browsing dir
 -- "let g:netrw_altv=1
--- vim.g.netrw_banner=0 --hide banner
+vim.g.netrw_banner=0 --hide banner
 -- vim.g.netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 -- "override overloading netrw settings to enable line numbers
--- vim.g.netrw_bufsettings='noma nomod nu nobl nowrap ro'
+vim.g.netrw_bufsettings='noma nomod nu nobl nowrap ro'
 
 -- set dark cursor for eink
--- vim.cmd [[highlight Cursor guibg=#000000 ctermbg=16]]
--- vim.cmd [[highlight Cursor guibg=#191919 ctermbg=59]]
 vim.cmd [[highlight Cursor guibg=#5F5F5F ctermbg=59]]
 vim.cmd [[set guicursor=n-v-c-sm:block-Cursor/lCursor,i-ci-ve:ver25-Cursor/lCursor,r-cr-o:hor20-Cursor/lCursor]]
--- vim.cmd [[highlight Normal ctermbg=NONE guibg=NONE]]
