@@ -1,23 +1,5 @@
 -- Initialize plugins
 return {
-    -- themes
-    -- {
-    --     'zenbones-theme/zenbones.nvim',
-    --     dependencies = {
-    --         { 'rktjmp/lush.nvim' },
-    --     },
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function()
-    --         -- vim.cmd([[autocmd Colorscheme zenwritten lua require "config.customise_zenwritten"]])
-    --         vim.cmd([[set termguicolors]])
-    --         vim.cmd([[set background=light]])
-    --         vim.g.zenwritten_transparent_background = true
-    --         vim.g.zenwritten_italic_comments = false
-    --         vim.cmd([[colorscheme zenwritten]])
-    --     end
-    -- },
-
     -- git
     {
         'tpope/vim-fugitive',

@@ -75,6 +75,8 @@ vim.g.netrw_banner=0 --hide banner
 -- "override overloading netrw settings to enable line numbers
 vim.g.netrw_bufsettings='noma nomod nu nobl nowrap ro'
 
--- set dark cursor for eink
-vim.cmd [[highlight Cursor guibg=#5F5F5F ctermbg=59]]
+-- set EInk background and cursor colours
+-- vim.cmd [[highlight Cursor guibg=#5F5F5F ctermbg=59]]
+vim.cmd [[highlight Cursor guibg=NvimDarkGrey2 ctermbg=59]]
 vim.cmd [[set guicursor=n-v-c-sm:block-Cursor/lCursor,i-ci-ve:ver25-Cursor/lCursor,r-cr-o:hor20-Cursor/lCursor]]
+vim.cmd [[highlight Normal guibg=NONE guifg=NvimDarkGrey2 ctermbg=NONE]]

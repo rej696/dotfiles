@@ -27,13 +27,9 @@ return {
                 sorting_strategy = "ascending",
                 mappings = {
                     i = {
-                        -- ['<C-n>'] = actions.move_selection_next,
-                        -- ['<C-p>'] = actions.move_selection_previous,
                         ['<C-q>'] = actions.smart_send_to_qflist,
-                        -- ['<C-c>'] = actions.smart_send_to_qflist,
                         ['<C-a>'] = actions.smart_add_to_qflist,
                         ['<C-s>'] = actions.file_split,
-                        -- ['<C-[>'] = actions.close,
                         ['<C-c>'] = actions.close,
                         ['<C-z>'] = actions.close,
                         ['<C-p>'] = actions.cycle_history_prev,
@@ -51,12 +47,6 @@ return {
                         flip_columns = 170,
                     },
                 },
-                -- layout_config = {
-                --   horizontal = {
-                --     height = 47,
-                --     prompt_position = "top",
-                --   }
-                -- }
             },
             extensions = {
                 fzf = {
