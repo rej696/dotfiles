@@ -1,8 +1,11 @@
+local colors_name= "zenrowan"
+vim.g.colors_name = colors_name
+
 local lush = require "lush"
 local base = require "zenwritten"
 local p = require "zenwritten.palette"
 
-local specs = lush.parse(function()
+local specs = lush.extends({base}).with(function()
     return {
         Function { base.Function, gui = "italic", fg = p.dark.leaf},
         Constant { base.Constant, gui = "italic", fg = p.dark.wood},
@@ -14,4 +17,4 @@ local specs = lush.parse(function()
     }
 end)
 
-lush.apply(lush.compile(specs))
+lush(specs)

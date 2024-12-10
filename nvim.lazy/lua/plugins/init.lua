@@ -7,8 +7,7 @@ return {
             { 'rktjmp/lush.nvim' },
         },
         config = function()
-            vim.cmd([[autocmd Colorscheme zenwritten lua require "config.customise_zenwritten"]])
-            vim.cmd([[colorscheme zenwritten]])
+            vim.cmd [[colorscheme zenrowan]]
         end
     },
 
