@@ -7,7 +7,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.python3_host_prog = "/usr/bin/python3.11"
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
@@ -34,17 +33,5 @@ require("lazy").setup(
             missing = true
         },
         checker = { enabled = false }, -- automatically check for plugin updates
-        performance = {
-            rtp = {
-                -- disable some rtp plugins
-                -- disabled_plugins = {
-                --     "gzip",
-                --     "tarPlugin",
-                --     "tohtml",
-                --     "tutor",
-                --     "zipPlugin",
-                -- },
-            },
-        },
     }
 )

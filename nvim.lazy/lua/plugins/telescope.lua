@@ -38,8 +38,8 @@ return {
                         -- ['<C-[>'] = actions.close,
                         ['<C-c>'] = actions.close,
                         ['<C-z>'] = actions.close,
-                        ['<C-p>'] = actions.cycle_history_prev,
-                        ['<C-n>'] = actions.cycle_history_next,
+                        ['<C-o>'] = actions.cycle_history_prev,
+                        ['<C-i>'] = actions.cycle_history_next,
                     },
                     n = {
                         ['<C-z>'] = actions.close,

@@ -36,5 +36,4 @@ augroup quickfix
     autocmd QuickFixCmdPost lgetexpr lwindow
 augroup END
 ]],
-
 false)

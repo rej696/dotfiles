@@ -9,31 +9,6 @@ return {
         end
     },
 
-    -- {
-    --     'zbirenbaum/copilot.lua',
-    --     cmd = "Copilot",
-    --     event = "InsertEnter",
-    --     config = function()
-    --         require("copilot").setup({
-    --             suggestion = {
-    --                 enabled = true,
-    --                 auto_trigger = true
-    --             },
-    --             panel = {
-    --                 enabled = true,
-    --                 auto_refresh = true
-    --             },
-    --             copilot_node_command = '/home/rowan/.nvm/versions/node/v17.9.1/bin/node'
-    --         })
-    --     end
-    -- },
-    -- {
-    --     'zbirenbaum/copilot-cmp',
-    --     config = function()
-    --         require("copilot_cmp").setup()
-    --     end
-    -- },
-
     {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
@@ -55,11 +30,9 @@ return {
             })
 
             local cmp = require('cmp')
-            -- local cmp_action = require('lsp-zero.cmp').action()
 
             cmp.setup({
                 sources = {
-                    -- {name = "copilot"},
                     { name = 'nvim_lsp', keyword_length = 6, group_index = 1, max_item_count = 30 },
                     { name = 'buffer',   keyword_length = 3 },
                     { name = 'path' },
@@ -69,8 +42,6 @@ return {
                 mapping = {
                     ['<C-Space>'] = cmp.mapping.complete(),
                     ['<Tab>'] = cmp.mapping.confirm({ select = true }),
-                    -- ['<Tab>'] = cmp_action.luasnip_supertab(),
-                    -- ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
                     ['<CR>'] = cmp.mapping.confirm({ select = false }),
                 }
             })
@@ -234,12 +205,6 @@ return {
             lsp.setup()
         end
     },
-    -- {
-    --     "dhananjaylatkar/cscope_maps.nvim",
-    --     config = function()
-    --         require("cscope_maps").setup()
-    --     end
-    -- },
     {
         "rej696/calltree.nvim",
         dependencies = {

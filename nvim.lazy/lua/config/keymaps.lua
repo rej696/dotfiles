@@ -22,7 +22,7 @@ nnoremap("<leader>ob", ":!fd -e c -e h | xargs cscope -b <CR>")
 nnoremap("<leader>ot", ":!fd -e c -e h | ctags -L - <CR>")
 
 -- Toggle Source and header
-nnoremap("gh", "<Cmd>ClangdSwitchSourceHeader<CR>")
+nnoremap("<leader>gh", "<Cmd>ClangdSwitchSourceHeader<CR>")
 nnoremap("<leader>th", "<Cmd>ClangdToggleInlayHints<CR>")
 
 -- Trim whitespace
@@ -51,11 +51,6 @@ nnoremap("<A-p>", ":<C-U>TmuxNavigatePrevious<CR>")
 -- nnoremap("<A-k>", "<C-W><k>")
 -- nnoremap("<A-l>", "<C-W><l>")
 
--- Toggle File explorer
--- nnoremap("<leader>e", "<Cmd>NvimTreeToggle<CR>")
-nnoremap("<leader>ex", ":Ex<CR>")
-
-
 -- List Buffer then select
 nnoremap("<leader>b", ":ls<CR>:b<Space>")
 
@@ -77,8 +72,8 @@ tnoremap("<Esc>", "<C-\\><C-n>")
 nnoremap("<leader>cl", ":cwindow<CR>")
 nnoremap("<leader>co", ":copen<CR>")
 nnoremap("<leader>cc", ":cclose<CR>")
-nnoremap("]c", ":cnext<CR>")
-nnoremap("[c", ":cprevious<CR>")
+nnoremap("]q", ":cnext<CR>")
+nnoremap("[q", ":cprevious<CR>")
 
 -- Location list
 nnoremap("<leader>ll", ":lwindow<CR>")
@@ -130,7 +125,8 @@ nnoremap("<leader>fr", "<Cmd>Telescope resume disable_devicons=true<CR>")
 
 -- Git
 nnoremap("<leader>gp", "<Cmd>Gitsigns preview_hunk_inline<CR>")
-nnoremap("<leader>gn", "<Cmd>Gitsigns next_hunk<CR>")
+nnoremap("]g", "<Cmd>Gitsigns next_hunk<CR>")
+nnoremap("[g", "<Cmd>Gitsigns prev_hunk<CR>")
 nnoremap("<leader>gr", "<Cmd>Gitsigns reset_hunk<CR>")
 nnoremap("<leader>gl", "<Cmd>Gitsigns blame_line<CR>")
 nnoremap("<leader>ga", "<Cmd>Gitsigns stage_hunk<CR>")
@@ -154,6 +150,7 @@ nnoremap("<leader>/", ":vimgrep<Space>")
 -- Don't lose contents of yank register on visual select and paste
 xnoremap("<leader>p", "\"_dP")
 nnoremap("<leader>p", "\"+p")
+nnoremap("<leader>P", "\"+P")
 
 -- Yank to system clipboard, delete to _ register
 nnoremap("<leader>y", "\"+y")
