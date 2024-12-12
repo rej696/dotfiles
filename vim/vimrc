@@ -1,9 +1,9 @@
 " mapped commands
-" <Space>f = Fuzzy find files
+" <Space>ff = Fuzzy find files
 " <Space>b = List buffers and prompt to switch
 " <Space>x = Delete current buffer
-" <Space>g = Grep and open quickfix list
-" <Space>/ = Vimgrep and add to quickfix (see :h vimgrep)
+" <Space>fg = Grep and open quickfix list
+" <Space>f/ = Vimgrep and add to quickfix (see :h vimgrep)
 " <Space>cl = Toggle quickfix list
 " <Space>co = Open quickfix list
 " <Space>cc = Close quickfix list
@@ -52,6 +52,13 @@ set expandtab " tabs are expanded to 4 spaces
 
 " Colorsheme
 syntax on
+set termguicolors
+colorscheme zenrowan
+set background=dark
+set t_Co=256
+
+" visual mode highlight
+hi Visual cterm=bold ctermbg=blue ctermfg=white
 
 if has("gui_running")
     if has("gui_gtk3")
@@ -59,27 +66,15 @@ if has("gui_running")
     else
         set guifont=Hack:h11
     endif
+    " remove gvim toolbars
+    set guioptions-=m "menubar
+    set guioptions-=T "toolbar
+    set guioptions-=r "scrollbar
 endif
-
-" set Molokai https://github.com/tomasr/molokai
-let g:rehash256 = 1 " better molokai color support
-" let g:molokai_original = 1 " different molokai setting
-colorscheme molokai
-
-" " set Solarized https://github.com/altercation/vim-colors-solarized
-" set background=dark
-" " let g:solarized_termcolors=256 " only use if not using solarized in terminal
-" let g:solarized_termcolors=16
-" let g:solarized_termtrans=1 " remove background
-" colorscheme solarized
-" set t_Co=16
 
 " Overwrite Terminal Request Version
 set t_RV=
 
-" set cursor to switch between modes
-let &t_SI="\e[6 q"
-let &t_EI="\e[2 q"
 
 " wildmenu
 set wildmenu
@@ -92,28 +87,7 @@ set completeopt=menuone,noinsert,noselect
 " mouse
 set mouse=a
 
-" remove gvim toolbars
-set guioptions-=m "menubar
-set guioptions-=T "toolbar
-set guioptions-=r "scrollbar
 
-if ($OS =~ "Windows")
-  let g:netrw_scp_cmd="\"c:\\Users\\Rowan.Saunders\\scoop\\apps\\putty\\current\\PSCP.EXE\" -q -batch"
-endif
-
-" Repeatable insertion of single character (like r vs R for i) using s (i) and S (a)
-" s is accessabe via cl and S via cc
-function! RepeatChar(char, count)
-  return repeat(a:char, a:count)
-endfunction
-nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
-nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
-
-" run lua code, e.g. :Lua "print(\"Hello World\")"
-" make sure to wrap code in double quotes, and escape double quotes in the code
-command! Lua echo system("lua -e" . <q-args>)
-
-nnoremap <silent> <C-G> :Lex<CR>
 
 " netrw commands
 " gh : toggle hidden files
@@ -126,13 +100,14 @@ nnoremap <silent> <C-G> :Lex<CR>
 " r: reverse sorting order
 " R: rename highlighted file/directory
 " t: open in newtab
+" a: show hidden files
 
 
 " netrw directory browser settings
 "let g:netrw_liststyle=0 "thin view (- to go up a directory)
 "let g:netrw_browse_split=4 "open new file in pr:evious window
 let g:netrw_winsize=25 "set default width to 25%
-let g:netrw_keepdir=0 "sync current dir with browsing dir
+let g:netrw_keepdir=1 "sync current dir with browsing dir
 "let g:netrw_altv=1
 let g:netrw_banner=0 "hide banner
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
@@ -140,49 +115,19 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 "override overloading netrw settings to enable line numbers
 let g:netrw_bufsettings='noma nomod nu nobl nowrap ro'
 
-" Set statusline
-let g:currentmode={
-      \ 'n'  : 'n',
-      \ 'v'  : 'v',
-      \ 'V'  : 'vl',
-      \ '' : 'vb',
-      \ 'i'  : 'i',
-      \ 'R'  : 'r',
-      \ 'r'  : 'r',
-      \ 'Rv' : 'rv',
-      \ 'c'  : 'c',
-      \ 't'  : 'f',
-      \}
+" hex editing mode (using ftplugin/xxd.vim)
+function! Hex()
+    if "xxd" != &ft
+        let b:old_ft = &ft
+        set ft=xxd
+    else
+        let &ft = b:old_ft
+        unlet b:old_ft
+    endif
+endfunction
 
-
-set laststatus=2
-set statusline=
-set statusline+=%#Constant#%{(g:currentmode[mode()]==#'n')?'\ \ NORMAL\ ':''}
-set statusline+=%#Directory#%{(g:currentmode[mode()]==#'i')?'\ \ INSERT\ ':''}
-set statusline+=%#Conditional#%{(g:currentmode[mode()]==#'r')?'\ \ REPLACE\ ':''}
-set statusline+=%#Conditional#%{(g:currentmode[mode()]==#'rv')?'\ \ V-REPLACE\ ':''}
-set statusline+=%#Define#%{(g:currentmode[mode()]==#'v')?'\ \ VISUAL\ ':''}
-set statusline+=%#Define#%{(g:currentmode[mode()]==#'vl')?'\ \ V-LINE\ ':''}
-set statusline+=%#Define#%{(g:currentmode[mode()]==#'vb')?'\ \ V-BLOCK\ ':''}
-set statusline+=%#Constant#%{(g:currentmode[mode()]==#'c')?'\ \ COMMAND\ ':''}
-set statusline+=%#Constant#%{(g:currentmode[mode()]==#'f')?'\ \ FINDER\ ':''}
-set statusline+=%#Define#\ %t
-set statusline+=\ %#Conditional#%m
-set statusline+=%=
-set statusline+=%#Define#%y
-set statusline+=%#Directory#\ %l,%c\ %3p%%\ %*
-" set statusline+=%#Directory#\ %l%#Conditional#,
-"set statusline+=%#Directory#%c
-"set statusline+=%#Directory#\ %3p%%
-"set statusline+=%#Conditional#\ %*
-set noshowmode
-
-" ---------------------------------------------------------
-" commands.lua
-" ---------------------------------------------------------
-
-" Remove trailing whitespace
-autocmd BufWritePre * %s/\s\+$//e
+command Xxd :call Hex()
+command Hex :call Hex()
 
 " Grep
 if executable("rg")
@@ -191,7 +136,7 @@ if executable("rg")
 endif
 
 function! Grep(...)
-  return system(join([&grepprg] + [expand(join(a:000, ' '))], ' '))
+  return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
 endfunction
 
 command! -nargs=+ -complete=file_in_path -bar Grep cgetexpr Grep(<f-args>)
@@ -208,6 +153,113 @@ augroup quickfix
   autocmd QuickFixCmdPost lgetexpr lwindow
 augroup END
 
+" fzf
+function! FZFterm() abort
+    let l:tempname = tempname()
+    execute 'silent !fzf --multi --preview "cat {}" ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+    " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+    try
+        execute 'cfile ' . l:tempname
+        redraw!
+    finally
+        call delete(l:tempname)
+    endtry
+endfunction
+
+function! FZFtermall() abort
+    let l:tempname = tempname()
+    execute 'silent !fd -H | fzf --multi --preview "cat {}"' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+    " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+    try
+        execute 'cfile ' . l:tempname
+        redraw!
+    finally
+        call delete(l:tempname)
+    endtry
+endfunction
+
+function! FZFtermgrep() abort
+    let l:tempname = tempname()
+    let l:rg = "rg --column --line-number --no-heading --color=always --smart-case "
+    execute 'silent !fzf --ansi --disabled --bind "start:reload:' . l:rg. ' {q}" --bind "change:reload:sleep 0.1;' . l:rg .' {q} || true" --delimiter : --preview "cat {1}"' . '| awk ''{ print $1":"$2":0" }'' > ' . fnameescape(l:tempname)
+    " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+    try
+        execute 'cfile ' . l:tempname
+        redraw!
+    finally
+        call delete(l:tempname)
+    endtry
+endfunction
+
+command! -nargs=* Fzf call FZFterm()
+command! -nargs=* Fzfall call FZFtermall()
+command! -nargs=* Fzfgrep call FZFtermgrep()
+
+" FZF integration
+set rtp+=~/.fzf
+let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.8, 'relative': v:true } }
+" Rg command
+let g:rg_prefix = "rg --column --line-number --no-heading --color=always --smart-case "
+command! -nargs=* Rg call fzf#run(fzf#wrap({
+            \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
+            \ 'options': '--ansi --disabled --bind "start:reload:' . g:rg_prefix .
+            \ ' {q}" --bind "change:reload:' . g:rg_prefix .
+            \ ' {q} || true" --delimiter : ' .
+            \ ' --preview "cat {1}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' .
+            \ ' --preview-window "+{2}"'}))
+
+"command! -nargs=* FindWord call fzf#run(fzf#wrap({
+"            \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
+"            \ 'source': "rg --column --line-number --no-heading --color=always --smart-case " . expand('<cword>'),
+"            \ 'options': '--ansi --disabled --delimiter : ' }))
+
+command! -nargs=* FindWord call fzf#run(fzf#wrap({
+            \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
+            \ 'source': "rg --column --line-number --no-heading --color=always --smart-case " . expand('<cword>'),
+            \ 'options': '--ansi --disabled --delimiter : ' .
+            \ ' --preview "cat {1}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' .
+            \ ' --preview-window "+{2}"'}))
+
+command! -nargs=* Tree call fzf#run(fzf#wrap({
+            \ 'sink': "e",
+            \ 'source': "fd -t d",
+            \ 'options': '--preview "tree -C {} | head -n 40" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
+
+command! -nargs=* Find call fzf#run(fzf#wrap({
+            \ 'sink': "e",
+            \ 'source': "fd -t f",
+            \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
+
+command! -nargs=* FindAll call fzf#run(fzf#wrap({
+            \ 'sink': "e",
+            \ 'source': "fd -H -t f",
+            \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
+
+command! -nargs=* FindBuf call fzf#run(fzf#wrap({
+            \ 'sink': "e",
+            \ 'source': map(filter(copy(getbufinfo()), 'v:val.listed'), { val -> fnamemodify(v:val.name, ':.')}),
+            \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
+
+command! -nargs=* FindIgnored call fzf#run(fzf#wrap({
+            \ 'sink': "e",
+            \ 'source': "fd -H -I -t f",
+            \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
+
+" Commenting
+augroup commenting_blocks_of_code
+    autocmd!
+    autocmd FileType c,cpp,rust let b:comment_leader = '\/\/ '
+    autocmd FileType sh,python,lua let b:comment_leader = '# '
+    autocmd FileType conf,fstab let b:comment_leader = '# '
+    autocmd FileType tex let b:comment_leader = '% '
+    autocmd FileType vim let b:comment_leader = '" '
+    autocmd FileType lisp let b:comment_leader = '; '
+    autocmd FileType forth let b:comment_leader = '\\ '
+augroup END
+
+noremap <silent> gcc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> gcu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+
 " ---------------------------------------------------------
 " keymaps.lua
 " ---------------------------------------------------------
@@ -216,14 +268,17 @@ let g:mapleader = " "
 let g:maplocalleader = " "
 
 " Remap Splits
-nnoremap <A-Left> <C-W><C-J>
-nnoremap <A-Down> <C-W><C-K>
-nnoremap <A-Up> <C-W><C-L>
-nnoremap <A-Right> <C-W><C-H>
+nnoremap <A-Left> <C-W><C-H>
+nnoremap <A-Down> <C-W><C-J>
+nnoremap <A-Up> <C-W><C-K>
+nnoremap <A-Right> <C-W><C-L>
 nnoremap <A-J> <C-W><C-J>
 nnoremap <A-K> <C-W><C-K>
 nnoremap <A-L> <C-W><C-L>
 nnoremap <A-H> <C-W><C-H>
+
+nnoremap <leader>sp :split<CR>
+nnoremap <leader>v :vsplit<CR>
 
 " List buffer then select
 nnoremap <leader>b :ls<CR>:b<Space>
@@ -233,22 +288,51 @@ nnoremap <leader>x :bd<CR>
 nnoremap <leader>q :close<CR>
 
 " Fuzzy find files
-set path+=**
-nnoremap <leader>f :find *
+"set path+=**
+"nnoremap <leader>ff :find *
+nnoremap <leader>ff :Find<CR>
+nnoremap <leader>fa :FindAll<CR>
+nnoremap <leader>fw :FindWord<CR>
+nnoremap <leader>fb :FindBuf<CR>
+nnoremap <leader>fg :Rg<CR>
 
 " Grep commands
-nnoremap <leader>g :Grep<Space>
-nnoremap <leader>/ :vimgrep<Space>
+nnoremap <leader>rg :Grep<Space>
+nnoremap <leader>/ :Grep<Space>
+nnoremap <leader>f/ :vimgrep<Space>
 
 " Quickfix list
 nnoremap <leader>cl :cwindow<CR>
 nnoremap <leader>co :copen<CR>
 nnoremap <leader>cc :cclose<CR>
-nnoremap <leader>cn :cnext<CR>
-nnoremap <leader>cp :cprevious<CR>
 
 " Location list
 nnoremap <leader>ll :lwindow<CR>
 nnoremap <leader>lo :lopen<CR>
 nnoremap <leader>ll :lclose<CR>
 
+" Navigation
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprevious<CR>
+nnoremap ]t :tabn<CR>
+nnoremap [t :tabp<CR>
+nnoremap ]e :cnext<CR>
+nnoremap [e :cprevious<CR>
+nnoremap ]l :lnext<CR>
+nnoremap [l :lprevious<CR>
+
+" changelist (like jumplist)
+nnoremap <C-m> g,
+nnoremap <C-n> g;
+
+" build tags
+nnoremap <leader>ot :!fd -e c -e h \| ctags -L - <CR>
+
+" Centre page after pgdn/up
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" Centre page after search
+nnoremap n  nzz
+nnoremap N  Nzz
+nnoremap *  *zz
