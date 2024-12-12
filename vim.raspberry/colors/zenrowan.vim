@@ -2,37 +2,9 @@
 "
 " Based on Zenburn.lua zenwritten colorscheme
 
-" [colors.bright]
-" black = "#3D3839"
-" blue = "#61ABDA"
-" cyan = "#65B8C1"
-" green = "#8BAE68"
-" magenta = "#CF86C1"
-" red = "#E8838F"
-" white = "#8E8E8E"
-" yellow = "#D68C67"
-
-" [colors.cursor]
-" cursor = "#C9C9C9"
-" text = "#191919"
-
-" [colors.normal]
-" black = "#191919"
-" blue = "#6099C0"
-" cyan = "#66A5AD"
-" green = "#819B69"
-" magenta = "#B279A7"
-" red = "#DE6E7C"
-" white = "#BBBBBB"
-" yellow = "#B77E64"
-
-" [colors.primary]
-" background = "#191919"
-" foreground = "#BBBBBB"
-
 " Function = green
 " Constant = yellow
-" Prepoc = forground
+" PreProc = forground
 " Statement = red
 " Number = magenta
 " Type = cyan
@@ -78,7 +50,7 @@ if &background ==# 'dark'
     highlight! link LspReferenceWrite ColorColumn
     highlight Comment guifg=#686868 guibg=NONE guisp=NONE gui=italic cterm=italic
     highlight Conceal guifg=#7F7F7F guibg=NONE guisp=NONE gui=bold,italic cterm=bold,italic
-    highlight Constant guifg=#8B8B8B guibg=NONE guisp=NONE gui=italic cterm=italic
+    highlight Constant guifg=#B77E64 guibg=NONE guisp=NONE gui=italic cterm=italic
     highlight! link Character Constant
     highlight! link String Constant
     highlight! link TroubleSource Constant
@@ -145,7 +117,7 @@ if &background ==# 'dark'
     highlight FloatBorder guifg=#797979 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight FoldColumn guifg=#616161 guibg=NONE guisp=NONE gui=bold cterm=bold
     highlight Folded guifg=#A3A3A3 guibg=#353535 guisp=NONE gui=NONE cterm=NONE
-    highlight Function guifg=#BBBBBB guibg=NONE guisp=NONE gui=NONE cterm=NONE
+    highlight Function guifg=#819B69 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link TroubleNormal Function
     highlight! link TroubleText Function
     highlight FzfLuaBufFlagAlt guifg=#6099C0 guibg=NONE guisp=NONE gui=NONE cterm=NONE
@@ -185,7 +157,7 @@ if &background ==# 'dark'
     highlight! link EndOfBuffer NonText
     highlight! link Whitespace NonText
     highlight NormalFloat guifg=NONE guibg=#2C2C2C guisp=NONE gui=NONE cterm=NONE
-    highlight Number guifg=#8B8B8B guibg=NONE guisp=NONE gui=NONE cterm=NONE
+    highlight Number guifg=#B279A7 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link Float Number
     highlight Pmenu guifg=NONE guibg=#2C2C2C guisp=NONE gui=NONE cterm=NONE
     highlight PmenuSbar guifg=NONE guibg=#595959 guisp=NONE gui=NONE cterm=NONE
@@ -207,9 +179,9 @@ if &background ==# 'dark'
     highlight SpellCap guifg=#CB7A83 guibg=NONE guisp=NONE gui=undercurl cterm=undercurl
     highlight! link SpellLocal SpellCap
     highlight SpellRare guifg=#CB7A83 guibg=NONE guisp=NONE gui=undercurl cterm=undercurl
-    highlight Statement guifg=#BBBBBB guibg=NONE guisp=NONE gui=bold cterm=bold
+    highlight Statement guifg=#DE6E7C guibg=NONE guisp=NONE gui=bold cterm=bold
     highlight! link FzfLuaBufName Statement
-    highlight! link PreProc Statement
+    highlight PreProc guifg=#BBBBBB guibg=NONE guisp=NONE gui=bold cterm=bold
     highlight! link WhichKey Statement
     highlight StatusLine guifg=#BBBBBB guibg=#303030 guisp=NONE gui=NONE cterm=NONE
     highlight! link TabLine StatusLine
@@ -221,7 +193,7 @@ if &background ==# 'dark'
     highlight! link BufferCurrent TabLineSel
     highlight Title guifg=#BBBBBB guibg=NONE guisp=NONE gui=bold cterm=bold
     highlight Todo guifg=NONE guibg=NONE guisp=NONE gui=bold,underline cterm=bold,underline
-    highlight Type guifg=#969696 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+    highlight Type guifg=#66A5AD guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link helpSpecial Type
     highlight! link markdownCode Type
     highlight Underlined guifg=NONE guibg=NONE guisp=NONE gui=underline cterm=underline

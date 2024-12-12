@@ -52,9 +52,10 @@ set expandtab " tabs are expanded to 4 spaces
 
 " Colorsheme
 syntax on
-" set termguicolors
-colorscheme default
-set t_Co=8
+set termguicolors
+colorscheme zenrowan
+set background=dark
+set t_Co=256
 
 " visual mode highlight
 hi Visual cterm=bold ctermbg=blue ctermfg=white
@@ -315,8 +316,8 @@ nnoremap ]b :bnext<CR>
 nnoremap [b :bprevious<CR>
 nnoremap ]t :tabn<CR>
 nnoremap [t :tabp<CR>
-nnoremap ]c :cnext<CR>
-nnoremap [c :cprevious<CR>
+nnoremap ]e :cnext<CR>
+nnoremap [e :cprevious<CR>
 nnoremap ]l :lnext<CR>
 nnoremap [l :lprevious<CR>
 
