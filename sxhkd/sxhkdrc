@@ -4,10 +4,10 @@
 
 # terminal emulator
 super + Return
-	alacritty
+	alacritty -e tmux new-session -A -s home
 
 super + shift + Return
-	WINIT_X11_SCALE_FACTOR=1.66 alacritty
+	WINIT_X11_SCALE_FACTOR=1.66 alacritty -e tmux new-session -A -s home
 
 # program launcher
 super + space

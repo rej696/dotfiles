@@ -11,6 +11,11 @@ return {
         end
     },
 
+    -- vim sessions
+    {
+        'tpope/vim-obsession',
+    },
+
     -- git
     {
         'tpope/vim-fugitive',
