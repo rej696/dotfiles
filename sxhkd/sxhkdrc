@@ -9,6 +9,12 @@ super + Return
 super + shift + Return
 	WINIT_X11_SCALE_FACTOR=1.66 alacritty -e tmux new-session -A -s home
 
+super + ctrl + Return
+	alacritty
+
+super + shift + ctrl + Return
+	WINIT_X11_SCALE_FACTOR=1.66 alacritty
+
 # program launcher
 super + space
 	rofi -show combi
@@ -36,7 +42,7 @@ super + b
 
 # pulse audio controller
 super + p
-        pavucontrol
+        pwvucontrol
 
 # network manager
 super + i

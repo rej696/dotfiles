@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+switch_to() {
+    if [[ -z $TMUX ]]; then
+        tmux attach-session -t $1
+    else
+        tmux switch-client -t $1
+    fi
+}
+
+has_session() {
+    tmux list-sessions | grep -q "^$1:"
+}
+
+hydrate() {
+    if [ -f $2/.tmux-sessionizer ]; then
+        tmux send-keys -t $1 "source $2/.tmux-sessionizer" c-M
+    elif [ -f $HOME/.tmux-sessionizer ]; then
+        tmux send-keys -t $1 "source $HOME/.tmux-sessionizer" c-M
+    fi
+}
+
+kill=0
+
+if [[ $# -eq 1 ]]; then
+    if [[ $1 -eq "kill" ]]; then
+        selected=$(tmux list-sessions -F '#{session_name}' | fzf)
+        kill=1
+    else
+        selected=$1
+    fi
+else
+    # select git repositories based on directories that may contain them
+    # extract /$HOME/.../.git from path
+    # filter out any unwanted files according to $FILTER variable
+    # append existing named tmux sessions to list
+    # reverse order (so tmux sessions appear first in fzf)
+    # awk command to remove non adjecent non-uniq entries (i.e. paths that have already been opened as sessions)
+    export FILTER='(dotfiles/tmux/plugins|sandbox/git)'
+    selected=$(find ~/work ~/play ~/sandbox ~/dotfiles -name ".git" -type d \
+        | perl -pe 's|$ENV{HOME}/(.*)/\.git|\1|' \
+        | perl -ne 'print unless m{$ENV{FILTER}}' \
+        | cat - <(tmux list-sessions -F '#{session_name}') \
+        | tac \
+        | awk '! seen[$0]++' \
+        | fzf --no-sort)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+if [[ $kill -eq 1 ]]; then
+    tmux kill-session -t $selected
+    tmux switch-client
+else
+    selected_name=$(basename "$selected" | tr . _)
+    tmux_running=$(pgrep tmux)
+
+    if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+        tmux new-session -s $selected_name -c $selected
+        hydrate $selected_name $selected
+        exit 0
+    fi
+
+    if ! has_session $selected_name; then
+        tmux new-session -ds $selected_name -c $selected
+        hydrate $selected_name $selected
+    fi
+
+    switch_to $selected_name
+fi
