@@ -7,7 +7,8 @@ return {
         {
             'nvim-telescope/telescope-fzf-native.nvim',
             build = "make"
-        }
+        },
+        'debugloop/telescope-undo.nvim',
     },
     config = function()
         local actions = require('telescope.actions')
@@ -61,6 +62,20 @@ return {
                 -- }
             },
             extensions = {
+                undo = {
+                    mappings = {
+                        i = {
+                            ["<CR>"] = require "telescope-undo.actions".restore,
+                            ["<C-y>"] = require "telescope-undo.actions".yank_additions,
+                            ["<C-S-y>"] = require "telescope-undo.actions".yank_deletions,
+                        },
+                        n = {
+                            ["<CR>"] = require "telescope-undo.actions".restore,
+                            ["<C-y>"] = require "telescope-undo.actions".yank_additions,
+                            ["<C-S-y>"] = require "telescope-undo.actions".yank_deletions,
+                        },
+                    },
+                },
                 fzf = {
                     fuzzy = true, -- false will only do exact matching
                     override_generic_sorter = true, -- override the generic sorter
@@ -81,5 +96,6 @@ return {
         })
 
         require('telescope').load_extension('fzf')
+        require('telescope').load_extension('undo')
     end
 }

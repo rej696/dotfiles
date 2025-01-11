@@ -28,6 +28,7 @@ $HOME/.config/polybar/launch.sh
 pgrep -x nm-applet > /dev/null || nm-applet &
 pgrep -x pa-applet > /dev/null || pa-applet &
 pgrep -x flameshot > /dev/null || flameshot &
+pgrep -x blueman-applet > /dev/null || blueman-applet &
 pgrep -x light-locker > /dev/null || light-locker --lock-on-lid &
 
 # fix java guis with bspwm
