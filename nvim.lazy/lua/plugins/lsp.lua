@@ -126,8 +126,6 @@ return {
             end
 
             local clangd_on_attach = function(client, bufnr)
-                require('clangd_extensions.inlay_hints').setup_autocmd()
-                require('clangd_extensions.inlay_hints').set_inlay_hints()
                 -- vim.api.nvim_set_keymap('n', '<space>h', ':ClangdSwitchSourceHeader<CR>', { noremap=true, silent=true })
                 on_attach(client, bufnr)
             end
@@ -192,27 +190,34 @@ return {
                     "--clang-tidy",
                     "--enable-config",
                     "--offset-encoding=utf-16",
-                    "--query-driver=/usr/local/bin/arm-none-eabi-g*",
+                    "--query-driver=/usr/local/bin/arm-none-eabi-g*", 
                 },
             }
             require('clangd_extensions').setup {
-                inlay_hints = {
-                    inline = false,
-                    only_current_line = true,
-                }
             }
 
             lsp.setup()
         end
     },
     {
-        "rej696/calltree.nvim",
-        dependencies = {
-            "dhananjaylatkar/cscope_maps.nvim"
-        },
+        "dhananjaylatkar/cscope_maps.nvim",
         opts = {
-            prefix = "<leader>o",
-            tree_style = "brief",
-        },
-    }
+            disable_maps = true,
+            cscope = {
+                picker = "telescope",
+                skip_picker_for_single_result = true,
+            }
+        }
+    },
+
+    -- {
+    --     "rej696/calltree.nvim",
+    --     dependencies = {
+    --         "dhananjaylatkar/cscope_maps.nvim"
+    --     },
+    --     opts = {
+    --         prefix = "<leader>o",
+    --         tree_style = "brief",
+    --     },
+    -- }
 }
