@@ -1,19 +1,57 @@
-[user]
-	email = 55083730+rej696@users.noreply.github.com
-	name = rej696
+# can use :/<commit message text> to reference commits instead of hash
+[includeIf "gitdir:~/play/"]
+    path = dotfiles/gitconfig-home
+[includeIf "gitdir:~/sandbox/"]
+    path = dotfiles/gitconfig-home
+[includeIf "gitdir:~/dotfiles/"]
+    path = dotfiles/gitconfig-home
+[includeIf "gitdir:~/work/"]
+    path = dotfiles/gitconfig-work
 [diff]
-	tool = nvimdiff
+    tool = nvimdiff
+    algorithm = histogram
+    colorMoved = dimmed-zebra
+    colorMovedWs = allow-indentation-change
+    mnemonicPrefix = true
+    renames = true
 [core]
-	editor = vim
+    editor = nvim
 [init]
-	defaultBranch = main
-[maintenance]
-	repo = /home/rowan/dotfiles
+    defaultBranch = main
+[rebase]
+    autoStash = true
+    autoSquash = true
+    updateRefs = true
 [rerere]
-	enabled = true
-	autoUpdate = true
-[alias]
-	tree = log --graph --oneline --all
-	rej696 = config user.name "Rowan.Saunders" && config user.email "55083730+rej696@users.noreply.github.com"
+    enabled = true
+    autoUpdate = true
 [pull]
-	rebase = true
+    rebase = true
+[push]
+    default = simple
+    autoSetupRemote = true
+[column]
+    ui = auto
+[branch]
+    sort = -committerdate
+[tag]
+    sort = version:refname
+[help]
+    autocorrect = prompt
+[commit]
+    verbose = true
+[merge]
+    conflictstyle = zdiff3
+[alias]
+    tree = log --graph --oneline --all
+    logd = log -p --compact-summary
+    slog = log -p -S
+    all = "!f() { RED='\\033[0;01;31m'; BLUE='\\033[0;01;03;34m'; GREEN='\\033[0;32;1m'; NC='\\033[0m'; echo \"\\n(git) ${RED}[${GREEN}$(basename $(pwd))${RED}] ${BLUE}($(git rev-parse --abbrev-ref HEAD))${NC} git $@\"; git -c color.ui=always $@; for path in `git submodule status --recursive | awk '// {print $2}'`; do echo \"(git) ${RED}[${GREEN}$path${RED}] ${BLUE}($(git -C $path rev-parse --abbrev-ref HEAD))${NC} git $@\"; git -C $path -c color.ui=always $@; done; }; f"
+    rej696 = "!f() { git config --local user.name 'rej696' && git config --local user.email 'r.f.t@hotmail.co.uk'; }; f"
+    stall = all status --short
+    stiff = all diff --compact-summary
+    stree = all log --graph --oneline -n 5 --abbrev-commit
+    stref = all reflog --oneline -n 5 --abbrev-commit
+    root = "!f() { path=$(git rev-parse --show-superproject-working-tree); if [ \"\" = \"$path\" ]; then path=$(git rev-parse --show-toplevel); fi; echo $path; }; f"
+    top = "!f() { path=\"$GIT_PREFIX\"; if [ \"\" = \"$path\" ]; then path=\"./\"; fi; realpath --relative-to=\"$path\" \"$(git root)\"; }; f"
+
