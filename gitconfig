@@ -32,6 +32,7 @@
     autoSetupRemote = true
 [column]
     ui = auto
+    status = never
 [branch]
     sort = -committerdate
 [tag]
