@@ -16,7 +16,11 @@ require('luaforth.table')
 local forth_setup = function(str)
     Forth.pos = 1
     Forth.mode = "interpret"
-    Forth.src = str
+    if str == nil then
+        Forth.src = ""
+    else
+        Forth.src = str
+    end
 end
 
 local forth_run = function()
@@ -29,13 +33,16 @@ local forth_run = function()
     end
     if output ~= "" then
         if (#ok + #output) > 20 then
-            vim.print(ok)
-            vim.print(Forth.output_prompt .. output)
+            -- vim.print(ok)
+            -- vim.print(Forth.output_prompt .. output)
+            return ok .. "\n" .. Forth.output_prompt .. output
         else
-            vim.print(ok .. Forth.output_prompt .. output)
+            -- vim.print(ok .. Forth.output_prompt .. output)
+            return ok .. Forth.output_prompt .. output
         end
     else
-        vim.print(ok)
+        -- vim.print(ok)
+        return ok
     end
 end
 
@@ -55,15 +62,24 @@ return {
     end,
     prompt = function()
         forth_setup(vim.fn.input(Forth.input_prompt))
-        forth_run()
+        vim.print(forth_run())
     end,
     repl = function()
+        local input = vim.fn.input(Forth.input_prompt)
+        local state = Forth.input_prompt .. input
+        forth_setup(input)
         while true do
-            forth_setup(vim.fn.input(Forth.input_prompt))
+            -- vim.ui.input({prompt = Forth.input_prompt, default = ""}, forth_setup)
             if Forth.src == "" or Forth.src == "bye" then
                 break
             end
-            forth_run()
+            output = forth_run()
+
+            state = state ..  output  .. "\n" .. Forth.input_prompt
+
+            input = vim.fn.input(state)
+            state = state .. input
+            forth_setup(input)
         end
     end,
     reset = function()
