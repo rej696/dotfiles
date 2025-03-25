@@ -174,10 +174,26 @@ function viewpdf() {
 function setbrightness() {
   if [[ -z "$1" ]]
   then
-    echo 255 | sudo tee /sys/class/backlight/amdgpu_bl1/brightness
+    echo 255 | tee /sys/class/backlight/amdgpu_bl1/brightness
   else
-    echo $1 | sudo tee /sys/class/backlight/amdgpu_bl1/brightness
+    echo $1 | tee /sys/class/backlight/amdgpu_bl1/brightness
   fi
+}
+
+function getbrightness() {
+    local curr=$(cat /sys/class/backlight/amdgpu_bl1/brightness)
+    echo "$(((curr * 100) / 255))%"
+}
+
+
+function incbrightness() {
+    local curr=$(cat /sys/class/backlight/amdgpu_bl1/brightness)
+    setbrightness $((curr + 25))
+}
+
+function decbrightness() {
+    local curr=$(cat /sys/class/backlight/amdgpu_bl1/brightness)
+    setbrightness $((curr - 25))
 }
 
 function dualscreen() {
@@ -189,6 +205,9 @@ function laptopscreen() {
 }
 
 alias sb="setbrightness"
+alias gb="getbrightness"
+alias ib="incbrightness"
+alias db="decbrightness"
 
 # setxkbmap -option caps:escape
 # . "$HOME/.cargo/env"
