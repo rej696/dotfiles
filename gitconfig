@@ -37,8 +37,6 @@
     sort = -committerdate
 [tag]
     sort = version:refname
-[help]
-    autocorrect = prompt
 [commit]
     verbose = true
 [merge]

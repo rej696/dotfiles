@@ -35,6 +35,7 @@ return {
                 vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
                 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
                 vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+                vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help, bufopts)
                 vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
                 vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
                 vim.keymap.set('n', '<space>wl', function()
@@ -43,6 +44,7 @@ return {
                 vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
                 vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
                 vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+
                 vim.keymap.set('n', 'gr', ':Telescope lsp_references theme=ivy disable_devicond=true<CR>', bufopts)       --vim.lsp.buf.references, bufopts)
                 vim.keymap.set('n', 'gt', ':Telescope lsp_type_definitions theme=ivy disable_devicons=true<CR>', bufopts) --vim.lsp.buf.references, bufopts)
                 vim.keymap.set('n', '<space>fe', ':Telescope diagnostics theme=ivy disable_devicons=true<CR>', bufopts)   --vim.lsp.buf.references, bufopts)

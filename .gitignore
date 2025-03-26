@@ -3,5 +3,6 @@ tmux/plugins/*
 tmux/resurrect/*
 vim/.netrwhist
 nvim.lazy/lazy-lock.json
+nvim.v10/lazy-lock.json
 todo
 todone
