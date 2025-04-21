@@ -24,6 +24,7 @@ return {
                 local opts = {}
                 local bufopts = {buffer = event.buf}
 
+
                 vim.keymap.set('n', '<space>d', vim.diagnostic.open_float, opts)
                 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
                 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -52,6 +53,9 @@ return {
                 -- vim.keymap.set('v', '<space>F', vim.lsp.buf.range_formatting, bufopts)
                 vim.keymap.set({'n', 'x'}, '<space>F', vim.lsp.buf.format, bufopts)
                 vim.keymap.set('v', '<space>F', vim.lsp.buf.format, bufopts)
+
+                -- Stop LSP from overriding ctags
+                vim.cmd[[set tagfunc=]]
 
             end,
         })
@@ -93,11 +97,13 @@ return {
                     require('lspconfig').clangd.setup({
                         cmd = {
                             "clangd",
+                            "--log=verbose",
                             "--background-index",
-                            "--clang-tidy",
+                            -- "--clang-tidy",
+                            "--header-insertion=iwyu",
                             "--enable-config",
                             "--offset-encoding=utf-16",
-                            "--query-driver=/usr/local/bin/arm-none-eabi-g*",
+                            '--query-driver="/opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-g*,/home/rowan/work/stpcu/opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-g*,/usr/local/bin/arm-none-eabi-g*"',
                         },
                     })
                 end,

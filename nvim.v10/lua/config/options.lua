@@ -39,6 +39,8 @@ vim.o.completeopt        = "menuone,noinsert,noselect"
 vim.o.wildmode           = "longest,full"                -- Display auto-complete in Command Mode
 vim.o.updatetime         = 300                           -- Delay until write to Swap and HoldCommand event
 
+vim.o.formatoptions      = "jco/ql"
+
 -- Cindent rules
 vim.api.nvim_exec("set cino=(s,m1,l1", true)
 
@@ -74,3 +76,5 @@ vim.g.netrw_banner=0 --hide banner
 
 -- "override overloading netrw settings to enable line numbers
 vim.g.netrw_bufsettings='noma nomod nu nobl nowrap ro'
+
+vim.cmd[[set exrc]]
