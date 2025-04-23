@@ -77,6 +77,7 @@ return {
         'tpope/vim-commentary',
         keys = { "gcc", { "gc", mode = "v" } },
     },
+    { 'tpope/vim-dispatch' },
 
     -- hylang support
     -- {
