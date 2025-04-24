@@ -62,8 +62,15 @@ nnoremap("]b", ":bprevious<CR>")
 -- Buffer Navigation
 nnoremap("<A-Home>", ":tabp<CR>")
 nnoremap("<A-End>", ":tabn<CR>")
-nnoremap("[t", ":tabp<CR>")
-nnoremap("]t", ":tabn<CR>")
+nnoremap("[p", ":tabp<CR>")
+nnoremap("]p", ":tabn<CR>")
+
+-- tag navigation
+nnoremap("[t", ":tp<CR>")
+nnoremap("]t", ":tn<CR>")
+nnoremap("<leader>tn", ":tn<CR>")
+nnoremap("<leader>tp", ":tp<CR>")
+nnoremap("<leader>ts", ":ts<CR>")
 
 -- Terminal Remapping
 tnoremap("<Esc>", "<C-\\><C-n>")
@@ -109,7 +116,7 @@ nnoremap("<leader>d", '<Cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<C
 -- <space>F   format
 
 -- Fuzzy find files
-nnoremap("<leader>fi", ":find **/*")
+nnoremap("<leader>fi", ":find **/")
 nnoremap("<leader>ff", "<Cmd>Telescope find_files disable_devicons=true<CR>")
 nnoremap("<leader>fa", "<Cmd>Telescope find_files disable_devicons=true hidden=true no_ignore=true<CR>")
 nnoremap("<leader>fb", "<Cmd>Telescope buffers disable_devicons=true<CR>")

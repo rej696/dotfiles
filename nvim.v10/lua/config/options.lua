@@ -37,6 +37,7 @@ vim.o.spell              = false
 vim.o.spelllang          = "en_gb"
 vim.o.completeopt        = "menuone,noinsert,noselect"
 vim.o.wildmode           = "longest,full"                -- Display auto-complete in Command Mode
+vim.o.wildoptions        = "pum,tagfile"                 -- Display vertical popup menu
 vim.o.updatetime         = 300                           -- Delay until write to Swap and HoldCommand event
 
 vim.o.formatoptions      = "jco/ql"

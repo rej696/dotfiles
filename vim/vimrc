@@ -15,6 +15,9 @@
 " Allow hidden buffers
 set hidden
 
+" Allow project local config files (e.g. for paths and tagfiles)
+set exrc
+
 " Split normally
 set splitright
 set splitbelow
@@ -75,19 +78,20 @@ endif
 " Overwrite Terminal Request Version
 set t_RV=
 
-
 " wildmenu
 set wildmenu
-" wildmenu uses a popup and does fuzzy find
-" set wildoptions=fuzzy,pum
-set wildmode=list:longest,full
+" wildmenu uses a popup
+set wildoptions=pum,tagfile
+set wildmode=full
 " Insert mode auto completion popup <C-n>
 set completeopt=menuone,noinsert,noselect
 
 " mouse
 set mouse=a
 
-
+"set c indent rules and formatting
+set cino=(s,m1,l1
+set formatoptions=jco/ql
 
 " netrw commands
 " gh : toggle hidden files
@@ -289,7 +293,7 @@ nnoremap <leader>q :close<CR>
 
 " Fuzzy find files
 "set path+=**
-"nnoremap <leader>ff :find *
+nnoremap <leader>fi :find **/
 nnoremap <leader>ff :Find<CR>
 nnoremap <leader>fa :FindAll<CR>
 nnoremap <leader>fw :FindWord<CR>
@@ -314,12 +318,18 @@ nnoremap <leader>ll :lclose<CR>
 " Navigation
 nnoremap ]b :bnext<CR>
 nnoremap [b :bprevious<CR>
-nnoremap ]t :tabn<CR>
-nnoremap [t :tabp<CR>
-nnoremap ]e :cnext<CR>
-nnoremap [e :cprevious<CR>
+nnoremap ]p :tabn<CR>
+nnoremap [p :tabp<CR>
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprevious<CR>
 nnoremap ]l :lnext<CR>
 nnoremap [l :lprevious<CR>
+nnoremap ]t :tn<CR>
+nnoremap [t :tp<CR>
+
+nnoremap <leader>ts :ts<CR>
+nnoremap <leader>tn :tn<CR>
+nnoremap <leader>tp :tp<CR>
 
 " changelist (like jumplist)
 nnoremap <C-m> g,
