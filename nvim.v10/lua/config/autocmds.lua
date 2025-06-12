@@ -1,5 +1,28 @@
 -- Remove trailing whitespace
-vim.cmd [[autocmd BufWritePre * %s/\s\+$//e ]]
+vim.api.nvim_exec([[
+function! AutoTrimWhitespaceEnable()
+    if !exists('#AutoTrimWhitespace#BufWritePre')
+        augroup AutoTrimWhitespace
+            autocmd!
+            autocmd BufWritePre * %s/\s\+$//e
+        augroup END
+    endif
+endfunction
+
+function! AutoTrimWhitespaceDisable()
+    if exists('#AutoTrimWhitespace#BufWritePre')
+        augroup AutoTrimWhitespace
+            autocmd!
+        augroup END
+    endif
+endfunction
+call AutoTrimWhitespaceEnable()
+
+command! AutoTrimWhitespaceEnable call AutoTrimWhitespaceEnable()
+command! AutoTrimWhitespaceDisable call AutoTrimWhitespaceDisable()
+]],
+false
+)
 
 -- Swap folder
 vim.cmd('command! ListSwap split | enew | r !ls -l ~/.local/share/nvim/swap')
