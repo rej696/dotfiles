@@ -24,6 +24,8 @@ nnoremap("<leader>th", "<Cmd>ClangdToggleInlayHints<CR>")
 -- Trim whitespace
 nnoremap("<leader>tr", ":%s/\\s\\+$//e<CR>")
 vnoremap("<leader>tr", ":s/\\s\\+$//e<CR>")
+nnoremap("<leader>te", ":AutoTrimWhitespaceEnable<CR>")
+nnoremap("<leader>td", ":AutoTrimWhitespaceDisable<CR>")
 
 -- Centre page after pgdn/up
 nnoremap("<C-d>", "<C-d>zz")
