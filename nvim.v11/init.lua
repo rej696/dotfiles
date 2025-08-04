@@ -120,17 +120,34 @@ require("lazy").setup({
 
         { 'tpope/vim-dispatch' },
 
-    } },
+        -- Treesitter
+        {
+            "nvim-treesitter/nvim-treesitter",
+            build = ":TSUpdate",
+            lazy = false,
+            config = function()
+                require('nvim-treesitter.configs').setup({
+                    highlight = {
+                        enable = true,
+                        additional_vim_regex_highlighting = false
+                    },
+                })
+                vim.api.nvim_set_hl(0, "@function.call", { link = "Function" })
+                vim.api.nvim_set_hl(0, "@method.call", { link = "Function" })
+            end,
+
+        },
+    } }
 })
 
 -- Visual Options
-vim.o.conceallevel    = 0    -- Don't hide quotes in markdown
+vim.o.conceallevel    = 0 -- Don't hide quotes in markdown
 vim.o.cmdheight       = 1
 vim.o.pumheight       = 10
 vim.o.showmode        = false
-vim.o.showtabline     = 1       -- Only show tabline if more than one tab
+vim.o.showtabline     = 1    -- Only show tabline if more than one tab
 vim.o.title           = true
-vim.o.termguicolors   = true    -- Use true colors, required for some plugins
+vim.o.termguicolors   = true -- Use true colors, required for some plugins
 vim.wo.number         = true
 vim.wo.relativenumber = true
 vim.wo.signcolumn     = 'yes'
@@ -138,40 +155,40 @@ vim.wo.cursorline     = true
 vim.o.winborder       = 'rounded'
 
 -- folds
-vim.o.foldmethod      = 'indent'    -- Fold by indentation level
-vim.o.foldlevel       = 99          -- Default fold level to 99 (i.e. no folds),
+vim.o.foldmethod      = 'indent' -- Fold by indentation level
+vim.o.foldlevel       = 99       -- Default fold level to 99 (i.e. no folds),
 -- z[r,R] reduces and z[m,M] increases(more)
 -- R and M to reduce to min/max folds (i.e. zM will allow you to start using folds)
 -- zo and zc to open/close individual folds
 
 
 -- Behavioural Options
-vim.o.hlsearch        = false
-vim.o.ignorecase      = true    -- Ignore case when using lowercase in search
-vim.o.smartcase       = true    -- But don't ignore it when using upper case
-vim.o.smarttab        = true
-vim.o.smartindent     = true
-vim.o.expandtab       = true    -- Convert tabs to spaces. <C-v><tab> to insert a proper tab
-vim.o.tabstop         = 8
-vim.o.softtabstop     = 4
-vim.o.shiftwidth      = 4
-vim.o.splitbelow      = true
-vim.o.splitright      = true
-vim.o.scrolloff       = 5    -- Minimum offset in lines to screen borders
-vim.o.sidescrolloff   = 8
-vim.o.mouse           = 'a'
+vim.o.hlsearch      = false
+vim.o.ignorecase    = true -- Ignore case when using lowercase in search
+vim.o.smartcase     = true -- But don't ignore it when using upper case
+vim.o.smarttab      = true
+vim.o.smartindent   = true
+vim.o.expandtab     = true -- Convert tabs to spaces. <C-v><tab> to insert a proper tab
+vim.o.tabstop       = 8
+vim.o.softtabstop   = 4
+vim.o.shiftwidth    = 4
+vim.o.splitbelow    = true
+vim.o.splitright    = true
+vim.o.scrolloff     = 5 -- Minimum offset in lines to screen borders
+vim.o.sidescrolloff = 8
+vim.o.mouse         = 'a'
 
 -- Vim specific Options
-vim.o.hidden          = true    -- Do not save when switching buffers
-vim.o.fileencoding    = "utf-8"
-vim.o.spell           = false
-vim.o.spelllang       = "en_gb"
-vim.o.completeopt     = "fuzzy,menuone,noinsert,noselect"
-vim.o.wildmode        = "full"           -- Display auto-complete in Command Mode
-vim.o.wildoptions     = "pum,tagfile"    -- Display vertical popup menu
-vim.o.updatetime      = 300              -- Delay until write to Swap and HoldCommand event
+vim.o.hidden        = true -- Do not save when switching buffers
+vim.o.fileencoding  = "utf-8"
+vim.o.spell         = false
+vim.o.spelllang     = "en_gb"
+vim.o.completeopt   = "fuzzy,menuone,noinsert,noselect"
+vim.o.wildmode      = "full"        -- Display auto-complete in Command Mode
+vim.o.wildoptions   = "pum,tagfile" -- Display vertical popup menu
+vim.o.updatetime    = 300           -- Delay until write to Swap and HoldCommand event
 
-vim.o.formatoptions   = "jco/ql"
+vim.o.formatoptions = "jco/ql"
 
 -- Cindent rules
 vim.cmd [[set cino=(s,m1,l1]]
@@ -329,12 +346,12 @@ vim.lsp.set_log_level("off")
 
 -- Disable inline error messages
 vim.diagnostic.config {
-  virtual_text = false,
-  underline = false,            -- Keep error underline
-  signs = true,                -- Keep gutter signs
+    virtual_text = false,
+    underline = false, -- Keep error underline
+    signs = true,      -- Keep gutter signs
 }
 
-vim.lsp.enable({'clangd', 'luals', 'ruff', 'basedpyright',})
+vim.lsp.enable({ 'clangd', 'luals', 'ruff', 'basedpyright', })
 
 -- Stop LSP from overriding ctags
 vim.cmd [[set tagfunc=]]
