@@ -174,7 +174,7 @@ function viewpdf() {
 function setbrightness() {
   if [[ -z "$1" ]]
   then
-    echo 255 | tee /sys/class/backlight/amdgpu_bl1/brightness
+    cat /sys/class/backlight/amdgpu_bl1/max_brightness | tee /sys/class/backlight/amdgpu_bl1/brightness
   else
     echo $1 | tee /sys/class/backlight/amdgpu_bl1/brightness
   fi

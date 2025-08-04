@@ -54,11 +54,12 @@ super + shift + s
 
 # brightness
 XF86MonBrightnessUp;@XF86MonBrightnessUp
-        cat /sys/class/backlight/amdgpu_bl1/brightness | awk '\{ out=$0+5; print(out>255?255:out) \}' > /sys/class/backlight/amdgpu_bl1/brightness
+        cat /sys/class/backlight/amdgpu_bl1/brightness | awk '\{ out=$0+1205; print(out>61680?61680:out) \}' > /sys/class/backlight/amdgpu_bl1/brightness
+        # cat /sys/class/backlight/amdgpu_bl1/brightness | awk '\{ out=$0+5; print(out>255?255:out) \}' > /sys/class/backlight/amdgpu_bl1/brightness
 
 
 XF86MonBrightnessDown;@XF86MonBrightnessDown
-        cat /sys/class/backlight/amdgpu_bl1/brightness | awk '\{ out=$0-5; print(out<0?0:out) \}' > /sys/class/backlight/amdgpu_bl1/brightness
+        cat /sys/class/backlight/amdgpu_bl1/brightness | awk '\{ out=$0-1205; print(out<0?0:out) \}' > /sys/class/backlight/amdgpu_bl1/brightness
 
 #
 # bspwm hotkeys
