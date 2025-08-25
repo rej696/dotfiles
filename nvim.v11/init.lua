@@ -46,7 +46,7 @@ require("lazy").setup({
                 local pick = require("mini.pick")
                 pick.setup({
                     source = { show = pick.default_show },
-                    mappings = { scroll_down = "<C-d>", scroll_up = "<C-u>", delete_left = "<C-k>" }
+                    mappings = { scroll_down = "<C-d>", scroll_up = "<C-u>", delete_left = "<C-k>", choose_marked = "<M-q>", }
                 })
 
                 vim.keymap.set("n", "<leader>ff", [[<Cmd>Pick files<CR>]])
@@ -333,6 +333,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
         end
         vim.keymap.set({ 'n', 'v', 'x' }, '<leader>F', vim.lsp.buf.format, bufopts)
+        vim.keymap.set({ 'n' }, 'grd', vim.lsp.buf.definition, bufopts)
+        vim.cmd[[set tagfunc=]]
     end,
 })
 
@@ -342,7 +344,7 @@ vim.keymap.set("i", "<Tab>", function()
 end, { expr = true })
 
 
-vim.lsp.set_log_level("off")
+vim.lsp.set_log_level("WARN")
 
 -- Disable inline error messages
 vim.diagnostic.config {
