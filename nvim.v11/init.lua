@@ -49,11 +49,55 @@ require("lazy").setup({
                     mappings = { scroll_down = "<C-d>", scroll_up = "<C-u>", delete_left = "<C-k>", choose_marked = "<M-q>", }
                 })
 
-                vim.keymap.set("n", "<leader>ff", [[<Cmd>Pick files<CR>]])
+                -- vim.keymap.set("n", "<leader>ff", [[<Cmd>Pick files<CR>]])
                 vim.keymap.set("n", "<leader>fb", [[<Cmd>Pick buffers<CR>]])
-                vim.keymap.set("n", "<leader>fg", [[<Cmd>Pick grep_live<CR>]])
-                vim.keymap.set("n", "<leader>fw", [[<Cmd>Pick grep pattern="<cword>"<CR>]])
-                vim.keymap.set("n", "<leader>fr", [[<Cmd>Pick resume<CR>]])
+                -- vim.keymap.set("n", "<leader>fg", [[<Cmd>Pick grep live<CR>]])
+                -- vim.keymap.set("n", "<leader>fw", [[<Cmd>Pick grep pattern="<cword>"<CR>]])
+                -- vim.keymap.set("n", "<leader>fr", [[<Cmd>Pick resume<CR>]])
+            end,
+        },
+
+        {
+            'ibhagwan/fzf-lua',
+            opts = {},
+            version = false,
+            lazy = false,
+            config = function()
+                require("fzf-lua").setup({
+                    "hide",
+                    winopts= {
+                        -- split = "belowright new",
+                        fullscreen = true,
+                        border = "none",
+                        preview = {
+                            border = "border-top",
+                            vertical = "down:50%",
+                            horizontal = "right:50%",
+                            title = "left",
+                            layout = "flex",
+                            flip_columns = 180,
+                        },
+                    },
+                    keymap = {
+                        builtin = {
+                            true,
+                            ["<C-d>"] = "preview-page-down",
+                            ["<C-u>"] = "preview-page-up",
+                            ["<S-tab>"] = "toggle-preview",
+                        },
+                        fzf = {
+                            true,
+                            ["ctrl-d"] = "preview-page-down",
+                            ["ctrl-u"] = "preview-page-up",
+                        }
+                    },
+                })
+                vim.keymap.set("n", "<leader>fg", [[<Cmd>FzfLua live_grep<CR>]])
+                vim.keymap.set("n", "<leader>fw", [[<Cmd>FzfLua grep_cword<CR>]])
+                vim.keymap.set("n", "<leader>fh", [[<Cmd>FzfLua help_tags<CR>]])
+                vim.keymap.set("n", "<leader>ft", [[<Cmd>FzfLua builtin<CR>]])
+                vim.keymap.set("n", "<leader>fr", [[<Cmd>FzfLua resume<CR>]])
+                vim.keymap.set("n", "<leader>ff", function() FzfLua.files({winopts={split = "belowright new", preview = {hidden = true}}}) end)
             end,
         },
 
