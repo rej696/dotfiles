@@ -1,2 +1,2 @@
-#!bin/bash
+#!/bin/bash
 rsync -avhzP "${1}" "${2}"
