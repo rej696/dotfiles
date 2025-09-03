@@ -1,7 +1,29 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-
+#
+# Keymaps: https://gist.github.com/tuxfight3r/60051ac67c5f0445efee
+#
+# C-b, C-f character back and forth
+# M-b, M-f word back and forth
+# C-a, C-e, home and end
+# C-]-x, find x (next occurance)
+# M-C-]-x FIND x (previous occurance)
+# C-d delete character after cursor
+# M-d delete word after cursor
+# C-k delete all  after cursor
+# C-h backspace before cursor
+# C-w word backspace before cursor
+# M-backspace word backspace before cursor
+# C-u backspace all before cursor
+# C-z background process
+# C-_, C-x, C-u undo
+# M-t swap words
+# C-r history
+# C-p previous command in history
+# C-n next command in history
+# C-xC-e edit commandline in editor (exit vim with :cq to cancel)
+#
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -185,6 +207,7 @@ export EDITOR="nvim" # set the default editor to neovim
 export PATH=~/.local/bin:$PATH
 export MANPATH=~/.local/share/man:$MANPATH
 [ -s "$HOME/.cargo" ] && . "$HOME/.cargo/env"
+export PYTHONSTARTUP="${HOME}/dotfiles/pyreplrc.py"
 
 
 # Run janet-server to start server, then ConjureConnect, then run janet-client to connect to shared repl
@@ -201,3 +224,4 @@ PERL5LIB="${HOME}/.perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="${HOME}/.perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"${HOME}/.perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=${HOME}/.perl5"; export PERL_MM_OPT;
+
