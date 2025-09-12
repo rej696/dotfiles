@@ -83,3 +83,8 @@ class Shell(dotdict):
 
 sh = Shell()
 
+def hy():
+    """Run a hy repl from a python repl"""
+    import hy
+    return hy.REPL(locals = {**globals(), **locals()}).run()
+
