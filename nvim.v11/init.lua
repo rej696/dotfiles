@@ -119,6 +119,8 @@ require("lazy").setup({
             'tpope/vim-obsession',
         },
 
+        { 'tpope/vim-dispatch' },
+
         -- git
         {
             'tpope/vim-fugitive',
@@ -162,7 +164,6 @@ require("lazy").setup({
             end
         },
 
-        { 'tpope/vim-dispatch' },
 
         -- Treesitter
         {
@@ -180,6 +181,19 @@ require("lazy").setup({
                 vim.api.nvim_set_hl(0, "@method.call", { link = "Function" })
             end,
 
+        },
+
+        {
+            "mbbill/undotree",
+            config = function()
+                vim.g["undotree_SetFocusWhenToggle"] = 1;
+                vim.keymap.set('n', '<space>fu', "<Cmd>UndotreeToggle<CR>", {})
+                vim.o.undofile = true
+            end,
+        },
+
+        {
+            "rej696/vim-send2term",
         },
     } }
 })
@@ -236,6 +250,9 @@ vim.o.formatoptions = "jco/ql"
 
 -- Cindent rules
 vim.cmd [[set cino=(s,m1,l1]]
+
+-- vhdl indent rules
+vim.g.vhdl_indent_genportmap = 0;
 
 -- exrc
 vim.cmd [[set exrc]]
@@ -398,6 +415,9 @@ vim.diagnostic.config {
 }
 
 vim.lsp.enable({ 'clangd', 'luals', 'ruff', 'basedpyright', })
+if vim.fn.executable('vhdl_ls') == 1 then
+    vim.lsp.enable({ 'vhdl_ls' })
+end
 
 -- Stop LSP from overriding ctags
 vim.cmd [[set tagfunc=]]

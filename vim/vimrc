@@ -271,6 +271,8 @@ noremap <silent> gcu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<
 let g:mapleader = " "
 let g:maplocalleader = " "
 
+tnoremap <Esc> <C-\><C-n>
+
 " Remap Splits
 nnoremap <A-Left> <C-W><C-H>
 nnoremap <A-Down> <C-W><C-J>

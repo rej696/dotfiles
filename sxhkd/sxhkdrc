@@ -40,8 +40,12 @@ super + l
 super + b
         firefox
 
-# pulse audio controller
+# pdf viewer
 super + p
+        zathura
+
+# pulse audio controller
+super + a
         pwvucontrol
 
 # network manager
