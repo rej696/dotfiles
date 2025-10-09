@@ -194,6 +194,9 @@ require("lazy").setup({
 
         {
             "rej696/vim-send2term",
+            config = function()
+                vim.g["send2term_cmd_python"] = "uvx -p 3.14 python"
+            end,
         },
     } }
 })
@@ -313,6 +316,10 @@ vim.keymap.set("n", "<A-Left>", ":<C-U>TmuxNavigateLeft<CR>", map_opts)
 vim.keymap.set("n", "<A-Down>", ":<C-U>TmuxNavigateDown<CR>", map_opts)
 vim.keymap.set("n", "<A-Up>", ":<C-U>TmuxNavigateUp<CR>", map_opts)
 vim.keymap.set("n", "<A-Right>", ":<C-U>TmuxNavigateRight<CR>", map_opts)
+vim.keymap.set("t", "<A-Left>", "<C-\\><C-n>:<C-U>TmuxNavigateLeft<CR>", map_opts)
+vim.keymap.set("t", "<A-Down>", "<C-\\><C-n>:<C-U>TmuxNavigateDown<CR>", map_opts)
+vim.keymap.set("t", "<A-Up>", "<C-\\><C-n>:<C-U>TmuxNavigateUp<CR>", map_opts)
+vim.keymap.set("t", "<A-Right>", "<C-\\><C-n>:<C-U>TmuxNavigateRight<CR>", map_opts)
 vim.keymap.set("n", "<A-h>", ":<C-U>TmuxNavigateLeft<CR>", map_opts)
 vim.keymap.set("n", "<A-j>", ":<C-U>TmuxNavigateDown<CR>", map_opts)
 vim.keymap.set("n", "<A-k>", ":<C-U>TmuxNavigateUp<CR>", map_opts)

@@ -54,3 +54,5 @@
     root = "!f() { path=$(git rev-parse --show-superproject-working-tree); if [ \"\" = \"$path\" ]; then path=$(git rev-parse --show-toplevel); fi; echo $path; }; f"
     top = "!f() { path=\"$GIT_PREFIX\"; if [ \"\" = \"$path\" ]; then path=\"./\"; fi; realpath --relative-to=\"$path\" \"$(git root)\"; }; f"
 
+[http]
+	emptyAuth = true
