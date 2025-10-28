@@ -31,7 +31,7 @@ set relativenumber " line numbers
 set ruler " cursor location
 
 " Search
-"set hlsearch
+set nohlsearch
 set incsearch
 set showmatch
 set ignorecase
@@ -55,10 +55,10 @@ set expandtab " tabs are expanded to 4 spaces
 
 " Colorsheme
 syntax on
-set termguicolors
+set notermguicolors
 colorscheme zenrowan
 set background=dark
-set t_Co=256
+set t_Co=16
 
 " visual mode highlight
 hi Visual cterm=bold ctermbg=blue ctermfg=white
@@ -81,7 +81,7 @@ set t_RV=
 " wildmenu
 set wildmenu
 " wildmenu uses a popup
-set wildoptions=pum,tagfile
+set wildoptions=tagfile
 set wildmode=full
 " Insert mode auto completion popup <C-n>
 set completeopt=menuone,noinsert,noselect
@@ -91,7 +91,7 @@ set mouse=a
 
 "set c indent rules and formatting
 set cino=(s,m1,l1
-set formatoptions=jco/ql
+set formatoptions=jcoql
 
 " netrw commands
 " gh : toggle hidden files

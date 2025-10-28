@@ -1,0 +1,105 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "command": "vscode-neovim.send",
+        "key": "alt+left",
+        "when": "editorTextFocus && neovim.mode != insert",
+        "args": "<C-w>h"
+    },
+    {
+        "command": "vscode-neovim.send",
+        "key": "alt+down",
+        "when": "editorTextFocus && neovim.mode != insert",
+        "args": "<C-w>j"
+    },
+    {
+        "command": "vscode-neovim.send",
+        "key": "alt+up",
+        "when": "editorTextFocus && neovim.mode != insert",
+        "args": "<C-w>k"
+    },
+    {
+        "command": "vscode-neovim.send",
+        "key": "alt+right",
+        "when": "editorTextFocus && neovim.mode != insert",
+        "args": "<C-w>l"
+    },
+    {
+        "command": "workbench.action.closeSidebar",
+        "key": "Escape",
+        "when": "sideBarFocus"
+    },
+    {
+        "command": "workbench.action.closePanel",
+        "key": "Escape",
+        "when": "panelFocus"
+    },
+    {
+        "command": "workbench.action.focusActiveEditorGroup",
+        "key": "Escape",
+        "when": "!editorTextFocus && !panelFocus && !sideBarFocus"
+    },
+    {
+        "command": "workbench.action.closeActiveEditor",
+        "key": "ctrl+shift+w",
+    },
+    {
+        "key": "ctrl+space",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "-workbench.action.quickOpen"
+    },
+    {
+        "key": "alt+home",
+        "command": "workbench.action.previousEditor"
+    },
+    {
+        "key": "alt+home",
+        "command": "notebook.focusPreviousEditor",
+        "when": "accessibilityModeEnabled && notebookCellEditorFocused"
+    },
+    {
+        "key": "alt+end",
+        "command": "workbench.action.nextEditor"
+    },
+    {
+        "key": "alt+end",
+        "command": "notebook.focusNextEditor",
+        "when": "accessibilityModeEnabled && notebookCellEditorFocused"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "-vscode-neovim.ctrl-u",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal.u && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "-vscode-neovim.ctrl-d",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal.d && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "extension.multiCommand.execute",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal.u && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'",
+        "args": {
+            "sequence": [
+                "vscode-neovim.ctrl-u",
+                {"command": "cursorMove", "args": {"to": "viewPortCenter"}}
+            ]
+        }
+    },
+    {
+        "key": "ctrl+d",
+        "command": "extension.multiCommand.execute",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal.d && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'",
+        "args": {
+            "sequence": [
+                "vscode-neovim.ctrl-d",
+                {"command": "cursorMove", "args": {"to": "viewPortCenter"}}
+            ]
+        }
+    },
+
+]

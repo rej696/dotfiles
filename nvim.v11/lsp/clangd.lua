@@ -9,6 +9,6 @@ return {
         -- "--limit-references=0",
         "--offset-encoding=utf-16",
     },
-    root_markers = { '.git', 'compile_commands.json', 'compile_flags.txt', 'tags' },
+    root_markers = { '.git', 'compile_commands.json', 'compile_flags.txt', 'tags', '.clangd' },
     filetypes = { 'c', 'cpp' },
 }

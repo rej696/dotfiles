@@ -1,3 +1,52 @@
+
+-- nvim vscode configuration
+if vim.g.vscode then
+    local vscode = require "vscode"
+    vim.o.statusline = [[%<%f\ %h%w%m%r%=%-14.(%l,%c%V%)\ %P]]
+    -- vscode.update_config("editor.lineNumbers", "relative", "global")
+    vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+        pattern = {'*'},
+        callback = function()
+            vim.api.nvim_buf_create_user_command(0, "Oil", function() vscode.action('oil-code.open') end, {})
+            vim.api.nvim_buf_create_user_command(0, "Ex", function() vscode.action('oil-code.open') end, {})
+            vim.api.nvim_buf_create_user_command(0, "Term", function() vscode.action('oil-code.open') end, {})
+            vim.keymap.set('n', '<space>tt', function() vscode.action('workbench.action.terminal.toggleTerminal') end, {})
+            vim.keymap.set('n', '<space>to', function() vscode.action('workbench.action.output.toggleOutput') end, {})
+            -- vim.keymap.set('n', '<space>to', function() vscode.action('workbench.action.output.show.extension-output-asvetliakov.vscode-neovim-#31-vscode-neovim messages') end, {})
+            -- vim.keymap.set('n', '<space>ff', function() vscode.action('workbench.action.quickOpen') end, {})
+            vim.keymap.set('n', '<space>ff', function() vscode.action('find-it-faster.findFiles') end, {})
+            vim.keymap.set('n', '<space>fg', function() vscode.action('find-it-faster.findWithinFiles') end, {})
+            vim.keymap.set('n', '<space>ft', function() vscode.action('workbench.action.showCommands') end, {})
+            -- vim.keymap.set('n', '<space>fg', function() vscode.action('workbench.action.quickTextSearch') end, {})
+            vim.keymap.set('n', '<space>fb', function() vscode.action('workbench.action.showAllEditors') end, {})
+            -- vim.keymap.set('n', '<space>fw', function() vscode.action('workbench.action.findInFiles', { args = { query = vim.fn.expand('<cword>') } }) end, {})
+            vim.keymap.set('n', '<space>fw', function() vscode.action('workbench.action.quickTextSearch', { args = { query = vim.fn.expand('<cword>') } }) end, {})
+            -- vim.keymap.set('n', '<space>q', function() vscode.action('workbench.action.closeActiveEditor') end, {})
+            vim.keymap.set('n', '<space>q', function() vscode.action('workbench.action.closeGroup') end, {})
+            vim.keymap.set('n', '<space>sp', function() vscode.action('workbench.action.splitEditorDown') end, {})
+            vim.keymap.set('n', '<space>v', function() vscode.action('workbench.action.splitEditorRight') end, {})
+            vim.keymap.set('n', '<space>sv', function() vscode.action('workbench.action.splitEditorRight') end, {})
+            vim.keymap.set('n', '<space>s<left>', function() vscode.action('workbench.action.moveActiveEditorGroupLeft') end, {})
+            vim.keymap.set('n', '<space>s<down>', function() vscode.action('workbench.action.moveActiveEditorGroupDown') end, {})
+            vim.keymap.set('n', '<space>s<up>', function() vscode.action('workbench.action.moveActiveEditorGroupUp') end, {})
+            vim.keymap.set('n', '<space>s<right>', function() vscode.action('workbench.action.moveActiveEditorGroupRight') end, {})
+            -- <space>ff or <C-p> followed by `?` will show all the hotkeys for the vscode quick menu
+        end
+    })
+    vim.api.nvim_create_autocmd({'FileType'}, {
+        pattern = {"oil"},
+        callback = function()
+            vim.keymap.set("n", "-", function() vscode.action('oil-code.openParent') end)
+            vim.keymap.set("n", "_", function() vscode.action('oil-code.openCwd') end)
+            vim.keymap.set("n", "<CR>", function() vscode.action('oil-code.select') end)
+            vim.keymap.set("n", "<C-t>", function() vscode.action('oil-code.selectTab') end)
+            vim.keymap.set("n", "<C-l>", function() vscode.action('oil-code.refresh') end)
+            vim.keymap.set("n", "`", function() vscode.action('oil-code.cd') end)
+        end,
+    })
+    return
+end
+
 -- Lazy Package Manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
@@ -311,6 +360,7 @@ vim.keymap.set("n", "*", "*zz", map_opts)
 
 -- Remap Splits
 vim.keymap.set("n", "<leader>v", ":vsplit<CR>", map_opts)
+vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", map_opts)
 vim.keymap.set("n", "<leader>sp", ":split<CR>", map_opts)
 vim.keymap.set("n", "<A-Left>", ":<C-U>TmuxNavigateLeft<CR>", map_opts)
 vim.keymap.set("n", "<A-Down>", ":<C-U>TmuxNavigateDown<CR>", map_opts)
@@ -402,6 +452,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
         vim.keymap.set({ 'n', 'v', 'x' }, '<leader>F', vim.lsp.buf.format, bufopts)
         vim.keymap.set({ 'n' }, 'grd', vim.lsp.buf.definition, bufopts)
+        vim.keymap.set({ 'n' }, 'gd', vim.lsp.buf.definition, bufopts)
         vim.cmd[[set tagfunc=]]
     end,
 })
@@ -421,10 +472,23 @@ vim.diagnostic.config {
     signs = true,      -- Keep gutter signs
 }
 
-vim.lsp.enable({ 'clangd', 'luals', 'ruff', 'basedpyright', })
+vim.lsp.enable({
+    'clangd',
+    'luals',
+    'ruff',
+    'basedpyright',
+})
 if vim.fn.executable('vhdl_ls') == 1 then
     vim.lsp.enable({ 'vhdl_ls' })
 end
 
+if vim.fn.executable('robotframework_ls') == 1 then
+    vim.lsp.enable({ 'robotframework_ls' })
+end
+
+if vim.fn.executable('lemminx') == 1 then
+    vim.lsp.enable({ 'xml' })
+end
+
 -- Stop LSP from overriding ctags
-vim.cmd [[set tagfunc=]]
+-- vim.cmd [[set tagfunc=]]
