@@ -1,0 +1,114 @@
+From 31f7fe43bbdd437247e144789e23bdf3718a0645 Mon Sep 17 00:00:00 2001
+From: rej696 <rowan.saunders@protonmail.com>
+Date: Fri, 7 Nov 2025 16:46:59 +0100
+Subject: [PATCH] fix bold colors, add configuration
+
+---
+ config.def.h | 53 ++++++++++++++++++++++++++--------------------------
+ x.c          |  2 +-
+ 2 files changed, 27 insertions(+), 28 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index 2cd740a..b5c8616 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -5,7 +5,7 @@
+  *
+  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
+  */
+-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
++static char *font = "Hack:pixelsize=14:antialias=true:autohint=true";
+ static int borderpx = 2;
+ 
+ /*
+@@ -16,7 +16,7 @@ static int borderpx = 2;
+  * 4: value of shell in /etc/passwd
+  * 5: value of shell in config.h
+  */
+-static char *shell = "/bin/sh";
++static char *shell = "/bin/bash";
+ char *utmp = NULL;
+ /* scroll program: to enable use a string like "scroll" */
+ char *scroll = NULL;
+@@ -95,33 +95,32 @@ unsigned int tabspaces = 8;
+ 
+ /* Terminal colors (16 first used in escape sequence) */
+ static const char *colorname[] = {
+-	/* 8 normal colors */
+-	"black",
+-	"red3",
+-	"green3",
+-	"yellow3",
+-	"blue2",
+-	"magenta3",
+-	"cyan3",
+-	"gray90",
+ 
+-	/* 8 bright colors */
+-	"gray50",
+-	"red",
+-	"green",
+-	"yellow",
+-	"#5c5cff",
+-	"magenta",
+-	"cyan",
+-	"white",
++  /* 8 normal colors */
++  "#191919", /* black   */
++  "#DE6E7C", /* red     */
++  "#819B69", /* green   */
++  "#B77E64", /* yellow  */
++  "#6099C0", /* blue    */
++  "#B279A7", /* magenta */
++  "#66A5AD", /* cyan    */
++  "#BBBBBB", /* white   */
+ 
+-	[255] = 0,
++  /* 8 bright colors */
++  "#3D3839", /* black   */
++  "#E8838F", /* red     */
++  "#8BAE68", /* green   */
++  "#D68C67", /* yellow  */
++  "#61ABDA", /* blue    */
++  "#CF86C1", /* magenta */
++  "#65B8C1", /* cyan    */
++  "#8E8E8E", /* white   */
+ 
+-	/* more colors can be added after 255 to use with DefaultXX */
+-	"#cccccc",
+-	"#555555",
+-	"gray90", /* default foreground colour */
+-	"black", /* default background colour */
++  /* special colors */
++  [256] = "#C9C9C9", /* cursor */
++  [257] = "#191919", /* reverse cursor */
++  [258] = "#BBBBBB", /* foreground */
++  [259] = "#191919", /* background */
+ };
+ 
+ 
+@@ -153,7 +152,7 @@ static unsigned int rows = 24;
+ /*
+  * Default colour and shape of the mouse cursor
+  */
+-static unsigned int mouseshape = XC_xterm;
++static unsigned int mouseshape = XC_left_ptr;
+ static unsigned int mousefg = 7;
+ static unsigned int mousebg = 0;
+ 
+diff --git a/x.c b/x.c
+index d73152b..972ca49 100644
+--- a/x.c
++++ b/x.c
+@@ -1417,7 +1417,7 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
+ 
+ 	/* Change basic system colors [0-7] to bright system colors [8-15] */
+ 	if ((base.mode & ATTR_BOLD_FAINT) == ATTR_BOLD && BETWEEN(base.fg, 0, 7))
+-		fg = &dc.col[base.fg + 8];
++		fg = &dc.col[base.fg]; // + 8];
+ 
+ 	if (IS_SET(MODE_REVERSE)) {
+ 		if (fg == &dc.col[defaultfg]) {
+-- 
+2.47.3
+

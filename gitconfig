@@ -5,6 +5,8 @@
     path = dotfiles/gitconfig-home
 [includeIf "gitdir:~/dotfiles/"]
     path = dotfiles/gitconfig-home
+[includeIf "gitdir:~/opt/"]
+    path = dotfiles/gitconfig-home
 [includeIf "gitdir:~/work/"]
     path = dotfiles/gitconfig-work
 [diff]
@@ -56,3 +58,5 @@
 
 [http]
 	emptyAuth = true
+[user]
+	name = rej696

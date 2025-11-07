@@ -117,7 +117,7 @@ git_basename() {
 
 if [ "$color_prompt" = yes ]; then
     # PS1='${debian_chroot:+($debian_chroot)}$(git_basename) \[\033[01;31m\][\[\033[01;32m\]\W\[\033[01;31m\]] \[\033[01;32m\]\$ \[\033[00m\]'
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\][$(git_basename)\[\033[01;32m\]\W\[\033[01;31m\]]\[\033[03;34m\]$(__git_ps1) \[\033[00;01;32m\]\$ \[\033[00m\]'
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[00m\]\[\033[01;31m\][\[\033[00m\]$(git_basename)\[\033[00m\]\[\033[01;32m\]\W\[\033[00m\]\[\033[01;31m\]]\[\033[03;34m\]$(__git_ps1) \[\033[00;01;32m\]\$ \[\033[00m\]'
 else
     PS1='${debian_chroot:+($debian_chroot)}[\W] \$ '
 fi

@@ -453,7 +453,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set({ 'n', 'v', 'x' }, '<leader>F', vim.lsp.buf.format, bufopts)
         vim.keymap.set({ 'n' }, 'grd', vim.lsp.buf.definition, bufopts)
         vim.keymap.set({ 'n' }, 'gd', vim.lsp.buf.definition, bufopts)
-        vim.cmd[[set tagfunc=]]
+        -- vim.cmd[[set tagfunc=]]
     end,
 })
 
