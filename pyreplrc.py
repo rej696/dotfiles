@@ -88,3 +88,31 @@ def hy():
     import hy
     return hy.REPL(locals = {**globals(), **locals()}).run()
 
+
+try:
+    from _pyrepl.simple_interact import _get_reader
+    from _pyrepl.commands import Command
+except ImportError:
+    pass
+else:
+    class _FZFHistory(Command):
+        def do(self):
+            r = self.reader
+            history = r.history[::-1]
+            selected = subprocess.run('printf "%s\n" "{}" | fzf --height=25%'.format("\n".join(history)), shell=True, text=True, capture_output=True)
+            if selected.stdout.strip():
+                r.insert(selected.stdout.strip())
+            else:
+                # r.insert(' ')
+                # r.scheduled_commands.append('backspace')
+                r.handle1()
+                # r.restore()
+                # r.do_cmd(('backspace', []))
+
+    reader = _get_reader()
+    reader.commands["fzf_history"] = _FZFHistory
+    reader.bind(r"\M-r", "fzf_history")
+
+    del _get_reader, Command, reader, _FZFHistory
+
+

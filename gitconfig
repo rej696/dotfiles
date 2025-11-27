@@ -1,4 +1,7 @@
 # can use :/<commit message text> to reference commits instead of hash
+[user]
+    name = rej696
+    email = rowan.saunders@protonmail.com
 [includeIf "gitdir:~/play/"]
     path = dotfiles/gitconfig-home
 [includeIf "gitdir:~/sandbox/"]
@@ -48,7 +51,7 @@
     logd = log -p --compact-summary
     slog = log -p -S
     all = "!f() { RED='\\033[0;01;31m'; BLUE='\\033[0;01;03;34m'; GREEN='\\033[0;32;1m'; NC='\\033[0m'; echo \"\\n(git) ${RED}[${GREEN}$(basename $(pwd))${RED}] ${BLUE}($(git rev-parse --abbrev-ref HEAD))${NC} git $@\"; git -c color.ui=always $@; for path in `git submodule status --recursive | awk '// {print $2}'`; do echo \"(git) ${RED}[${GREEN}$path${RED}] ${BLUE}($(git -C $path rev-parse --abbrev-ref HEAD))${NC} git $@\"; git -C $path -c color.ui=always $@; done; }; f"
-    rej696 = "!f() { git config --local user.name 'rej696' && git config --local user.email 'r.f.t@hotmail.co.uk'; }; f"
+    rej696 = "!f() { git config --local user.name 'rej696' && git config --local user.email 'rowan.saunders@protonmail.com'; }; f"
     stall = all status --short
     stiff = all diff --compact-summary
     stree = all log --graph --oneline -n 5 --abbrev-commit
@@ -58,5 +61,3 @@
 
 [http]
 	emptyAuth = true
-[user]
-	name = rej696

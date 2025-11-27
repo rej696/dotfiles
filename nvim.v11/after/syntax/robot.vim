@@ -67,7 +67,7 @@ syn match robotTestcaseSet          "\c\[\(Tags\|Setup\|Teardown\|Precondition\|
 syn match robotSetup                "\c\<\(Suite\|Test\) \(Setup\|Teardown\|Precondition\|Postcondition\)\>"
 syn match robotSettings             "\c\<\(Library\|Resource\|Variables\|Documentation\|Metadata\|Force Tags\|Default Tags\|Test Template\|Test Timeout\)\>"
 
-syn match robotKeyword              "\c\s\{2\}\<\(if\|else\|end\|while\|for\|return\|in\|in range\)\>\(\s\{2\}\|$\)"
+syn match robotKeyword              "\c\s\{2\}\<\(if\|else\|else if\|end\|while\|for\|return\|in\|in range\)\>\(\s\{2\}\|$\)"
 
 
 " Standard libraries

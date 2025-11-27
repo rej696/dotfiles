@@ -99,7 +99,7 @@ require("lazy").setup({
                 })
 
                 -- vim.keymap.set("n", "<leader>ff", [[<Cmd>Pick files<CR>]])
-                vim.keymap.set("n", "<leader>fb", [[<Cmd>Pick buffers<CR>]])
+                -- vim.keymap.set("n", "<leader>fb", [[<Cmd>Pick buffers<CR>]])
                 -- vim.keymap.set("n", "<leader>fg", [[<Cmd>Pick grep live<CR>]])
                 -- vim.keymap.set("n", "<leader>fw", [[<Cmd>Pick grep pattern="<cword>"<CR>]])
                 -- vim.keymap.set("n", "<leader>fr", [[<Cmd>Pick resume<CR>]])
@@ -115,6 +115,7 @@ require("lazy").setup({
                 require("fzf-lua").setup({
                     "hide",
                     winopts= {
+                        -- split is optional?
                         -- split = "belowright new",
                         fullscreen = true,
                         border = "none",
@@ -141,19 +142,37 @@ require("lazy").setup({
                         }
                     },
                 })
-                vim.keymap.set("n", "<leader>fg", [[<Cmd>FzfLua live_grep<CR>]])
-                vim.keymap.set("n", "<leader>fw", [[<Cmd>FzfLua grep_cword<CR>]])
-                vim.keymap.set("n", "<leader>fh", [[<Cmd>FzfLua help_tags<CR>]])
-                vim.keymap.set("n", "<leader>ft", [[<Cmd>FzfLua builtin<CR>]])
-                vim.keymap.set("n", "<leader>fr", [[<Cmd>FzfLua resume<CR>]])
+                vim.keymap.set("n", "<leader>fg", function() FzfLua.live_grep({winopts={split = "belowright new", preview = {hidden = true}}}) end)
+                vim.keymap.set("n", "<leader>fw", function() FzfLua.grep_cword({winopts={split = "belowright new", preview = {hidden = true}}}) end)
+                vim.keymap.set("n", "<leader>fh", function() FzfLua.help_tags({winopts={split = "belowright new", preview = {hidden = true}}}) end)
+                vim.keymap.set("n", "<leader>ft", function() FzfLua.builtin({winopts={split = "belowright new", preview = {hidden = true}}}) end)
+                vim.keymap.set("n", "<leader>fb", function() FzfLua.buffers({winopts={split = "belowright new", preview = {hidden = true}}}) end)
+                vim.keymap.set("n", "<leader>fr", function() FzfLua.resume({winopts={split = "belowright new", preview = {hidden = true}}}) end)
                 vim.keymap.set("n", "<leader>ff", function() FzfLua.files({winopts={split = "belowright new", preview = {hidden = true}}}) end)
+                vim.keymap.set("n", "<leader>fag", [[<Cmd>FzfLua live_grep<CR>]])
+                vim.keymap.set("n", "<leader>faw", [[<Cmd>FzfLua grep_cword<CR>]])
+                vim.keymap.set("n", "<leader>fah", [[<Cmd>FzfLua help_tags<CR>]])
+                vim.keymap.set("n", "<leader>fat", [[<Cmd>FzfLua builtin<CR>]])
+                vim.keymap.set("n", "<leader>fab", [[<Cmd>FzfLua buffers<CR>]])
+                vim.keymap.set("n", "<leader>far", [[<Cmd>FzfLua resume<CR>]])
+                vim.keymap.set("n", "<leader>faf", [[<Cmd>FzfLua files<CR>]])
+
+                vim.keymap.set("n", "<leader>gh", [[<Cmd>FzfLua git_hunks<CR>]])
+                vim.keymap.set("n", "<leader>gs", [[<Cmd>FzfLua git_status<CR>]])
             end,
         },
 
         -- luaforth
         {
             'luaforth',
-            dir = '~/dotfiles/luaforth',
+            dir = (function()
+                if vim.uv.fs_stat(vim.fn.expand("~/dotfiles/luaforth")) then
+                    return '~/dotfiles/luaforth'
+                end
+                if vim.uv.fs_stat(vim.fn.expand("~/.pnvim/lua/luaforth")) then
+                    return "~/.pnvim/lua/luaforth"
+                end
+            end)(),
             config = function()
                 require('luaforth').setup({})
                 -- Luaforth
@@ -241,6 +260,20 @@ require("lazy").setup({
             end,
         },
 
+        {
+            "emmanueltouzery/decisive.nvim",
+            lazy = true,
+            ft = {'csv'},
+            config = function()
+                vim.keymap.set('n', '<leader>ca', ":lua require('decisive').align_csv({})<cr>", {desc="align CSV", silent=true})
+                vim.keymap.set('n', '<leader>cA', ":lua require('decisive').align_csv_clear({})<cr>", {desc="align CSV clear", silent=true})
+                vim.keymap.set('n', '<leader>cn', ":lua require('decisive').align_csv_prev_col()<cr>", {desc="align CSV prev col", silent=true})
+                vim.keymap.set('n', '<leader>cp', ":lua require('decisive').align_csv_next_col()<cr>", {desc="align CSV next col", silent=true})
+
+                -- setup text objects (optional)
+                require('decisive').setup{}
+            end,
+        },
         {
             "rej696/vim-send2term",
             config = function()

@@ -29,6 +29,8 @@ set nobackup " no swp files
 set number " line numbers
 set relativenumber " line numbers
 set ruler " cursor location
+set noswapfile
+set laststatus=2 " always show statusline
 
 " Search
 set nohlsearch
@@ -85,6 +87,9 @@ set wildoptions=tagfile
 set wildmode=full
 " Insert mode auto completion popup <C-n>
 set completeopt=menuone,noinsert,noselect
+
+" <C-x><C-o> to trigger omnicomplete
+set omnifunc=syntaxcomplete#Complete
 
 " mouse
 set mouse=a
@@ -158,96 +163,98 @@ augroup quickfix
 augroup END
 
 " fzf
-function! FZFterm() abort
-    let l:tempname = tempname()
-    execute 'silent !fzf --multi --preview "cat {}" ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-    " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-    try
-        execute 'cfile ' . l:tempname
-        redraw!
-    finally
-        call delete(l:tempname)
-    endtry
-endfunction
+if executable("fzf")
+    function! FZFterm() abort
+        let l:tempname = tempname()
+        execute 'silent !fzf --multi --preview "cat {}" ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+        " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+        try
+            execute 'cfile ' . l:tempname
+            redraw!
+        finally
+            call delete(l:tempname)
+        endtry
+    endfunction
 
-function! FZFtermall() abort
-    let l:tempname = tempname()
-    execute 'silent !fd -H | fzf --multi --preview "cat {}"' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-    " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-    try
-        execute 'cfile ' . l:tempname
-        redraw!
-    finally
-        call delete(l:tempname)
-    endtry
-endfunction
+    function! FZFtermall() abort
+        let l:tempname = tempname()
+        execute 'silent !fd -H | fzf --multi --preview "cat {}"' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+        " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+        try
+            execute 'cfile ' . l:tempname
+            redraw!
+        finally
+            call delete(l:tempname)
+        endtry
+    endfunction
 
-function! FZFtermgrep() abort
-    let l:tempname = tempname()
-    let l:rg = "rg --column --line-number --no-heading --color=always --smart-case "
-    execute 'silent !fzf --ansi --disabled --bind "start:reload:' . l:rg. ' {q}" --bind "change:reload:sleep 0.1;' . l:rg .' {q} || true" --delimiter : --preview "cat {1}"' . '| awk ''{ print $1":"$2":0" }'' > ' . fnameescape(l:tempname)
-    " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
-    try
-        execute 'cfile ' . l:tempname
-        redraw!
-    finally
-        call delete(l:tempname)
-    endtry
-endfunction
+    function! FZFtermgrep() abort
+        let l:tempname = tempname()
+        let l:rg = "rg --column --line-number --no-heading --color=always --smart-case "
+        execute 'silent !fzf --ansi --disabled --bind "start:reload:' . l:rg. ' {q}" --bind "change:reload:sleep 0.1;' . l:rg .' {q} || true" --delimiter : --preview "cat {1}"' . '| awk ''{ print $1":"$2":0" }'' > ' . fnameescape(l:tempname)
+        " execute 'silent !/home/rowan/.fzf/bin/fzf --multi ' . '| awk ''{ print $1":1:0" }'' > ' . fnameescape(l:tempname)
+        try
+            execute 'cfile ' . l:tempname
+            redraw!
+        finally
+            call delete(l:tempname)
+        endtry
+    endfunction
 
-command! -nargs=* Fzf call FZFterm()
-command! -nargs=* Fzfall call FZFtermall()
-command! -nargs=* Fzfgrep call FZFtermgrep()
+    command! -nargs=* Fzf call FZFterm()
+    command! -nargs=* Fzfall call FZFtermall()
+    command! -nargs=* Fzfgrep call FZFtermgrep()
 
-" FZF integration
-set rtp+=~/.fzf
-let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.8, 'relative': v:true } }
-" Rg command
-let g:rg_prefix = "rg --column --line-number --no-heading --color=always --smart-case "
-command! -nargs=* Rg call fzf#run(fzf#wrap({
-            \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
-            \ 'options': '--ansi --disabled --bind "start:reload:' . g:rg_prefix .
-            \ ' {q}" --bind "change:reload:' . g:rg_prefix .
-            \ ' {q} || true" --delimiter : ' .
-            \ ' --preview "cat {1}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' .
-            \ ' --preview-window "+{2}"'}))
+    " FZF integration
+    set rtp+=~/.fzf
+    let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.8, 'relative': v:true } }
+    " Rg command
+    let g:rg_prefix = "rg --column --line-number --no-heading --color=always --smart-case "
+    command! -nargs=* Rg call fzf#run(fzf#wrap({
+                \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
+                \ 'options': '--ansi --disabled --bind "start:reload:' . g:rg_prefix .
+                \ ' {q}" --bind "change:reload:' . g:rg_prefix .
+                \ ' {q} || true" --delimiter : ' .
+                \ ' --preview "cat {1}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' .
+                \ ' --preview-window "+{2}"'}))
 
-"command! -nargs=* FindWord call fzf#run(fzf#wrap({
-"            \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
-"            \ 'source': "rg --column --line-number --no-heading --color=always --smart-case " . expand('<cword>'),
-"            \ 'options': '--ansi --disabled --delimiter : ' }))
+    "command! -nargs=* FindWord call fzf#run(fzf#wrap({
+    "            \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
+    "            \ 'source': "rg --column --line-number --no-heading --color=always --smart-case " . expand('<cword>'),
+    "            \ 'options': '--ansi --disabled --delimiter : ' }))
 
-command! -nargs=* FindWord call fzf#run(fzf#wrap({
-            \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
-            \ 'source': "rg --column --line-number --no-heading --color=always --smart-case " . expand('<cword>'),
-            \ 'options': '--ansi --disabled --delimiter : ' .
-            \ ' --preview "cat {1}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' .
-            \ ' --preview-window "+{2}"'}))
+    command! -nargs=* FindWord call fzf#run(fzf#wrap({
+                \ 'sink': { res -> execute('edit '. split(res, ':')[0] . '| :' . split(res, ':')[1]) },
+                \ 'source': "rg --column --line-number --no-heading --color=always --smart-case " . expand('<cword>'),
+                \ 'options': '--ansi --disabled --delimiter : ' .
+                \ ' --preview "cat {1}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down' .
+                \ ' --preview-window "+{2}"'}))
 
-command! -nargs=* Tree call fzf#run(fzf#wrap({
-            \ 'sink': "e",
-            \ 'source': "fd -t d",
-            \ 'options': '--preview "tree -C {} | head -n 40" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
+    command! -nargs=* Tree call fzf#run(fzf#wrap({
+                \ 'sink': "e",
+                \ 'source': "fd -t d",
+                \ 'options': '--preview "tree -C {} | head -n 40" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
 
-command! -nargs=* Find call fzf#run(fzf#wrap({
-            \ 'sink': "e",
-            \ 'source': "fd -t f",
-            \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
+    command! -nargs=* Find call fzf#run(fzf#wrap({
+                \ 'sink': "e",
+                \ 'source': "fd -t f",
+                \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
 
-command! -nargs=* FindAll call fzf#run(fzf#wrap({
-            \ 'sink': "e",
-            \ 'source': "fd -H -t f",
-            \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
+    command! -nargs=* FindAll call fzf#run(fzf#wrap({
+                \ 'sink': "e",
+                \ 'source': "fd -H -t f",
+                \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
 
-command! -nargs=* FindBuf call fzf#run(fzf#wrap({
-            \ 'sink': "e",
-            \ 'source': map(filter(copy(getbufinfo()), 'v:val.listed'), { val -> fnamemodify(v:val.name, ':.')}),
-            \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
+    command! -nargs=* FindBuf call fzf#run(fzf#wrap({
+                \ 'sink': "e",
+                \ 'source': map(filter(copy(getbufinfo()), 'v:val.listed'), { val -> fnamemodify(v:val.name, ':.')}),
+                \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
 
-command! -nargs=* FindIgnored call fzf#run(fzf#wrap({
-            \ 'sink': "e",
-            \ 'source': "fd -H -I -t f",
-            \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
+    command! -nargs=* FindIgnored call fzf#run(fzf#wrap({
+                \ 'sink': "e",
+                \ 'source': "fd -H -I -t f",
+                \ 'options': '--preview "cat {}" --bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down'}))
+endif " fzf
 
 " Commenting
 augroup commenting_blocks_of_code
@@ -274,14 +281,14 @@ let g:maplocalleader = " "
 tnoremap <Esc> <C-\><C-n>
 
 " Remap Splits
-nnoremap <A-Left> <C-W><C-H>
-nnoremap <A-Down> <C-W><C-J>
-nnoremap <A-Up> <C-W><C-K>
-nnoremap <A-Right> <C-W><C-L>
-nnoremap <A-J> <C-W><C-J>
-nnoremap <A-K> <C-W><C-K>
-nnoremap <A-L> <C-W><C-L>
-nnoremap <A-H> <C-W><C-H>
+nnoremap <A-Left> <C-W>h
+nnoremap <A-Down> <C-W>j
+nnoremap <A-Up> <C-W>k
+nnoremap <A-Right> <C-W>l
+nnoremap <A-J> <C-W>j
+nnoremap <A-K> <C-W>k
+nnoremap <A-L> <C-W>l
+nnoremap <A-H> <C-W>h
 
 nnoremap <leader>sp :split<CR>
 nnoremap <leader>v :vsplit<CR>
@@ -334,8 +341,8 @@ nnoremap <leader>tn :tn<CR>
 nnoremap <leader>tp :tp<CR>
 
 " changelist (like jumplist)
-nnoremap <C-m> g,
-nnoremap <C-n> g;
+" nnoremap <C-m> g,
+" nnoremap <C-n> g;
 
 " build tags
 nnoremap <leader>ot :!fd -e c -e h \| ctags -L - <CR>

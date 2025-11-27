@@ -95,6 +95,8 @@ fi
 
 if [ -f /usr/lib/git-core/git-sh-prompt ]; then
     source /usr/lib/git-core/git-sh-prompt
+elif [ -f /usr/share/git-core/git-prompt.sh ]; then
+    source /usr/share/git-core/git-prompt.sh
 elif [ -f /usr/share/git/completion/git-prompt.sh ]; then
     source /usr/share/git/completion/git-prompt.sh
 elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
@@ -211,6 +213,8 @@ export MANPATH=~/.local/share/man:$MANPATH
 [ -s "$HOME/.cargo" ] && . "$HOME/.cargo/env"
 export PYTHONSTARTUP="${HOME}/dotfiles/pyreplrc.py"
 
+# show distrobox container
+[ -z "${CONTAINER_ID}" ] || export PS1="(${CONTAINER_ID}) ${PS1}"
 
 # Run janet-server to start server, then ConjureConnect, then run janet-client to connect to shared repl
 alias janet-server='janet -e "(import spork/netrepl) (netrepl/server-single)" 2&> /dev/null &'
