@@ -7,3 +7,6 @@
 [submodule "distracked"]
 	path = distracked
 	url = git@github.com:rej696/distracked.git
+[submodule "portable-neovim"]
+	path = portable-neovim
+	url = git@github.com:rej696/portable-neovim.git
