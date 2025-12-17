@@ -1,11 +1,10 @@
-
 -- nvim vscode configuration
 if vim.g.vscode then
     local vscode = require "vscode"
     vim.o.statusline = [[%<%f\ %h%w%m%r%=%-14.(%l,%c%V%)\ %P]]
     -- vscode.update_config("editor.lineNumbers", "relative", "global")
-    vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-        pattern = {'*'},
+    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+        pattern = { '*' },
         callback = function()
             vim.api.nvim_buf_create_user_command(0, "Oil", function() vscode.action('oil-code.open') end, {})
             vim.api.nvim_buf_create_user_command(0, "Ex", function() vscode.action('oil-code.open') end, {})
@@ -20,21 +19,27 @@ if vim.g.vscode then
             -- vim.keymap.set('n', '<space>fg', function() vscode.action('workbench.action.quickTextSearch') end, {})
             vim.keymap.set('n', '<space>fb', function() vscode.action('workbench.action.showAllEditors') end, {})
             -- vim.keymap.set('n', '<space>fw', function() vscode.action('workbench.action.findInFiles', { args = { query = vim.fn.expand('<cword>') } }) end, {})
-            vim.keymap.set('n', '<space>fw', function() vscode.action('workbench.action.quickTextSearch', { args = { query = vim.fn.expand('<cword>') } }) end, {})
+            vim.keymap.set('n', '<space>fw',
+                function() vscode.action('workbench.action.quickTextSearch',
+                        { args = { query = vim.fn.expand('<cword>') } }) end, {})
             -- vim.keymap.set('n', '<space>q', function() vscode.action('workbench.action.closeActiveEditor') end, {})
             vim.keymap.set('n', '<space>q', function() vscode.action('workbench.action.closeGroup') end, {})
             vim.keymap.set('n', '<space>sp', function() vscode.action('workbench.action.splitEditorDown') end, {})
             vim.keymap.set('n', '<space>v', function() vscode.action('workbench.action.splitEditorRight') end, {})
             vim.keymap.set('n', '<space>sv', function() vscode.action('workbench.action.splitEditorRight') end, {})
-            vim.keymap.set('n', '<space>s<left>', function() vscode.action('workbench.action.moveActiveEditorGroupLeft') end, {})
-            vim.keymap.set('n', '<space>s<down>', function() vscode.action('workbench.action.moveActiveEditorGroupDown') end, {})
-            vim.keymap.set('n', '<space>s<up>', function() vscode.action('workbench.action.moveActiveEditorGroupUp') end, {})
-            vim.keymap.set('n', '<space>s<right>', function() vscode.action('workbench.action.moveActiveEditorGroupRight') end, {})
+            vim.keymap.set('n', '<space>s<left>',
+                function() vscode.action('workbench.action.moveActiveEditorGroupLeft') end, {})
+            vim.keymap.set('n', '<space>s<down>',
+                function() vscode.action('workbench.action.moveActiveEditorGroupDown') end, {})
+            vim.keymap.set('n', '<space>s<up>', function() vscode.action('workbench.action.moveActiveEditorGroupUp') end,
+                {})
+            vim.keymap.set('n', '<space>s<right>',
+                function() vscode.action('workbench.action.moveActiveEditorGroupRight') end, {})
             -- <space>ff or <C-p> followed by `?` will show all the hotkeys for the vscode quick menu
         end
     })
-    vim.api.nvim_create_autocmd({'FileType'}, {
-        pattern = {"oil"},
+    vim.api.nvim_create_autocmd({ 'FileType' }, {
+        pattern = { "oil" },
         callback = function()
             vim.keymap.set("n", "-", function() vscode.action('oil-code.openParent') end)
             vim.keymap.set("n", "_", function() vscode.action('oil-code.openCwd') end)
@@ -114,7 +119,7 @@ require("lazy").setup({
             config = function()
                 require("fzf-lua").setup({
                     "hide",
-                    winopts= {
+                    winopts = {
                         -- split is optional?
                         -- split = "belowright new",
                         fullscreen = true,
@@ -142,13 +147,20 @@ require("lazy").setup({
                         }
                     },
                 })
-                vim.keymap.set("n", "<leader>fg", function() FzfLua.live_grep({winopts={split = "belowright new", preview = {hidden = true}}}) end)
-                vim.keymap.set("n", "<leader>fw", function() FzfLua.grep_cword({winopts={split = "belowright new", preview = {hidden = true}}}) end)
-                vim.keymap.set("n", "<leader>fh", function() FzfLua.help_tags({winopts={split = "belowright new", preview = {hidden = true}}}) end)
-                vim.keymap.set("n", "<leader>ft", function() FzfLua.builtin({winopts={split = "belowright new", preview = {hidden = true}}}) end)
-                vim.keymap.set("n", "<leader>fb", function() FzfLua.buffers({winopts={split = "belowright new", preview = {hidden = true}}}) end)
-                vim.keymap.set("n", "<leader>fr", function() FzfLua.resume({winopts={split = "belowright new", preview = {hidden = true}}}) end)
-                vim.keymap.set("n", "<leader>ff", function() FzfLua.files({winopts={split = "belowright new", preview = {hidden = true}}}) end)
+                vim.keymap.set("n", "<leader>fg",
+                    function() FzfLua.live_grep({ winopts = { split = "belowright new", preview = { hidden = true } } }) end)
+                vim.keymap.set("n", "<leader>fw",
+                    function() FzfLua.grep_cword({ winopts = { split = "belowright new", preview = { hidden = true } } }) end)
+                vim.keymap.set("n", "<leader>fh",
+                    function() FzfLua.help_tags({ winopts = { split = "belowright new", preview = { hidden = true } } }) end)
+                vim.keymap.set("n", "<leader>ft",
+                    function() FzfLua.builtin({ winopts = { split = "belowright new", preview = { hidden = true } } }) end)
+                vim.keymap.set("n", "<leader>fb",
+                    function() FzfLua.buffers({ winopts = { split = "belowright new", preview = { hidden = true } } }) end)
+                vim.keymap.set("n", "<leader>fr",
+                    function() FzfLua.resume({ winopts = { split = "belowright new", preview = { hidden = true } } }) end)
+                vim.keymap.set("n", "<leader>ff",
+                    function() FzfLua.files({ winopts = { split = "belowright new", preview = { hidden = true } } }) end)
                 vim.keymap.set("n", "<leader>fag", [[<Cmd>FzfLua live_grep<CR>]])
                 vim.keymap.set("n", "<leader>faw", [[<Cmd>FzfLua grep_cword<CR>]])
                 vim.keymap.set("n", "<leader>fah", [[<Cmd>FzfLua help_tags<CR>]])
@@ -263,15 +275,19 @@ require("lazy").setup({
         {
             "emmanueltouzery/decisive.nvim",
             lazy = true,
-            ft = {'csv'},
+            ft = { 'csv' },
             config = function()
-                vim.keymap.set('n', '<leader>ca', ":lua require('decisive').align_csv({})<cr>", {desc="align CSV", silent=true})
-                vim.keymap.set('n', '<leader>cA', ":lua require('decisive').align_csv_clear({})<cr>", {desc="align CSV clear", silent=true})
-                vim.keymap.set('n', '<leader>cn', ":lua require('decisive').align_csv_prev_col()<cr>", {desc="align CSV prev col", silent=true})
-                vim.keymap.set('n', '<leader>cp', ":lua require('decisive').align_csv_next_col()<cr>", {desc="align CSV next col", silent=true})
+                vim.keymap.set('n', '<leader>ca', ":lua require('decisive').align_csv({})<cr>",
+                    { desc = "align CSV", silent = true })
+                vim.keymap.set('n', '<leader>cA', ":lua require('decisive').align_csv_clear({})<cr>",
+                    { desc = "align CSV clear", silent = true })
+                vim.keymap.set('n', '<leader>cn', ":lua require('decisive').align_csv_prev_col()<cr>",
+                    { desc = "align CSV prev col", silent = true })
+                vim.keymap.set('n', '<leader>cp', ":lua require('decisive').align_csv_next_col()<cr>",
+                    { desc = "align CSV next col", silent = true })
 
                 -- setup text objects (optional)
-                require('decisive').setup{}
+                require('decisive').setup {}
             end,
         },
         {
@@ -332,6 +348,8 @@ vim.o.wildoptions   = "pum,tagfile" -- Display vertical popup menu
 vim.o.updatetime    = 300           -- Delay until write to Swap and HoldCommand event
 
 vim.o.formatoptions = "jco/ql"
+
+vim.g.editorconfig  = false -- disable editorconfig plugin, doesn't work with nfs
 
 -- Cindent rules
 vim.cmd [[set cino=(s,m1,l1]]
@@ -486,6 +504,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set({ 'n', 'v', 'x' }, '<leader>F', vim.lsp.buf.format, bufopts)
         vim.keymap.set({ 'n' }, 'grd', vim.lsp.buf.definition, bufopts)
         vim.keymap.set({ 'n' }, 'gd', vim.lsp.buf.definition, bufopts)
+
+        if client.name ~= nil and client.name == "robotframework_ls" then
+            client.settings.robot.variables.EXECDIR = vim.lsp.buf.list_workspace_folders()[1]
+            -- client.settings.robot.loadVariablesFromArgumentsFile = client.settings.robot.variables.EXECDIR .. "/config.txt"
+            client.notify("workspace/didChangeConfiguration", { settings = client.settings })
+        end
+
+
         -- vim.cmd[[set tagfunc=]]
     end,
 })
@@ -510,7 +536,14 @@ vim.lsp.enable({
     'luals',
     'ruff',
     'basedpyright',
+    'marksman'
 })
+--
+if vim.fn.executable('neocmakelsp') == 1 then
+    vim.lsp.enable({ 'neocmake' })
+    -- vim.lsp.config('neocmake', {capabilities = vim.lsp.protocol.make_client_capabilities()})
+end
+
 if vim.fn.executable('vhdl_ls') == 1 then
     vim.lsp.enable({ 'vhdl_ls' })
 end

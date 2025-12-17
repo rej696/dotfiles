@@ -214,7 +214,9 @@ export MANPATH=~/.local/share/man:$MANPATH
 export PYTHONSTARTUP="${HOME}/dotfiles/pyreplrc.py"
 
 # show distrobox container
+export DBX_CONTAINER_NAME=arch
 [ -z "${CONTAINER_ID}" ] || export PS1="(${CONTAINER_ID}) ${PS1}"
+[ -z "${SSH_TTY}" ] || export PS1="(desktop) ${PS1}"
 
 # Run janet-server to start server, then ConjureConnect, then run janet-client to connect to shared repl
 alias janet-server='janet -e "(import spork/netrepl) (netrepl/server-single)" 2&> /dev/null &'

@@ -75,6 +75,15 @@ class Shell(dotdict):
         except FileNotFoundError as e:
             print(e)
 
+    @staticmethod
+    def get(target, *args, **kwargs):
+        try:
+            if isinstance(target, list):
+                return sp.getoutput(shlex.join(target), *args, **kwargs)
+            return sp.getoutput(target, *args, **kwargs)
+        except FileNotFoundError as e:
+            print(e)
+
     def mkcmd(self, cmd):
         return ft.partial(self.run, cmd)
 
